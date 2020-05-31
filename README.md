@@ -117,7 +117,7 @@ TV Show users want notifications about is still airing.
 As a user interested in tv shows, I want to be able to quickly see what shows are trending currently.  
 
 #### Dependencies
-TV Show search data are available and accessible.  
+TV Show search data are available and accessible. 
 
 #### Assumptions  
 TV Show names are stated in English.  
@@ -128,6 +128,10 @@ TV Show names are stated in English.
 **When** I open the application  
 **Then** I should be shown a list of TV shows that are currently trending  
 
+**3.2**  
+**Given** A feed of TV show data is *not* available  
+**When** I open the application
+**Then** I should be told I am *not* connected to the internet and the app's functions are limited.  
 
 ## Class Diagram  
 ![Class Diagram UML](assets/readme/uml.png)  
