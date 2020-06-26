@@ -13,9 +13,12 @@ package edu.uc.muhammus.stara.dto
 
 import com.google.gson.annotations.SerializedName
 
+data class ShowJSON(var score: Double,
+                    var show: Show)
+
 data class Show(var name: String,
-                @SerializedName("language") var language: String,
-                @SerializedName("status") var status: String) {
+                var language: String,
+                var status: String) {
     override fun toString(): String {
         return this.name
     }

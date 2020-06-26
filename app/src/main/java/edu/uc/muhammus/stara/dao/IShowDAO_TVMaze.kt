@@ -6,12 +6,12 @@
  */
 package edu.uc.muhammus.stara.dao
 
-import edu.uc.muhammus.stara.dto.Show
+import edu.uc.muhammus.stara.dto.ShowJSON
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface IShowDAO_TVMaze {
     @GET("/search/shows")
-    fun getShows(@Query("q") showName: String) : Call<ArrayList<Show>>
+    fun getShows(@Query("q") showName: String) : Call<ArrayList<ShowJSON>>
 }

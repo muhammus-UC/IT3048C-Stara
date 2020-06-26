@@ -4,11 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import edu.uc.muhammus.stara.dto.Actor
 import edu.uc.muhammus.stara.dto.Show
+import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.service.ActorService
 import edu.uc.muhammus.stara.service.ShowService
 
 class MainViewModel : ViewModel() {
-    var shows: MutableLiveData<ArrayList<Show>> = MutableLiveData<ArrayList<Show>>()
+    var shows: MutableLiveData<ArrayList<ShowJSON>> = MutableLiveData<ArrayList<ShowJSON>>()
     var showService: ShowService = ShowService()
 
     fun fetchShows(showName: String) {
