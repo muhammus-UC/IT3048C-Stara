@@ -3,6 +3,7 @@ package edu.uc.muhammus.stara.ui.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import edu.uc.muhammus.stara.dto.Actor
+import edu.uc.muhammus.stara.dto.ActorJSON
 import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.service.ActorService
@@ -16,7 +17,7 @@ class MainViewModel : ViewModel() {
         shows = showService.fetchShows(showName)
     }
 
-    var actors: MutableLiveData<ArrayList<Actor>> = MutableLiveData<ArrayList<Actor>>()
+    var actors: MutableLiveData<ArrayList<ActorJSON>> = MutableLiveData<ArrayList<ActorJSON>>()
     var actorService: ActorService = ActorService()
 
     fun fetchActors(actorName: String) {

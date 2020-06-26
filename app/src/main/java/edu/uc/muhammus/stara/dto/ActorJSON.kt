@@ -8,10 +8,15 @@
 
 package edu.uc.muhammus.stara.dto
 
-import java.util.*
+import com.google.gson.annotations.SerializedName
 
-data class Actor(var name: String, var country: String?, var gender: String) {
+
+data class ActorJSON(var score: Double, @SerializedName("person") var actor: Actor)
+
+data class Actor(var name: String, var country: ActorCountry?, var gender: String) {
     override fun toString(): String {
         return this.name
     }
 }
+
+data class ActorCountry (var name: String, var code: String, var timezone: String)

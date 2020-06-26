@@ -3,6 +3,8 @@ package edu.uc.muhammus.stara
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import edu.uc.muhammus.stara.dto.Actor
+import edu.uc.muhammus.stara.dto.ActorCountry
+import edu.uc.muhammus.stara.dto.ActorJSON
 import edu.uc.muhammus.stara.service.ActorService
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 import io.mockk.confirmVerified
@@ -24,7 +26,8 @@ class ActorDataUnitTest {
 
     @Test
     fun confirmJoelMcHale_outputsJoelMcHale () {
-        var actor: Actor = Actor("Joel McHale", "Italy", "Male")
+        var country: ActorCountry = ActorCountry("Italy", "IT", "Europe/Rome")
+        var actor: Actor = Actor("Joel McHale", country, "Male")
         assertEquals("Joel McHale", actor.toString())
     }
 
@@ -49,18 +52,23 @@ class ActorDataUnitTest {
     }
 
     private fun createMockData() {
-        var allActorsLiveData = MutableLiveData<ArrayList<Actor>>()
-        var allActors = ArrayList<Actor>()
+        var allActorsLiveData = MutableLiveData<ArrayList<ActorJSON>>()
+        var allActors = ArrayList<ActorJSON>()
         // create and add actors to our collection
-        var mchale = Actor("Joel McHale", "Italy", "Male")
-        allActors.add(mchale)
-        var barrios = Actor("Joseph Barrios", "United States", "Male")
-        allActors.add(barrios)
+        var mchaleCountry = ActorCountry ("Italy", "IT", "Europe/Rome")
+        var mchale = Actor("Joel McHale", mchaleCountry, "Male")
+        var mchaleJSON = ActorJSON(50.0, mchale)
+        allActors.add(mchaleJSON)
+        var barriosCountry = ActorCountry("United States", "US", "America/New_York")
+        var barrios = Actor("Joseph Barrios", barriosCountry, "Male")
+        var barriosJSON = ActorJSON(25.0, barrios)
+        allActors.add(barriosJSON)
         var kramer = Actor("Joel Michael Kramer", null, "Male")
-        allActors.add(kramer)
+        var kramerJSON = ActorJSON(12.5, kramer)
+        allActors.add(kramerJSON)
         allActorsLiveData.postValue(allActors)
         every {actorService.fetchActors("Joel McHale")} returns allActorsLiveData
-        every {actorService.fetchActors(not("Joel McHale"))} returns MutableLiveData<ArrayList<Actor>>()
+        every {actorService.fetchActors(not("Joel McHale"))} returns MutableLiveData<ArrayList<ActorJSON>>()
         mvm.actorService = actorService
     }
 
@@ -74,7 +82,7 @@ class ActorDataUnitTest {
             assertNotNull(it)
             assertTrue(it.size > 0)
             it.forEach {
-                if (it.name == "Joel McHale" && it.country == "Italy" && it.gender == "Male") {
+                if (it.actor.name == "Joel McHale" && it.actor.country?.name == "Italy" && it.actor.gender == "Male") {
                     mchaleFound = true
                 }
             }
