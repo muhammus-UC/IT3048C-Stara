@@ -29,8 +29,14 @@ class ShowDataIntegrationTest {
         thenResultsShouldContainBlackBooks()
     }
 
-    private fun givenViewModelIsInitialized()
-    {
+    @Test
+    fun searchForGarbage_returnsNothing() {
+        givenViewModelIsInitialized()
+        whenSearchForGarbage()
+        thenGetZeroResults()
+    }
+
+    private fun givenViewModelIsInitialized() {
         mvm = MainViewModel()
     }
 
@@ -65,5 +71,16 @@ class ShowDataIntegrationTest {
             }
         }
         assertTrue(blackBooksFound)
+    }
+
+    private fun whenSearchForGarbage() {
+        mvm.fetchShows("sklujapouetllkjsdau")
+        Thread.sleep(5000) // Give time to complete network request
+    }
+
+    private fun thenGetZeroResults() {
+        mvm.shows.observeForever {
+            assertEquals(0, it.size)
+        }
     }
 }

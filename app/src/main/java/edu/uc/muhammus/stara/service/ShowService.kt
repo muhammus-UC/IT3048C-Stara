@@ -1,7 +1,7 @@
 /**
- * Setup Retrofit for use with TVMaze API
+ * Use Retrofit for TV Show Data via TVMaze API
  *
- * Path for BASE_URL in IShowDAO_TVMaze.kt and IActorDAO_TVMaze.kt
+ * Path for BASE_URL in IShowDAO_TVMaze.kt
  * API Reference: https://www.tvmaze.com/api
  */
 
@@ -25,10 +25,10 @@ class ShowService {
         call?.enqueue(object: Callback<ArrayList<ShowJSON>> {
             /**
              * Invoked when a network exception occurred talking to the server or when an unexpected
-             * exception occured creating the request or processing the response.
+             * exception occurred creating the request or processing the response.
              */
             override fun onFailure(call: Call<ArrayList<ShowJSON>>, t: Throwable) {
-                println("ShowService Respone FAILED")
+                println("ShowService Response FAILED")
                 Log.e("tag", "ShowService Response FAILED")
             }
 
