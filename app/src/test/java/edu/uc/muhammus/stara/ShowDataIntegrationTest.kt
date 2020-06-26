@@ -1,7 +1,7 @@
 package edu.uc.muhammus.stara
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import edu.uc.muhammus.stara.dto.Show
+import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
 import org.junit.Assert.*
@@ -22,6 +22,13 @@ class ShowDataIntegrationTest {
         thenTheCollectionSizeShouldBeGreaterThanZero()
     }
 
+    @Test
+    fun searchForBlackBooks_returnsBlackBooks() {
+        givenViewModelIsInitialized()
+        whenSearchForBlackBooks()
+        thenResultsShouldContainBlackBooks()
+    }
+
     private fun givenViewModelIsInitialized()
     {
         mvm = MainViewModel()
@@ -29,15 +36,34 @@ class ShowDataIntegrationTest {
 
     private fun whenJSONDataAreReadAndParsed() {
         mvm.fetchShows("Community")
+        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenTheCollectionSizeShouldBeGreaterThanZero() {
-        var allShows = ArrayList<Show>()
+        var allShows = ArrayList<ShowJSON>()
         mvm.shows.observeForever {
             allShows = it
         }
-        Thread.sleep(5000)
         assertNotNull(allShows)
         assertTrue(allShows.size > 0)
+    }
+
+    private fun whenSearchForBlackBooks() {
+        mvm.fetchShows("Black Books")
+        Thread.sleep(5000) // Give time to complete network request
+    }
+
+    private fun thenResultsShouldContainBlackBooks() {
+        var blackBooksFound = false
+        mvm.shows.observeForever {
+            assertNotNull(it)
+            assertTrue(it.size > 0)
+            it.forEach{
+                if (it.show.name == "Black Books" && it.show.language == "English" && it.show.status == "Ended") {
+                    blackBooksFound = true
+                }
+            }
+        }
+        assertTrue(blackBooksFound)
     }
 }
