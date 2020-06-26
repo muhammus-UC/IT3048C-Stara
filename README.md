@@ -62,7 +62,7 @@ Cast names are stated in English.
 
 ### Requirement 101.0: Manage List of Shows  
 #### Scenario
-As a user interested in TV Shows, I want to be able to maint a list of TV shows that I can quickly share or get a notification about.  
+As a user interested in TV Shows, I want to be able to maintain a list of TV shows that I can quickly share or get a notification about.
 
 #### Dependencies  
 TV Show search data are available and accessible  

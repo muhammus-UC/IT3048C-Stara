@@ -3,17 +3,16 @@ package edu.uc.muhammus.stara
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import edu.uc.muhammus.stara.dto.Show
+import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.service.ShowService
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Test
-
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.rules.TestRule
 
 class ShowDataUnitTest {
@@ -25,7 +24,7 @@ class ShowDataUnitTest {
 
     @Test
     fun confirmCommunity_outputsCommunity () {
-        var show: Show = Show("Community", "English", "Ended")
+        var show = Show("Community", "English", "Ended")
         assertEquals("Community", show.toString())
     }
 
@@ -50,18 +49,21 @@ class ShowDataUnitTest {
     }
 
     private fun createMockData() {
-        var allShowsLiveData = MutableLiveData<ArrayList<Show>>()
-        var allShows = ArrayList<Show>()
+        var allShowsLiveData = MutableLiveData<ArrayList<ShowJSON>>()
+        var allShows = ArrayList<ShowJSON>()
         // create and add shows to our collection
         var community = Show("Community", "English", "Ended")
-        allShows.add(community)
+        var communityJSON = ShowJSON(50.0, community)
+        allShows.add(communityJSON)
         var communityLife = Show("Community Life", "English", "To Be Determined")
-        allShows.add(communityLife)
+        var communityLifeJSON = ShowJSON(25.0, communityLife)
+        allShows.add(communityLifeJSON)
         var diplomatic = Show("Diplomatic Immunity", "English", "Ended")
-        allShows.add(diplomatic)
+        var diplomaticJSON = ShowJSON(12.5, diplomatic)
+        allShows.add(diplomaticJSON)
         allShowsLiveData.postValue(allShows)
         every {showService.fetchShows("Community")} returns allShowsLiveData
-        every {showService.fetchShows(not("Community"))} returns MutableLiveData<ArrayList<Show>>()
+        every {showService.fetchShows(not("Community"))} returns MutableLiveData<ArrayList<ShowJSON>>()
         mvm.showService = showService
 
     }
@@ -76,7 +78,7 @@ class ShowDataUnitTest {
             assertNotNull(it)
             assertTrue(it.size > 0)
             it.forEach {
-                if (it.name == "Community" && it.language == "English" && it.status == "Ended") {
+                if (it.show.name == "Community" && it.show.language == "English" && it.show.status == "Ended") {
                     communityFound = true
                 }
             }
