@@ -1,9 +1,17 @@
 /**
  * Holds information about an actor/actress
  *
- * @param name - A String that holds actor name. Ex: Joel McHale
- * @param country - A String that holds actor's country of birth. Ex: Italy NULLABLE
- * @param gender - A String that holds actor's gender. Ex: Male
+ * @param ActorJSON.Score A double used to tell which result is closest.
+ *
+ * @param ActorJSON.Actor An Actor object used to parse nested JSON about an actor/actress.
+ * @param ActorJSON.Actor.name A String that holds actor/actress name. Ex: Joel McHale
+ *
+ * @param ActorJSON.Actor.country - A Country object used to parse nested JSON about birth country of actor/actress. NULLABLE
+ * @param ActorJSON.Actor.country.name - A String that holds actor's country of birth's country name. Ex: Italy NULLABLE
+ * @param ActorJSON.Actor.country.code - A String that holds actor's country of birth's country code. Ex: IT NULLABLE
+ * @param ActorJSON.Actor.country.timezone - A String that holds actor's country of birth's time zone. Ex: Europe/Rome NULLABLE
+ *
+ * @param ActorJSON.Actor.gender - A String that holds actor's gender. Ex: Male
  */
 
 package edu.uc.muhammus.stara.dto
@@ -19,4 +27,4 @@ data class Actor(var name: String, var country: ActorCountry?, var gender: Strin
     }
 }
 
-data class ActorCountry (var name: String, var code: String, var timezone: String)
+data class ActorCountry (var name: String?, var code: String?, var timezone: String?)
