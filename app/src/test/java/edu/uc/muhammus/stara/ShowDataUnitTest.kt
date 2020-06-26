@@ -10,11 +10,9 @@ import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Test
-
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.rules.TestRule
 
 class ShowDataUnitTest {
@@ -26,7 +24,7 @@ class ShowDataUnitTest {
 
     @Test
     fun confirmCommunity_outputsCommunity () {
-        var show: Show = Show("Community", "English", "Ended")
+        var show = Show("Community", "English", "Ended")
         assertEquals("Community", show.toString())
     }
 

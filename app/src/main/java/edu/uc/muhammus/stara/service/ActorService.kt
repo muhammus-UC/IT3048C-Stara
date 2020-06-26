@@ -9,7 +9,6 @@ package edu.uc.muhammus.stara.service
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import edu.uc.muhammus.stara.dao.IActorDAO_TVMaze
-import edu.uc.muhammus.stara.dto.Actor
 import edu.uc.muhammus.stara.dto.ActorJSON
 import edu.uc.muhammus.stara.retrofit.RetrofitClientInstance_TVMaze
 import retrofit2.Call

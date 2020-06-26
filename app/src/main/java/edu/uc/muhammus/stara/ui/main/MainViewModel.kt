@@ -2,9 +2,7 @@ package edu.uc.muhammus.stara.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import edu.uc.muhammus.stara.dto.Actor
 import edu.uc.muhammus.stara.dto.ActorJSON
-import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.service.ActorService
 import edu.uc.muhammus.stara.service.ShowService

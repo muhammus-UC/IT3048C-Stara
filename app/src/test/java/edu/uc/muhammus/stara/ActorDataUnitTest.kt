@@ -26,8 +26,8 @@ class ActorDataUnitTest {
 
     @Test
     fun confirmJoelMcHale_outputsJoelMcHale () {
-        var country: ActorCountry = ActorCountry("Italy", "IT", "Europe/Rome")
-        var actor: Actor = Actor("Joel McHale", country, "Male")
+        var country = ActorCountry("Italy", "IT", "Europe/Rome")
+        var actor = Actor("Joel McHale", country, "Male")
         assertEquals("Joel McHale", actor.toString())
     }
 
