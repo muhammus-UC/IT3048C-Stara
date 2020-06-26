@@ -2,6 +2,8 @@ package edu.uc.muhammus.stara
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
+import edu.uc.muhammus.stara.dto.Show
+import edu.uc.muhammus.stara.service.ShowService
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 import io.mockk.confirmVerified
 import io.mockk.every
@@ -84,7 +86,7 @@ class ShowDataUnitTest {
 
     private fun thenVerifyFunctionsInvoked() {
         verify {showService.fetchShows("Community")}
-        verify(exactly = 0) {showService.fetchPlants("Loner")}
+        verify(exactly = 0) {showService.fetchShows("Loner")}
         confirmVerified(showService)
     }
 
