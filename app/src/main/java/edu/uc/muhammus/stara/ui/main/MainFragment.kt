@@ -1,6 +1,6 @@
 package edu.uc.muhammus.stara.ui.main
 
-import androidx.lifecycle.ViewModelProviders
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,10 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import edu.uc.muhammus.stara.R
 
 class MainFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
 
@@ -27,5 +23,10 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
+    companion object {
+        fun newInstance() = MainFragment()
+    }
+
 
 }
