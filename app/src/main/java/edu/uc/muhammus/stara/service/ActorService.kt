@@ -1,16 +1,16 @@
 /**
  * Use Retrofit for Actor Data via TVMaze API
  *
- * Path for BASE_URL in IActorDAO_TVMaze.kt
+ * Path for BASE_URL in IActorDAOTVMaze.kt
  * API Reference: https://www.tvmaze.com/api
  */
 package edu.uc.muhammus.stara.service
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import edu.uc.muhammus.stara.dao.IActorDAO_TVMaze
+import edu.uc.muhammus.stara.dao.IActorDAOTVMaze
 import edu.uc.muhammus.stara.dto.ActorJSON
-import edu.uc.muhammus.stara.retrofit.RetrofitClientInstance_TVMaze
+import edu.uc.muhammus.stara.retrofit.RetrofitClientInstanceTVMaze
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +18,7 @@ import retrofit2.Response
 class ActorService {
     internal fun fetchActors(actorName: String) : MutableLiveData<ArrayList<ActorJSON>> {
         var _actors = MutableLiveData<ArrayList<ActorJSON>>()
-        var service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IActorDAO_TVMaze::class.java)
+        var service = RetrofitClientInstanceTVMaze.retrofitInstance?.create(IActorDAOTVMaze::class.java)
         val call = service?.getActors(actorName)
 
         call?.enqueue(object: Callback<ArrayList<ActorJSON>> {

@@ -1,7 +1,7 @@
 /**
  * Setup Retrofit for use with TVMaze API
  *
- * Path for BASE_URL in IShowDAO_TVMaze.kt and IActorDAO_TVMaze.kt
+ * Path for BASE_URL in IShowDAOTVMaze.kt and IActorDAOTVMaze.kt
  * TVMaze API Reference: https://www.tvmaze.com/api
  */
 package edu.uc.muhammus.stara.retrofit
@@ -9,7 +9,7 @@ package edu.uc.muhammus.stara.retrofit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClientInstance_TVMaze {
+object RetrofitClientInstanceTVMaze {
     private var retrofit: Retrofit? = null
     private val BASE_URL = "https://api.tvmaze.com"
 

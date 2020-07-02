@@ -1,7 +1,7 @@
 /**
  * Use Retrofit for TV Show Data via TVMaze API
  *
- * Path for BASE_URL in IShowDAO_TVMaze.kt
+ * Path for BASE_URL in IShowDAOTVMaze.kt
  * API Reference: https://www.tvmaze.com/api
  */
 
@@ -9,9 +9,9 @@ package edu.uc.muhammus.stara.service
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import edu.uc.muhammus.stara.dao.IShowDAO_TVMaze
+import edu.uc.muhammus.stara.dao.IShowDAOTVMaze
 import edu.uc.muhammus.stara.dto.ShowJSON
-import edu.uc.muhammus.stara.retrofit.RetrofitClientInstance_TVMaze
+import edu.uc.muhammus.stara.retrofit.RetrofitClientInstanceTVMaze
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +19,7 @@ import retrofit2.Response
 class ShowService {
     internal fun fetchShows(showName: String) : MutableLiveData<ArrayList<ShowJSON>> {
         var _shows = MutableLiveData<ArrayList<ShowJSON>>()
-        val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IShowDAO_TVMaze::class.java)
+        val service = RetrofitClientInstanceTVMaze.retrofitInstance?.create(IShowDAOTVMaze::class.java)
         val call = service?.getShows(showName)
 
         call?.enqueue(object: Callback<ArrayList<ShowJSON>> {
