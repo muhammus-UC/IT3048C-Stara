@@ -18,6 +18,7 @@ class ActorDataIntegrationTest {
     fun actorDTO_isPopulated() {
         givenViewModelIsInitialized()
         whenJSONDataAreReadAndParsed()
+        Thread.sleep(5000) // Give time to complete network request
         thenTheCollectionSizeShouldBeGreaterThanZero()
     }
 
@@ -25,6 +26,7 @@ class ActorDataIntegrationTest {
     fun searchForTomHanks_returnsTomHanks() {
         givenViewModelIsInitialized()
         whenSearchForTomHanks()
+        Thread.sleep(5000) // Give time to complete network request
         thenResultsShouldContainTomHanks()
     }
 
@@ -41,7 +43,7 @@ class ActorDataIntegrationTest {
 
     private fun whenJSONDataAreReadAndParsed() {
         mvm.fetchActors("Joel McHale")
-        Thread.sleep(5000) // Give time to complete network request
+
     }
 
     private fun thenTheCollectionSizeShouldBeGreaterThanZero() {
@@ -55,7 +57,6 @@ class ActorDataIntegrationTest {
 
     private fun whenSearchForTomHanks() {
         mvm.fetchActors("Tom Hanks")
-        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenResultsShouldContainTomHanks() {

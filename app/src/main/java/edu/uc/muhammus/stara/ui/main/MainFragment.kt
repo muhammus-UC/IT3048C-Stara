@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -34,4 +30,7 @@ class MainFragment : Fragment() {
         })
     }
 
+    companion object {
+        fun newInstance() = MainFragment()
+    }
 }
