@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClientInstance_TVMaze {
     private var retrofit: Retrofit? = null
-    private val BASE_URL = "https://api.tvmaze.com"
+    private const val BASE_URL = "https://api.tvmaze.com"
 
     val retrofitInstance: Retrofit?
         get() {

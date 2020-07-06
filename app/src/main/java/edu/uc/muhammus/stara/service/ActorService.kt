@@ -17,11 +17,12 @@ import retrofit2.Response
 
 class ActorService {
     internal fun fetchActors(actorName: String) : MutableLiveData<ArrayList<ActorJSON>> {
-        var _actors = MutableLiveData<ArrayList<ActorJSON>>()
-        var service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IActorDAO_TVMaze::class.java)
+        val _actors = MutableLiveData<ArrayList<ActorJSON>>()
+        val service =
+            RetrofitClientInstance_TVMaze.retrofitInstance?.create(IActorDAO_TVMaze::class.java)
         val call = service?.getActors(actorName)
 
-        call?.enqueue(object: Callback<ArrayList<ActorJSON>> {
+        call?.enqueue(object : Callback<ArrayList<ActorJSON>> {
             /**
              * Invoked when a network exception occurred talking to the server or when an unexpected
              * exception occurred creating the request or processing the response.
