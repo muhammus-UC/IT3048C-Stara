@@ -18,7 +18,7 @@ import retrofit2.Response
 
 class ShowService {
     internal fun fetchShows(showName: String) : MutableLiveData<ArrayList<ShowJSON>> {
-        var _shows = MutableLiveData<ArrayList<ShowJSON>>()
+        val _shows = MutableLiveData<ArrayList<ShowJSON>>()
         val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IShowDAO_TVMaze::class.java)
         val call = service?.getShows(showName)
 
