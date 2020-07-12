@@ -42,7 +42,6 @@ class ShowDataIntegrationTest {
 
     private fun whenJSONDataAreReadAndParsed() {
         mvm.fetchShows("Community")
-        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenTheCollectionSizeShouldBeGreaterThanZero() {
@@ -56,7 +55,6 @@ class ShowDataIntegrationTest {
 
     private fun whenSearchForBlackBooks() {
         mvm.fetchShows("Black Books")
-        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenResultsShouldContainBlackBooks() {
@@ -75,7 +73,6 @@ class ShowDataIntegrationTest {
 
     private fun whenSearchForGarbage() {
         mvm.fetchShows("sklujapouetllkjsdau")
-        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenGetZeroResults() {
