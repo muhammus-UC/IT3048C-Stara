@@ -41,7 +41,13 @@ class ActorService {
                 call: Call<ArrayList<ActorJSON>>,
                 response: Response<ArrayList<ActorJSON>>
             ) {
-                _actors.value = response.body()
+                if (response.isSuccessful) {
+                    Log.d("ActorService.kt", "ActorService Response SUCCEEDED")
+                    _actors.value = response.body()
+                }
+                else {
+                    Log.e("ActorService.kt", "ActorService Response ERROR")
+                }
             }
         })
         Thread.sleep(1000)

@@ -42,7 +42,13 @@ class ShowService {
                 call: Call<ArrayList<ShowJSON>>,
                 response: Response<ArrayList<ShowJSON>>
             ) {
-                _shows.value = response.body()
+                if (response.isSuccessful) {
+                    Log.d("ShowService.kt", "ShowService Response SUCCEEDED")
+                    _shows.value = response.body()
+                }
+                else {
+                    Log.d("ShowService.kt", "ShowService Response ERROR")
+                }
             }
         })
         Thread.sleep(1000)
