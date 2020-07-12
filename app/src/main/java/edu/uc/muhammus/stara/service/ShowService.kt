@@ -29,7 +29,7 @@ class ShowService {
              */
             override fun onFailure(call: Call<ArrayList<ShowJSON>>, t: Throwable) {
                 println("ShowService Response FAILED")
-                Log.e("tag", "ShowService Response FAILED")
+                Log.e("ShowService.kt", "ShowService Response FAILED")
             }
 
             /**

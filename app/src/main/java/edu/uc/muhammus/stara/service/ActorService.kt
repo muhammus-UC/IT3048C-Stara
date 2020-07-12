@@ -26,10 +26,9 @@ class ActorService {
              * Invoked when a network exception occurred talking to the server or when an unexpected
              * exception occurred creating the request or processing the response.
              */
-
             override fun onFailure(call: Call<ArrayList<ActorJSON>>, t: Throwable) {
                 println("ActorService Response FAILED")
-                Log.e("tag", "ShowService Response FAILED")
+                Log.e("ActorService.kt", "ActorService Response FAILED")
             }
 
             /**
