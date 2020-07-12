@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
+import edu.uc.muhammus.stara.ui.misc.ShowListViewAdapter
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -54,7 +55,7 @@ class MainFragment : Fragment() {
         }
 
         viewModel.shows.observe(viewLifecycleOwner, Observer{
-            searchListView.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, allShowsJSON)
+            searchListView.adapter = ShowListViewAdapter(requireContext(), allShowsJSON)
         })
     }
 
