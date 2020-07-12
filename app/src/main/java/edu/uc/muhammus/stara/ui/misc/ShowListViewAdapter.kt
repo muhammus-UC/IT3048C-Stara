@@ -2,21 +2,18 @@ package edu.uc.muhammus.stara.ui.misc
 // Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ShowJSON
 import kotlinx.android.synthetic.main.list_item_show.view.*
-import org.w3c.dom.Text
 
-class ShowListViewAdapter(private val context: Context, private val dataSource: ArrayList<ShowJSON>) : BaseAdapter() {
+class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<ShowJSON>) : BaseAdapter() {
     private val inflater: LayoutInflater
         = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

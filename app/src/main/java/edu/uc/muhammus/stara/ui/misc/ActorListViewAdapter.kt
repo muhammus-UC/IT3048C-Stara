@@ -10,11 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
-import edu.uc.muhammus.stara.dto.Actor
 import edu.uc.muhammus.stara.dto.ActorJSON
 import kotlinx.android.synthetic.main.list_item_show.view.*
 
-class ActorListViewAdapter(private val context: Context, private val dataSource: ArrayList<ActorJSON>) : BaseAdapter() {
+class ActorListViewAdapter(context: Context, private val dataSource: ArrayList<ActorJSON>) : BaseAdapter() {
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
