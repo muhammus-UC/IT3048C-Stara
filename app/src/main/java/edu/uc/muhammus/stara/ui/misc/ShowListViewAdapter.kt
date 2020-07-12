@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ShowJSON
@@ -32,12 +33,28 @@ class ShowListViewAdapter(private val context: Context, private val dataSource: 
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val rowView = inflater.inflate(R.layout.list_item_show, parent, false)
+        val view: View
+        val holder: ViewHolder
 
-        val titleTextView = rowView.list_title as TextView
-        val subtitleTextView = rowView.list_subtitle as TextView
-        val detailTextView = rowView.list_detail as TextView
-        val thumbnailImageView = rowView.list_thumbnail as ImageView
+        if (convertView == null) {
+            view = inflater.inflate(R.layout.list_item_show, parent, false)
+
+            holder = ViewHolder()
+            holder.thumbnailImageView = view.list_thumbnail as ImageView
+            holder.titleTextView = view.list_title as TextView
+            holder.subtitleTextView = view.list_subtitle as TextView
+            holder.detailTextView = view.list_detail as TextView
+
+            view.tag = holder
+        } else {
+            view = convertView
+            holder = convertView.tag as ViewHolder
+        }
+
+        val titleTextView = holder.titleTextView
+        val subtitleTextView = holder.subtitleTextView
+        val detailTextView = holder.detailTextView
+        val thumbnailImageView = holder.thumbnailImageView
 
         val showJSON = getItem(position) as ShowJSON
 
@@ -52,7 +69,14 @@ class ShowListViewAdapter(private val context: Context, private val dataSource: 
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
 
-        return rowView
+        return view
+    }
+
+    private class ViewHolder {
+        lateinit var titleTextView: TextView
+        lateinit var subtitleTextView: TextView
+        lateinit var detailTextView: TextView
+        lateinit var thumbnailImageView: ImageView
     }
 }
 
