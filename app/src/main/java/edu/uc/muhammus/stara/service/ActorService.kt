@@ -44,6 +44,7 @@ class ActorService {
                 _actors.value = response.body()
             }
         })
+        Thread.sleep(1000)
         return _actors
     }
 }

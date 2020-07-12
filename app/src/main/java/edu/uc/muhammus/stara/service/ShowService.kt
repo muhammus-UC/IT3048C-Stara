@@ -45,6 +45,7 @@ class ShowService {
                 _shows.value = response.body()
             }
         })
+        Thread.sleep(1000)
         return _shows
     }
 }
