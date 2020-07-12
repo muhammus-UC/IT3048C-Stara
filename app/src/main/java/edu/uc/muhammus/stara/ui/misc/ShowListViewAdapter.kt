@@ -2,6 +2,7 @@ package edu.uc.muhammus.stara.ui.misc
 // Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,12 @@ class ShowListViewAdapter(private val context: Context, private val dataSource: 
         subtitleTextView.text = showJSON.show.status
         detailTextView.text = showJSON.show.language
 
-        Picasso.get().load(showJSON.show.image?.medium).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)
+        if (showJSON.show.image != null) {
+            var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
+
+            // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
+            Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
+        }
 
         return rowView
     }
