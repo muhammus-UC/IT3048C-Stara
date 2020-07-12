@@ -1,5 +1,6 @@
 package edu.uc.muhammus.stara.ui.main
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
