@@ -8,26 +8,14 @@
     android:background="@drawable/gradient_color"
     tools:context=".ui.main.MainFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="115dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/search_title"
-        android:textColor="@color/titleText"
-        android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <AutoCompleteTextView
         android:id="@+id/actSearch"
         android:layout_width="281dp"
         android:layout_height="52dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchRadioGroup" />
 
     <Button
         android:id="@+id/btnSearch"
@@ -50,5 +38,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSearch" />
+
+    <RadioGroup
+        android:id="@+id/searchRadioGroup"
+        android:layout_width="275dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/searchRadioShow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Show" />
+
+        <RadioButton
+            android:id="@+id/searchRadioActor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Actor" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
