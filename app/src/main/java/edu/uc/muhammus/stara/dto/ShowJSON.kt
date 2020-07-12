@@ -14,7 +14,11 @@
 
 package edu.uc.muhammus.stara.dto
 
-data class ShowJSON(var score: Double, var show: Show)
+data class ShowJSON(var score: Double, var show: Show) {
+    override fun toString(): String {
+        return this.show.name
+    }
+}
 
 data class Show(var name: String,
                 var language: String,
