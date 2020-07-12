@@ -6,14 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
@@ -42,27 +37,24 @@ class MainFragment : Fragment() {
             shows -> actSearch.setAdapter(ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, shows))
         })
         viewModel.fetchShows("Community")
-        Thread.sleep(5000)
-        viewModel.fetchShows("Community")
         */
 
-        btnSearch.setOnClickListener{fillSearchListView()}
+        btnSearch.setOnClickListener{populateSearchListView()}
     }
 
-    private fun fillSearchListView() {
-        var allShows: ArrayList<Show> = ArrayList<Show>()
-
+    private fun populateSearchListView() {
         var searchTerm = actSearch.text.toString()
         viewModel.fetchShows(searchTerm)
 
+        var allShowsJSON = ArrayList<ShowJSON>()
         viewModel.shows.observeForever {
             it.forEach{
-                allShows.add(it.show)
+                allShowsJSON.add(it)
             }
         }
 
         viewModel.shows.observe(viewLifecycleOwner, Observer{
-            searchListView.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, allShows)
+            searchListView.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, allShowsJSON)
         })
     }
 
