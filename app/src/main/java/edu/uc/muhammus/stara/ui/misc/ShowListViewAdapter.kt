@@ -34,19 +34,26 @@ class ShowListViewAdapter(private val context: Context, private val dataSource: 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
+        // Using ViewHolder to optimize performance for ListView, making it function similar to RecyclerView.
+        // Without ViewHolder, ListView recreates elements instead of recycling them on scroll.
         val holder: ViewHolder
 
+        // Check if view already exists. If it does not, create it
         if (convertView == null) {
             view = inflater.inflate(R.layout.list_item_show, parent, false)
 
+            // Use ViewHolder private class to optimize performance
             holder = ViewHolder()
             holder.thumbnailImageView = view.list_thumbnail as ImageView
             holder.titleTextView = view.list_title as TextView
             holder.subtitleTextView = view.list_subtitle as TextView
             holder.detailTextView = view.list_detail as TextView
 
+            // Used for recycling view when it already exists.
             view.tag = holder
-        } else {
+        }
+        // View does already exist, recycle it instead of recreating it unnecessarily.
+        else {
             view = convertView
             holder = convertView.tag as ViewHolder
         }
@@ -63,8 +70,10 @@ class ShowListViewAdapter(private val context: Context, private val dataSource: 
         detailTextView.text = showJSON.show.language
 
         if (showJSON.show.image != null) {
+            // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
 
+            // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
@@ -72,6 +81,7 @@ class ShowListViewAdapter(private val context: Context, private val dataSource: 
         return view
     }
 
+    // Same components as used in getView()
     private class ViewHolder {
         lateinit var titleTextView: TextView
         lateinit var subtitleTextView: TextView
@@ -79,4 +89,3 @@ class ShowListViewAdapter(private val context: Context, private val dataSource: 
         lateinit var thumbnailImageView: ImageView
     }
 }
-
