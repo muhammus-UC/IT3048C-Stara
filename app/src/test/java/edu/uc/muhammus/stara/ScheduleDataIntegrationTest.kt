@@ -19,6 +19,7 @@ class ScheduleDataIntegrationTest {
     fun scheduleDTO_isPopulated() {
         givenViewModelIsInitialized()
         whenJSONDataAreReadAndParsed()
+        andWhenSleep()
         thenTheCollectionSizeShouldBeGreaterThanZero()
     }
 
@@ -26,7 +27,12 @@ class ScheduleDataIntegrationTest {
     fun scheduleDTO_containsShow() {
         givenViewModelIsInitialized()
         whenJSONDataAreReadAndParsed()
+        andWhenSleep()
         thenTheCollectionShouldHaveShow()
+    }
+
+    private fun andWhenSleep() {
+        Thread.sleep(2000)
     }
 
     private fun givenViewModelIsInitialized() {
