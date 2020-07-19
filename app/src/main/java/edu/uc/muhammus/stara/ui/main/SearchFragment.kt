@@ -15,15 +15,15 @@ import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.misc.ActorListViewAdapter
 import edu.uc.muhammus.stara.ui.misc.ShowListViewAdapter
-import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.search_fragment.*
 
-class MainFragment : Fragment() {
+class SearchFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.search_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -79,6 +79,6 @@ class MainFragment : Fragment() {
     )
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = SearchFragment()
     }
 }

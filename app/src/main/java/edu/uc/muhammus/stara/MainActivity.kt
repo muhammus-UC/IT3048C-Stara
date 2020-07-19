@@ -2,7 +2,10 @@ package edu.uc.muhammus.stara
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import edu.uc.muhammus.stara.ui.main.MainFragment
+import android.widget.Toast
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import edu.uc.muhammus.stara.ui.main.SearchFragment
+import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, SearchFragment.newInstance())
                     .commitNow()
         }
     }
