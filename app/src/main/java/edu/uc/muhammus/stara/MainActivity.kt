@@ -15,11 +15,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SearchFragment.newInstance())
+                    .replace(R.id.container, ScheduleFragment.newInstance())
                     .commitNow()
         }
 
         // Configure bottom navigation bar buttons
+        // Reference: https://stackoverflow.com/a/44611348
         staraBottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 // Schedule clicked

@@ -5,4 +5,14 @@
     android:id="@+id/scheduleConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.ScheduleFragment" />
+    tools:context=".ui.main.ScheduleFragment" >
+
+    <ListView
+        android:id="@+id/scheduleListView"
+        android:layout_width="341dp"
+        android:layout_height="624dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
