@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import edu.uc.muhammus.stara.R
+import edu.uc.muhammus.stara.ui.misc.ScheduleListViewAdapter
+import kotlinx.android.synthetic.main.schedule_fragment.*
 
 class ScheduleFragment : Fragment() {
 
@@ -31,7 +34,16 @@ class ScheduleFragment : Fragment() {
 
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        populateScheduleListView()
+    }
+
+    private fun populateScheduleListView() {
+        viewModel.fetchSchedule("US")
+
+        viewModel.schedule.observe(viewLifecycleOwner, Observer {
+            schedule -> scheduleListView.adapter = ScheduleListViewAdapter(requireContext(), schedule)
+        })
     }
 
 }
