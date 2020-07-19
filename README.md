@@ -11,7 +11,7 @@ Aida Musaeva
 ## Introduction  
 
 Have you ever wondered what to watch next?
-Due to the popularity of streaming services today, there is just too many options to shift through.  
+Due to the popularity of streaming services today, there are just too many options.  
 
 Stara can help you by:
 - Keeping a list of shows you are interested in  
