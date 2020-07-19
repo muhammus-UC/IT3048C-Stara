@@ -13,9 +13,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        // Initialize fragments in variables to keep them running when switching
+        // Reference: https://stackoverflow.com/a/25151895
+        var searchFragment: SearchFragment = SearchFragment.newInstance()
+        var scheduleFragment: ScheduleFragment = ScheduleFragment.newInstance()
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, ScheduleFragment.newInstance())
+                    .add(R.id.container, scheduleFragment)
+                    .add(R.id.container, searchFragment)
+                    .hide(searchFragment)
                     .commitNow()
         }
 
@@ -26,7 +34,8 @@ class MainActivity : AppCompatActivity() {
                 // Schedule clicked
                 R.id.action_schedule -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, ScheduleFragment.newInstance())
+                        .hide(searchFragment)
+                        .show(scheduleFragment)
                         .commitNow()
                 }
                 // Favorites clicked
@@ -36,7 +45,8 @@ class MainActivity : AppCompatActivity() {
                 // Search clicked
                 R.id.action_search -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SearchFragment.newInstance())
+                        .hide(scheduleFragment)
+                        .show(searchFragment)
                         .commitNow()
                 }
             }
