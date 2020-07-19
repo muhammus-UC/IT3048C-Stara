@@ -19,6 +19,7 @@ class ShowDataIntegrationTest {
     fun showDTO_isPopulated() {
         givenViewModelIsInitialized()
         whenJSONDataAreReadAndParsed()
+        andWhenSleep()
         thenTheCollectionSizeShouldBeGreaterThanZero()
     }
 
@@ -26,6 +27,7 @@ class ShowDataIntegrationTest {
     fun searchForBlackBooks_returnsBlackBooks() {
         givenViewModelIsInitialized()
         whenSearchForBlackBooks()
+        andWhenSleep()
         thenResultsShouldContainBlackBooks()
     }
 
@@ -33,7 +35,12 @@ class ShowDataIntegrationTest {
     fun searchForGarbage_returnsNothing() {
         givenViewModelIsInitialized()
         whenSearchForGarbage()
+        andWhenSleep()
         thenGetZeroResults()
+    }
+
+    private fun andWhenSleep() {
+        Thread.sleep(1000)
     }
 
     private fun givenViewModelIsInitialized() {

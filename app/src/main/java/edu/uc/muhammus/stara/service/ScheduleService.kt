@@ -51,7 +51,6 @@ class ScheduleService {
                 }
             }
         })
-        Thread.sleep(1000)
         return _schedule
     }
 }
