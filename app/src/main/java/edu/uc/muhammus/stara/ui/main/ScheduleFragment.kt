@@ -1,3 +1,8 @@
+/**
+ * Fragment shown by default.
+ * Shows a schedule of new episodes premiering today in United States via TVMaze API.
+ * Feature to add: Get user location and get schedule data for country they are in.
+ */
 package edu.uc.muhammus.stara.ui.main
 
 import androidx.lifecycle.ViewModelProviders

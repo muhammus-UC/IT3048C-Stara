@@ -1,5 +1,5 @@
 /*
- * Interface used for communicating with TVMaze API via Retrofit to get TV Show data
+ * Interface used for communicating with TVMaze API via Retrofit to get TV Schedule data
  *
  * @GET domain is defined in RetrofitClientInstance_TVMaze.kt
  * TVMaze API Reference: https://www.tvmaze.com/api

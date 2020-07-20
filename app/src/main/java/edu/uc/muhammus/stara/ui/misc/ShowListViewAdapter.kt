@@ -1,5 +1,9 @@
+/**
+ * Used to format how Show List View looks like.
+ * Used in SearchFragment.kt.
+ * Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
+ */
 package edu.uc.muhammus.stara.ui.misc
-// Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
 
 import android.content.Context
 import android.view.LayoutInflater

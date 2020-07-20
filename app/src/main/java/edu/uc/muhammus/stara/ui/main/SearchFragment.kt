@@ -1,3 +1,6 @@
+/**
+ * Allows user to search for actor or show data via TVMaze API.
+ */
 package edu.uc.muhammus.stara.ui.main
 
 
