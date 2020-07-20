@@ -51,7 +51,6 @@ class ShowService {
                 }
             }
         })
-        Thread.sleep(1000)
         return _shows
     }
 }

@@ -50,7 +50,6 @@ class ActorService {
                 }
             }
         })
-        Thread.sleep(1000)
         return _actors
     }
 }
