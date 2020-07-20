@@ -38,6 +38,16 @@ class ScheduleFragment : Fragment() {
         populateScheduleListView()
     }
 
+    // When fragment is hidden or shown
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        // If fragment is NOT hidden
+        if(!hidden) {
+            activity?.title = "Stara - Schedule"
+        }
+    }
+
     private fun populateScheduleListView() {
         viewModel.fetchSchedule("US")
 
