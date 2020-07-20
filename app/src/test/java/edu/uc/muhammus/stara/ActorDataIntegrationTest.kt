@@ -18,6 +18,7 @@ class ActorDataIntegrationTest {
     fun actorDTO_isPopulated() {
         givenViewModelIsInitialized()
         whenJSONDataAreReadAndParsed()
+        andWhenSleep()
         thenTheCollectionSizeShouldBeGreaterThanZero()
     }
 
@@ -25,7 +26,7 @@ class ActorDataIntegrationTest {
     fun searchForTomHanks_returnsTomHanks() {
         givenViewModelIsInitialized()
         whenSearchForTomHanks()
-        //andWhenSleep()
+        andWhenSleep()
         thenResultsShouldContainTomHanks()
     }
 
@@ -33,7 +34,12 @@ class ActorDataIntegrationTest {
     fun searchForGarbage_returnsNothing() {
         givenViewModelIsInitialized()
         whenSearchForGarbage()
+        andWhenSleep()
         thenGetZeroResults()
+    }
+
+    private fun andWhenSleep() {
+        Thread.sleep(1000)
     }
 
     private fun givenViewModelIsInitialized() {
