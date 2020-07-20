@@ -28,8 +28,6 @@ class SearchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity?.title = "Stara - Search"
-
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -42,6 +40,16 @@ class SearchFragment : Fragment() {
         */
 
         btnSearch.setOnClickListener{populateSearchListView()}
+    }
+
+    // When fragment is hidden or shown
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        // If fragment is NOT hidden
+        if(!hidden) {
+            activity?.title = "Stara - Search"
+        }
     }
 
     private fun populateSearchListView() {

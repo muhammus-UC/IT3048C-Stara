@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <!-- Reference: https://medium.com/@suragch/how-to-add-a-bottom-navigation-bar-in-android-958ed728ef6c -->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/staraBottomNav"
         android:layout_width="wrap_content"
@@ -20,4 +21,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
