@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,12 +33,10 @@ class SearchFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         // AutocompleteTextView Code
-        /*
-        viewModel.shows.observe(viewLifecycleOwner, Observer{
-            shows -> actSearch.setAdapter(ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, shows))
-        })
-        viewModel.fetchShows("Community")
-        */
+        //viewModel.shows.observe(viewLifecycleOwner, Observer{
+        //    shows -> actSearch.setAdapter(ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, shows))
+        //})
+        //viewModel.fetchShows("Community")
 
         btnSearch.setOnClickListener{populateSearchListView()}
     }
@@ -59,30 +58,16 @@ class SearchFragment : Fragment() {
         {
             viewModel.fetchShows(searchTerm)
 
-            var allShowsJSON = ArrayList<ShowJSON>()
-            viewModel.shows.observeForever {
-                it.forEach{
-                    allShowsJSON.add(it)
-                }
-            }
-
             viewModel.shows.observe(viewLifecycleOwner, Observer{
-                searchListView.adapter = ShowListViewAdapter(requireContext(), allShowsJSON)
+                    shows -> searchListView.adapter = ShowListViewAdapter(requireContext(), shows)
             })
         }
         else if (searchRadioActor.isChecked)
         {
             viewModel.fetchActors(searchTerm)
 
-            var allActorsJSON = ArrayList<ActorJSON>()
-            viewModel.actors.observeForever {
-                it.forEach{
-                    allActorsJSON.add(it)
-                }
-            }
-
             viewModel.actors.observe(viewLifecycleOwner, Observer {
-                searchListView.adapter = ActorListViewAdapter(requireContext(), allActorsJSON)
+                actors -> searchListView.adapter = ActorListViewAdapter(requireContext(), actors)
             })
         }
     }
