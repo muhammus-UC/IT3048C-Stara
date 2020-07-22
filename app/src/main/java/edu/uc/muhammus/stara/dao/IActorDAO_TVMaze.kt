@@ -1,7 +1,7 @@
 /*
  * Interface used for communicating with TVMaze API via Retrofit to get Actor data
  *
- * @GET domain is defined in RetrofitClientInstanceTVMaze.kt
+ * @GET domain is defined in RetrofitClientInstance_TVMaze.kt
  * TVMaze API Reference: https://www.tvmaze.com/api
  */
 
@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface IActorDAOTVMaze {
+interface IActorDAO_TVMaze {
     @GET("/search/people")
     fun getActors(@Query("q") actorName: String) : Call<ArrayList<ActorJSON>>
 }

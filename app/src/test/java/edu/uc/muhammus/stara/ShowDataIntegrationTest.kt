@@ -19,6 +19,7 @@ class ShowDataIntegrationTest {
     fun showDTO_isPopulated() {
         givenViewModelIsInitialized()
         whenJSONDataAreReadAndParsed()
+        andWhenSleep()
         thenTheCollectionSizeShouldBeGreaterThanZero()
     }
 
@@ -26,6 +27,7 @@ class ShowDataIntegrationTest {
     fun searchForBlackBooks_returnsBlackBooks() {
         givenViewModelIsInitialized()
         whenSearchForBlackBooks()
+        andWhenSleep()
         thenResultsShouldContainBlackBooks()
     }
 
@@ -33,7 +35,12 @@ class ShowDataIntegrationTest {
     fun searchForGarbage_returnsNothing() {
         givenViewModelIsInitialized()
         whenSearchForGarbage()
+        andWhenSleep()
         thenGetZeroResults()
+    }
+
+    private fun andWhenSleep() {
+        Thread.sleep(1000)
     }
 
     private fun givenViewModelIsInitialized() {
@@ -42,7 +49,6 @@ class ShowDataIntegrationTest {
 
     private fun whenJSONDataAreReadAndParsed() {
         mvm.fetchShows("Community")
-        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenTheCollectionSizeShouldBeGreaterThanZero() {
@@ -56,7 +62,6 @@ class ShowDataIntegrationTest {
 
     private fun whenSearchForBlackBooks() {
         mvm.fetchShows("Black Books")
-        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenResultsShouldContainBlackBooks() {
@@ -75,7 +80,6 @@ class ShowDataIntegrationTest {
 
     private fun whenSearchForGarbage() {
         mvm.fetchShows("sklujapouetllkjsdau")
-        Thread.sleep(5000) // Give time to complete network request
     }
 
     private fun thenGetZeroResults() {
