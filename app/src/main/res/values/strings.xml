@@ -3,4 +3,7 @@
     <string name="search_title">Search</string>
     <string name="search_text">Type to search…</string>
     <string name="search_button">Search</string>
+    <string name="show">Show</string>
+    <string name="actor">Actor</string>
+    <string name="thumbnail">thumbnail</string>
 </resources>

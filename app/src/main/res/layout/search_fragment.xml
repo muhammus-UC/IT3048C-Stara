@@ -55,14 +55,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Show" />
+            android:text="@string/show" />
 
         <RadioButton
             android:id="@+id/searchRadioActor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Actor" />
+            android:text="@string/actor" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
