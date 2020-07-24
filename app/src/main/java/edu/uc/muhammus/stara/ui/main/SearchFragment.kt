@@ -35,12 +35,6 @@ class SearchFragment : Fragment() {
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        // AutocompleteTextView Code
-        //viewModel.shows.observe(viewLifecycleOwner, Observer{
-        //    shows -> actSearch.setAdapter(ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, shows))
-        //})
-        //viewModel.fetchShows("Community")
-
         btnSearch.setOnClickListener{populateSearchListView()}
     }
 
