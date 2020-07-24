@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Stara</string>
+    <string name="schedule_title">Today\'s TV Schedule for</string>
+    <string name="schedule_subtitle">United States</string>
     <string name="search_title">Search</string>
     <string name="search_text">Type to search…</string>
     <string name="search_button">Search</string>

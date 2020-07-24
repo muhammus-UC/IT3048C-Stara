@@ -16,6 +16,9 @@ import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ScheduleJSON
 import kotlinx.android.synthetic.main.list_item_show.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayList<ScheduleJSON>) : BaseAdapter() {
     private val inflater: LayoutInflater
@@ -65,18 +68,38 @@ class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayLis
         val thumbnailImageView = holder.thumbnailImageView
 
         val scheduleJSON = getItem(position) as ScheduleJSON
+        var showName = scheduleJSON.show.name
+        var episodeName = scheduleJSON.episodeName
+        var airtime = scheduleJSON.airtime
 
-        titleTextView.text = scheduleJSON.episodeName
-        subtitleTextView.text = scheduleJSON.show.name
-        detailTextView.text = scheduleJSON.airtime
+        // Truncate names to keep UI clean
+        if (showName.length > 32) {
+            showName = showName.substring(0, 32).trim() + "..."
+        }
+        if (episodeName.length > 24) {
+            episodeName = episodeName.substring(0, 24).trim() + "..."
+        }
 
-        if (scheduleJSON.show.image != null) {
+        episodeName = "Episode: $episodeName"
+
+        // Convert 24 hour time to 12 hour
+        // Reference: https://stackoverflow.com/a/49326758
+        airtime = LocalTime.parse(airtime).format(DateTimeFormatter.ofPattern("hh:mm a"))
+
+        titleTextView.text = showName
+        subtitleTextView.text = episodeName
+        detailTextView.text = airtime
+
+        if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
+        }
+        else {
+            thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
 
         return view
