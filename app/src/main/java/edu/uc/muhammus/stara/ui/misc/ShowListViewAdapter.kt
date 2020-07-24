@@ -66,7 +66,7 @@ class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<Sh
 
         val showJSON = getItem(position) as ShowJSON
         var showName = showJSON.show.name
-        var showLanguage = showJSON.show.language
+        var showLanguage = showJSON.show.language ?: "Language Unknown"
         var showStatus = "Status: " + showJSON.show.status
 
         // Truncate names to keep UI clean
@@ -74,11 +74,16 @@ class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<Sh
             showName = showName.substring(0, 32).trim() + "..."
         }
 
+        // If showStatus is "Status: ", we don't know the status
+        if (showStatus.equals("Status: ")) {
+            showStatus = "Status: Unknown"
+        }
+
         titleTextView.text = showName
         subtitleTextView.text = showStatus
         detailTextView.text = showLanguage
 
-        if (showJSON.show.image != null) {
+        if (showJSON.show.image != null && showJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
 

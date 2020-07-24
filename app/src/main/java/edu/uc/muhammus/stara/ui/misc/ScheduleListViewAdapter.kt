@@ -90,7 +90,7 @@ class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayLis
         subtitleTextView.text = episodeName
         detailTextView.text = airtime
 
-        if (scheduleJSON.show.image != null) {
+        if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
 
