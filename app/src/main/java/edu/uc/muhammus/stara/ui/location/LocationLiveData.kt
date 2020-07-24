@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import com.google.android.gms.location.LocationCallback
@@ -24,6 +25,8 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
     // Data has no observers
     override fun onInactive() {
         super.onInactive()
+        // Make sure observers are removed after location data has been received once.
+        Log.d("LocationLiveData.kt", "No observers.")
         // Turn off location updates
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
@@ -70,7 +73,7 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
         val locationRequest: LocationRequest = LocationRequest.create().apply {
             interval = ONE_MINUTE
             fastestInterval = ONE_MINUTE / 4
-            priority = LocationRequest.PRIORITY_LOW_POWER // We only need to know country, so LOW_POWER is enough for our needs
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }
 }
