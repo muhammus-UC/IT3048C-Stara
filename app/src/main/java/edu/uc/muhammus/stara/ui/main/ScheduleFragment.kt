@@ -7,7 +7,7 @@ package edu.uc.muhammus.stara.ui.main
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.lifecycle.ViewModelProviders
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -23,16 +23,18 @@ import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.ui.location.LocationViewModel
 import edu.uc.muhammus.stara.ui.misc.ScheduleListViewAdapter
 import kotlinx.android.synthetic.main.schedule_fragment.*
+import java.util.*
 
 class ScheduleFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ScheduleFragment()
-    }
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 2000
     private lateinit var viewModel: MainViewModel
     private lateinit var locationViewModel: LocationViewModel
+
+    private lateinit var longitude: String
+    private lateinit var latitude: String
+    private lateinit var countryCode: String
+    private lateinit var countryName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +51,15 @@ class ScheduleFragment : Fragment() {
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        populateScheduleListView()
-
-        // Check for location permissions
+        /**
+         * Check for location permissions.
+         * If permission granted, get TV premieres schedule for country user is in.
+         * If permission not granted, get TV premieres schedule for United States.
+         */
         prepRequestLocationUpdates()
     }
 
+    // Prepare to get location by ensuring user has granted permission.
     private fun prepRequestLocationUpdates() {
         if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             requestLocationUpdates()
@@ -65,14 +70,36 @@ class ScheduleFragment : Fragment() {
         }
     }
 
+    // User has granted permission to access location, time to use it to get user's country's schedule.
     private fun requestLocationUpdates() {
         locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
-            Log.d("ScheduleFragment.kt", "Latitude: " + it.latitude)
-            Log.d("ScheduleFragment.kt", "Longitude: " + it.longitude)
+            latitude = it.latitude
+            longitude = it.longitude
+            Log.d("ScheduleFragment.kt", "Latitude: $latitude")
+            Log.d("ScheduleFragment.kt", "Longitude: $longitude")
+
+            // Use Geocoder to convert GPS coordinates into a countryName and countryCode
+            var geocoder = Geocoder(context, Locale.getDefault())
+            var address = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
+            countryCode = address.get(0).countryCode
+            countryName = address.get(0).countryName
+            Log.d("ScheduleFragment.kt", "Country code is: $countryCode")
+            Log.d("ScheduleFragment.kt", "Country name is: $countryName")
+
+            // Populate view with schedule for country user is in.
+            populateScheduleListView(countryCode)
+            // Update text to indicate which country schedule is being gotten for
+            txtScheduleSubtitle.text = countryName
+
+            // Don't expect to update country schedule often. Remove Observer after one location received.
+            locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
         })
     }
 
+    /**
+     * Whenever any permission is requested, use this function to handle it
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -84,7 +111,8 @@ class ScheduleFragment : Fragment() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocationUpdates()
                 } else {
-                    Toast.makeText(context, "Unable to update location without permission", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Unable to update location without permission. Showing USA Schedule.", Toast.LENGTH_LONG).show()
+                    populateScheduleListView("US")
                 }
             }
         }
@@ -100,12 +128,16 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    private fun populateScheduleListView() {
-        viewModel.fetchSchedule("US")
+    // Fetch schedule for countryCode specified
+    private fun populateScheduleListView(countryCode: String) {
+        viewModel.fetchSchedule(countryCode)
 
         viewModel.schedule.observe(viewLifecycleOwner, Observer {
             schedule -> scheduleListView.adapter = ScheduleListViewAdapter(requireContext(), schedule)
         })
     }
 
+    companion object {
+        fun newInstance() = ScheduleFragment()
+    }
 }
