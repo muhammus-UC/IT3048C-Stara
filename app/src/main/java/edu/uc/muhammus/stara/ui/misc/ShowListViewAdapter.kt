@@ -65,10 +65,18 @@ class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<Sh
         val thumbnailImageView = holder.thumbnailImageView
 
         val showJSON = getItem(position) as ShowJSON
+        var showName = showJSON.show.name
+        var showLanguage = showJSON.show.language
+        var showStatus = "Status: " + showJSON.show.status
 
-        titleTextView.text = showJSON.show.name
-        subtitleTextView.text = showJSON.show.status
-        detailTextView.text = showJSON.show.language
+        // Truncate names to keep UI clean
+        if (showName.length > 32) {
+            showName = showName.substring(0, 32).trim() + "..."
+        }
+
+        titleTextView.text = showName
+        subtitleTextView.text = showStatus
+        detailTextView.text = showLanguage
 
         if (showJSON.show.image != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
@@ -77,6 +85,9 @@ class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<Sh
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
+        }
+        else {
+            thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
 
         return view
