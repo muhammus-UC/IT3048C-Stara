@@ -65,10 +65,22 @@ class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayLis
         val thumbnailImageView = holder.thumbnailImageView
 
         val scheduleJSON = getItem(position) as ScheduleJSON
+        var showName = scheduleJSON.show.name
+        var episodeName = scheduleJSON.episodeName
+        var airtime = scheduleJSON.airtime
 
-        titleTextView.text = scheduleJSON.episodeName
-        subtitleTextView.text = scheduleJSON.show.name
-        detailTextView.text = scheduleJSON.airtime
+        // Truncate names to keep UI clean
+        if (showName.length > 32) {
+            showName = showName.substring(0, 32).trim() + "..."
+        }
+        if (episodeName.length > 32) {
+            episodeName = episodeName.substring(0, 32).trim() + "..."
+        }
+
+
+        titleTextView.text = showName
+        subtitleTextView.text = episodeName
+        detailTextView.text = airtime
 
         if (scheduleJSON.show.image != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.

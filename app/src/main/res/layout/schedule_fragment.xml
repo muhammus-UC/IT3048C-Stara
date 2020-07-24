@@ -5,14 +5,38 @@
     android:id="@+id/scheduleConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.ScheduleFragment" >
+    android:layout_marginBottom="56dp"
+    tools:context=".ui.main.ScheduleFragment">
 
     <ListView
         android:id="@+id/scheduleListView"
-        android:layout_width="373dp"
-        android:layout_height="550dp"
+        android:layout_width="393dp"
+        android:layout_height="447dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtScheduleSubtitle" />
+
+    <TextView
+        android:id="@+id/txtScheduleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/schedule_title"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtScheduleSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/schedule_subtitle"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtScheduleTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
