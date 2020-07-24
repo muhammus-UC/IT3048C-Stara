@@ -29,8 +29,7 @@ data class Show(var name: String,
     }
 }
 
-data class Image(var medium: String = "",
-                 var original: String = "") {
+data class Image(var medium: String, var original: String) {
     override fun toString(): String {
         return this.original
     }

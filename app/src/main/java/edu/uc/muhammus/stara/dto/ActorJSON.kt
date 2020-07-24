@@ -22,13 +22,17 @@ import com.google.gson.annotations.SerializedName
 data class ActorJSON(var score: Double, @SerializedName("person") var actor: Actor)
 
 data class Actor(var name: String,
-                 var country: ActorCountry?,
-                 var gender: String = "Gender Unknown",
-                 var image: ImageURL? = null) {
+                 var country: ActorCountry? = ActorCountry("Country Unknown", "Country Code Unknown", "Timezone Unknown"),
+                 var gender: String? = "Gender Unknown",
+                 var image: ImageURL? = null
+) {
     override fun toString(): String {
         return this.name
     }
 }
-data class ActorCountry(var name: String?, var code: String?, var timezone: String?)
+data class ActorCountry(var name: String? = "Country Unknown",
+                        var code: String? = "Country Code Unknown",
+                        var timezone: String? = "Timezone Unknown"
+)
 
 data class ImageURL(var medium: String, var original: String)
