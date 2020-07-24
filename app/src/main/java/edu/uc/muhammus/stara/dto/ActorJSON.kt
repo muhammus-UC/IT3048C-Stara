@@ -23,7 +23,7 @@ data class ActorJSON(var score: Double, @SerializedName("person") var actor: Act
 
 data class Actor(var name: String,
                  var country: ActorCountry?,
-                 var gender: String = "",
+                 var gender: String = "Gender Unknown",
                  var image: ImageURL? = null) {
     override fun toString(): String {
         return this.name
