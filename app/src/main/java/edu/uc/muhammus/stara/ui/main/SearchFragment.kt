@@ -4,10 +4,13 @@
 package edu.uc.muhammus.stara.ui.main
 
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -49,7 +52,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun populateSearchListView() {
-        var searchTerm = actSearch.text.toString()
+        var searchTerm = editSearch.text.toString()
 
         if (searchRadioShow.isChecked)
         {
@@ -67,7 +70,21 @@ class SearchFragment : Fragment() {
                 actors -> searchListView.adapter = ActorListViewAdapter(requireContext(), actors)
             })
         }
+
+        hideKeyboard()
     }
+
+    // Code to hide soft keyboard - START
+    // Reference: https://stackoverflow.com/a/45857155
+    private fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+    // Code to hide soft keyboard - END
+
 
     // Used for debugging, in case API is not working
     private val listOfShows = listOf(
