@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -39,7 +40,12 @@ class SearchFragment : StaraFragment() {
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
         searchRecyclerView.itemAnimator = DefaultItemAnimator()
 
+        // Populate SearchRecyclerView when user searches for show or actor
         btnSearch.setOnClickListener{populateSearchRecyclerView()}
+
+        // Change hint text based on which radio button is clicked
+        searchRadioActor.setOnClickListener{changeSearchHintText()}
+        searchRadioShow.setOnClickListener{changeSearchHintText()}
     }
 
     private fun populateSearchRecyclerView() {
@@ -69,6 +75,17 @@ class SearchFragment : StaraFragment() {
         }
 
         hideKeyboard()
+    }
+
+    private fun changeSearchHintText() {
+        if (searchRadioShow.isChecked)
+        {
+            editSearch.hint = "Search for Show..."
+        }
+        else if (searchRadioActor.isChecked)
+        {
+            editSearch.hint = "Search for Actor..."
+        }
     }
 
     // When fragment is hidden or shown
