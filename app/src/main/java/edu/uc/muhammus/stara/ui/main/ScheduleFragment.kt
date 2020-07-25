@@ -79,7 +79,7 @@ class ScheduleFragment : StaraFragment() {
 
     // User has granted permission to access location, time to use it to get user's country's schedule.
     private fun requestLocationUpdates() {
-        showToast("Getting Schedule...", false)
+        showToast("Getting Schedule...")
 
         locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {

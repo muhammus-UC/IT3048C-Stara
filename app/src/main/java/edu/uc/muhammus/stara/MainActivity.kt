@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_schedule -> {
                     if (activeFragment == scheduleFragment)
                     {
-                        showToast("Schedule already showing.")
+                        showToast("Schedule already showing.", true)
                     }
                     else if (activeFragment == searchFragment)
                     {
@@ -57,13 +57,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 // Favorites clicked
                 R.id.action_favorites -> {
-                    Toast.makeText(applicationContext, "Favorites Under Construction", Toast.LENGTH_SHORT).show()
+                    showToast("Favorites Under Construction")
                 }
                 // Search clicked
                 R.id.action_search -> {
                     if (activeFragment == searchFragment)
                     {
-                        showToast("Search already showing.")
+                        showToast("Search already showing.", true)
                     }
                     else if (activeFragment == scheduleFragment)
                     {
@@ -80,7 +80,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(text: String) {
-        Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+    private fun showToast(text: String, isLong: Boolean = false)
+    {
+        if (isLong)
+        {
+            Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
+        }
+        else
+        {
+            Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+        }
     }
 }
