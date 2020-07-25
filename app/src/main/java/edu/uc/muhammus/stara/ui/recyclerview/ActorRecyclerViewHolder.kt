@@ -1,5 +1,5 @@
 // Reference: https://www.youtube.com/watch?v=__gxd4IKVvk
-package edu.uc.muhammus.stara.ui.adapter
+package edu.uc.muhammus.stara.ui.recyclerview
 
 import android.view.View
 import android.widget.ImageView
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ActorJSON
-import edu.uc.muhammus.stara.dto.ShowJSON
 
 class ActorRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)

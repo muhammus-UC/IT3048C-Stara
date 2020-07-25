@@ -1,5 +1,5 @@
 // Reference: https://www.youtube.com/watch?v=__gxd4IKVvk
-package edu.uc.muhammus.stara.ui.adapter
+package edu.uc.muhammus.stara.ui.recyclerview
 
 import android.view.View
 import android.widget.ImageView

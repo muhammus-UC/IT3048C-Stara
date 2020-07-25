@@ -1,13 +1,12 @@
 // Reference: https://www.youtube.com/watch?v=__gxd4IKVvk
-package edu.uc.muhammus.stara.ui.adapter
+package edu.uc.muhammus.stara.ui.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import edu.uc.muhammus.stara.dto.ActorJSON
 import edu.uc.muhammus.stara.dto.ShowJSON
 
-class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout: Int): RecyclerView.Adapter<ActorRecyclerViewHolder>() {
+class ShowsRecyclerViewAdapter(val showJSONs: List<ShowJSON>, val itemLayout: Int): RecyclerView.Adapter<ShowRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -31,9 +30,9 @@ class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout:
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorRecyclerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
-        return ActorRecyclerViewHolder(view)
+        return ShowRecyclerViewHolder(view)
     }
 
     /**
@@ -42,7 +41,7 @@ class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout:
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return actorJSONs.size
+        return showJSONs.size
     }
 
     /**
@@ -66,8 +65,8 @@ class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout:
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ActorRecyclerViewHolder, position: Int) {
-        val actorJSON = actorJSONs.get(position)
-        holder.updateActorJSON(actorJSON)
+    override fun onBindViewHolder(holder: ShowRecyclerViewHolder, position: Int) {
+        val showJSON = showJSONs.get(position)
+        holder.updateShowJSON(showJSON)
     }
 }

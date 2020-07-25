@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ShowJSON
-import edu.uc.muhammus.stara.ui.adapter.ActorsRecyclerViewAdapter
-import edu.uc.muhammus.stara.ui.adapter.ShowsRecyclerViewAdapter
+import edu.uc.muhammus.stara.ui.recyclerview.ActorsRecyclerViewAdapter
+import edu.uc.muhammus.stara.ui.recyclerview.ShowsRecyclerViewAdapter
 import kotlinx.android.synthetic.main.search_fragment.*
 
 class SearchFragment : StaraFragment() {
