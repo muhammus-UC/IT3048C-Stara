@@ -25,8 +25,6 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
     // Data has no observers
     override fun onInactive() {
         super.onInactive()
-        // Make sure observers are removed after location data has been received once.
-        Log.d("LocationLiveData.kt", "No observers.")
         // Turn off location updates
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
@@ -70,9 +68,10 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
 
     companion object {
         val ONE_MINUTE: Long = 60000
+        val ONE_DAY: Long = 86400000
         val locationRequest: LocationRequest = LocationRequest.create().apply {
-            interval = ONE_MINUTE
-            fastestInterval = ONE_MINUTE / 4
+            interval = ONE_DAY
+            fastestInterval = ONE_DAY / 4
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }

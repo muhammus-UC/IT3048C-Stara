@@ -4,28 +4,24 @@
 package edu.uc.muhammus.stara.ui.main
 
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.R
-import edu.uc.muhammus.stara.dto.ActorJSON
-import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
-import edu.uc.muhammus.stara.ui.misc.ActorListViewAdapter
-import edu.uc.muhammus.stara.ui.misc.ShowListViewAdapter
+import edu.uc.muhammus.stara.ui.recyclerview.ActorsRecyclerViewAdapter
+import edu.uc.muhammus.stara.ui.recyclerview.ShowsRecyclerViewAdapter
 import kotlinx.android.synthetic.main.search_fragment.*
 
-class SearchFragment : Fragment() {
+class SearchFragment : StaraFragment() {
 
     private lateinit var viewModel: MainViewModel
+    private var fragmentTitle = "Stara - Search"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -38,7 +34,41 @@ class SearchFragment : Fragment() {
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        btnSearch.setOnClickListener{populateSearchListView()}
+        // Configure recycler view options with sane defaults
+        searchRecyclerView.hasFixedSize()
+        searchRecyclerView.layoutManager = LinearLayoutManager(context)
+        searchRecyclerView.itemAnimator = DefaultItemAnimator()
+
+        btnSearch.setOnClickListener{populateSearchRecyclerView()}
+    }
+
+    private fun populateSearchRecyclerView() {
+        var searchTerm = editSearch.text.toString()
+
+        if (searchRadioShow.isChecked)
+        {
+            // Remove observers since we keep adding one when button is pressed.
+            viewModel.shows.removeObservers(viewLifecycleOwner)
+
+            viewModel.fetchShows(searchTerm)
+
+            viewModel.shows.observe(viewLifecycleOwner, Observer{
+                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show)
+            })
+        }
+        else if (searchRadioActor.isChecked)
+        {
+            // Remove observers since we keep adding one when button is pressed.
+            viewModel.actors.removeObservers(viewLifecycleOwner)
+
+            viewModel.fetchActors(searchTerm)
+
+            viewModel.actors.observe(viewLifecycleOwner, Observer{
+                actors -> searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_show)
+            })
+        }
+
+        hideKeyboard()
     }
 
     // When fragment is hidden or shown
@@ -47,58 +77,9 @@ class SearchFragment : Fragment() {
 
         // If fragment is NOT hidden
         if(!hidden) {
-            activity?.title = "Stara - Search"
+            activity?.title = fragmentTitle
         }
     }
-
-    private fun populateSearchListView() {
-        var searchTerm = editSearch.text.toString()
-
-        if (searchRadioShow.isChecked)
-        {
-            viewModel.fetchShows(searchTerm)
-
-            viewModel.shows.observe(viewLifecycleOwner, Observer{
-                    shows -> searchListView.adapter = ShowListViewAdapter(requireContext(), shows)
-            })
-        }
-        else if (searchRadioActor.isChecked)
-        {
-            viewModel.fetchActors(searchTerm)
-
-            viewModel.actors.observe(viewLifecycleOwner, Observer {
-                actors -> searchListView.adapter = ActorListViewAdapter(requireContext(), actors)
-            })
-        }
-
-        hideKeyboard()
-    }
-
-    // Code to hide soft keyboard - START
-    // Reference: https://stackoverflow.com/a/45857155
-    private fun Fragment.hideKeyboard() {
-        view?.let { activity?.hideKeyboard(it) }
-    }
-    private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-    // Code to hide soft keyboard - END
-
-
-    // Used for debugging, in case API is not working
-    private val listOfShows = listOf(
-        Show("Community", "English", "Ended"),
-        Show("Still Game", "Japanese", "Ended"),
-        Show("Bobs Burgers", "Korean", "Ended"),
-        Show("Archer", "Arabic", "Ended"),
-        Show("HIMYM", "Urdu", "Ended"),
-        Show("My name is Earl", "French", "Ended"),
-        Show("Psych", "Hindi", "Ended"),
-        Show("Monk", "Punjabi", "Ended"),
-        Show("The Mentalist", "Spanish", "Ended"),
-        Show("White Collar", "Chinese", "Ended")
-    )
 
     companion object {
         fun newInstance() = SearchFragment()

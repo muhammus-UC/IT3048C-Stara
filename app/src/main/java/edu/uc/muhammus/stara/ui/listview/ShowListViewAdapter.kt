@@ -1,9 +1,9 @@
 /**
- * Used to format how Schedule List View looks like.
- * Used in ScheduleFragment.kt.
+ * Used to format how Show List View looks like.
+ * No longer used. Kept for archival purposes. Refer to recyclerview package.
  * Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
  */
-package edu.uc.muhammus.stara.ui.misc
+package edu.uc.muhammus.stara.ui.listview
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,15 +14,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
-import edu.uc.muhammus.stara.dto.ScheduleJSON
+import edu.uc.muhammus.stara.dto.ShowJSON
 import kotlinx.android.synthetic.main.list_item_show.view.*
-import java.text.SimpleDateFormat
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
-class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayList<ScheduleJSON>) : BaseAdapter() {
+class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<ShowJSON>) : BaseAdapter() {
     private val inflater: LayoutInflater
-            = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
         return dataSource.size
@@ -67,37 +64,35 @@ class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayLis
         val detailTextView = holder.detailTextView
         val thumbnailImageView = holder.thumbnailImageView
 
-        val scheduleJSON = getItem(position) as ScheduleJSON
-        var showName = scheduleJSON.show.name
-        var episodeName = scheduleJSON.episodeName
-        var airtime = scheduleJSON.airtime
+        val showJSON = getItem(position) as ShowJSON
+        var showName = showJSON.show.name
+        var showLanguage = showJSON.show.language ?: "Language Unknown"
+        var showStatus = "Status: " + showJSON.show.status
 
         // Truncate names to keep UI clean
         if (showName.length > 32) {
             showName = showName.substring(0, 32).trim() + "..."
         }
-        if (episodeName.length > 24) {
-            episodeName = episodeName.substring(0, 24).trim() + "..."
+
+        // If showStatus is "Status: ", we don't know the status
+        if (showStatus.equals("Status: ")) {
+            showStatus = "Status: Unknown"
         }
 
-        episodeName = "Episode: $episodeName"
-
-        // Convert 24 hour time to 12 hour
-        // Reference: https://stackoverflow.com/a/49326758
-        airtime = LocalTime.parse(airtime).format(DateTimeFormatter.ofPattern("hh:mm a"))
-
         titleTextView.text = showName
-        subtitleTextView.text = episodeName
-        detailTextView.text = airtime
+        subtitleTextView.text = showStatus
+        detailTextView.text = showLanguage
 
-        if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
+        // If API gave image URL, display that image
+        if (showJSON.show.image != null && showJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
+            var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
+        // Else display a placeholder indicating no image
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }

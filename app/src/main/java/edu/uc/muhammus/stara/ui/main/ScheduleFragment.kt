@@ -10,7 +10,6 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,17 +17,20 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import edu.uc.muhammus.stara.MainActivity
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.ui.location.LocationViewModel
-import edu.uc.muhammus.stara.ui.misc.ScheduleListViewAdapter
+import edu.uc.muhammus.stara.ui.recyclerview.SchedulesRecyclerViewAdapter
 import kotlinx.android.synthetic.main.schedule_fragment.*
 import java.util.*
 
-class ScheduleFragment : Fragment() {
+class ScheduleFragment : StaraFragment() {
+
+    private lateinit var viewModel: MainViewModel
+    private var fragmentTitle = "Stara - Schedule"
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 2000
-    private lateinit var viewModel: MainViewModel
     private lateinit var locationViewModel: LocationViewModel
 
     private lateinit var longitude: String
@@ -46,10 +48,15 @@ class ScheduleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity?.title = "Stara - Schedule"
+        activity?.title = fragmentTitle
 
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        // Configure recycler view options with sane defaults
+        scheduleRecyclerView.hasFixedSize()
+        scheduleRecyclerView.layoutManager = LinearLayoutManager(context)
+        scheduleRecyclerView.itemAnimator = DefaultItemAnimator()
 
         /**
          * Check for location permissions.
@@ -72,6 +79,8 @@ class ScheduleFragment : Fragment() {
 
     // User has granted permission to access location, time to use it to get user's country's schedule.
     private fun requestLocationUpdates() {
+        showToast("Getting Schedule...")
+
         locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
             latitude = it.latitude
@@ -88,12 +97,12 @@ class ScheduleFragment : Fragment() {
             Log.d("ScheduleFragment.kt", "Country name is: $countryName")
 
             // Populate view with schedule for country user is in.
-            populateScheduleListView(countryCode)
+            populateScheduleRecyclerView(countryCode)
             // Update text to indicate which country schedule is being gotten for
             txtScheduleSubtitle.text = countryName
 
             // Don't expect to update country schedule often. Remove Observer after one location received.
-            locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
+            //locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
         })
     }
 
@@ -105,17 +114,28 @@ class ScheduleFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode) {
             LOCATION_PERMISSION_REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocationUpdates()
                 } else {
-                    Toast.makeText(context, "Unable to update location without permission. Showing USA Schedule.", Toast.LENGTH_LONG).show()
-                    populateScheduleListView("US")
+                    showToast("Unable to update location without permission. Showing USA Schedule.", true)
+                    populateScheduleRecyclerView("US")
                 }
             }
+            else -> {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            }
         }
+    }
+
+    // Fetch schedule for countryCode specified
+    private fun populateScheduleRecyclerView(countryCode: String) {
+        viewModel.fetchSchedule(countryCode)
+
+        viewModel.schedule.observe(viewLifecycleOwner, Observer {
+            schedule -> scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item_show)
+        })
     }
 
     // When fragment is hidden or shown
@@ -124,17 +144,8 @@ class ScheduleFragment : Fragment() {
 
         // If fragment is NOT hidden
         if(!hidden) {
-            activity?.title = "Stara - Schedule"
+            activity?.title = fragmentTitle
         }
-    }
-
-    // Fetch schedule for countryCode specified
-    private fun populateScheduleListView(countryCode: String) {
-        viewModel.fetchSchedule(countryCode)
-
-        viewModel.schedule.observe(viewLifecycleOwner, Observer {
-            schedule -> scheduleListView.adapter = ScheduleListViewAdapter(requireContext(), schedule)
-        })
     }
 
     companion object {

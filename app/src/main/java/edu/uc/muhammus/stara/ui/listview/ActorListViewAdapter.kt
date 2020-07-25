@@ -1,9 +1,9 @@
 /**
  * Used to format how Actor List View looks like.
- * Used in SearchFragment.kt.
+ * No longer used. Kept for archival purposes. Refer to recyclerview package.
  * Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
  */
-package edu.uc.muhammus.stara.ui.misc
+package edu.uc.muhammus.stara.ui.listview
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -78,6 +78,7 @@ class ActorListViewAdapter(context: Context, private val dataSource: ArrayList<A
         subtitleTextView.text = actorGender
         detailTextView.text = actorCountry
 
+        // If API gave image URL, display that image
         if (actorJSON.actor.image != null && actorJSON.actor.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = actorJSON.actor.image?.medium!!.replace("http", "https")
@@ -86,6 +87,7 @@ class ActorListViewAdapter(context: Context, private val dataSource: ArrayList<A
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
+        // Else display a placeholder indicating no image
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
