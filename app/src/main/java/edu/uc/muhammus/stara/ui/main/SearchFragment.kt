@@ -43,9 +43,8 @@ class SearchFragment : StaraFragment() {
         // Populate SearchRecyclerView when user searches for show or actor
         btnSearch.setOnClickListener{populateSearchRecyclerView()}
 
-        // Change hint text based on which radio button is clicked
-        searchRadioActor.setOnClickListener{changeSearchHintText()}
-        searchRadioShow.setOnClickListener{changeSearchHintText()}
+        // Change hint text based on which radio button is clicked by adding a listener
+        changeSearchHintText()
     }
 
     private fun populateSearchRecyclerView() {
@@ -78,14 +77,16 @@ class SearchFragment : StaraFragment() {
     }
 
     private fun changeSearchHintText() {
-        if (searchRadioShow.isChecked)
-        {
-            editSearch.hint = "Search for Show..."
-        }
-        else if (searchRadioActor.isChecked)
-        {
-            editSearch.hint = "Search for Actor..."
-        }
+        searchRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener(
+            fun (_, checkedId) {
+                if (checkedId == R.id.searchRadioShow) {
+                    editSearch.hint = "Search for Show..."
+                }
+                else if (checkedId == R.id.searchRadioActor) {
+                    editSearch.hint = "Search for Actor..."
+                }
+            }
+        ))
     }
 
     // When fragment is hidden or shown
