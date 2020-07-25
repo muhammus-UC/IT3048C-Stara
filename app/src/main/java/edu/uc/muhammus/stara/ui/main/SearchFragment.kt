@@ -14,15 +14,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ShowJSON
+import edu.uc.muhammus.stara.ui.adapter.ActorsRecyclerViewAdapter
 import edu.uc.muhammus.stara.ui.adapter.ShowsRecyclerViewAdapter
 import kotlinx.android.synthetic.main.search_fragment.*
 
 class SearchFragment : StaraFragment() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var showsRecyclerViewAdapter: ShowsRecyclerViewAdapter
     private var fragmentTitle = "Stara - Search"
-    private var _shows = ArrayList<ShowJSON>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -40,43 +39,36 @@ class SearchFragment : StaraFragment() {
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
         searchRecyclerView.itemAnimator = DefaultItemAnimator()
 
-        // Configure recycler view adapters
-        showsRecyclerViewAdapter = ShowsRecyclerViewAdapter(_shows, R.layout.list_item_show)
+        // Set default recycler view adapter so that it doesn't disappear
+        // This adapter configuration is not really used
+        searchRecyclerView.adapter = ShowsRecyclerViewAdapter(ArrayList<ShowJSON>(), R.layout.list_item_show)
 
-        // Set default recycler view adapter
-        searchRecyclerView.adapter = showsRecyclerViewAdapter
-
-        viewModel.shows.observe(viewLifecycleOwner, Observer {
-            shows ->
-                // Remove all shows in there
-                _shows.removeAll(_shows)
-                // Update with the new shows that we have observed
-                _shows.addAll(shows)
-                // Tell recycler view to update
-                searchRecyclerView.adapter = showsRecyclerViewAdapter
-        })
-        btnSearch.setOnClickListener{populateSearchListView()}
+        btnSearch.setOnClickListener{populateSearchRecyclerView()}
     }
 
-    private fun populateSearchListView() {
+    private fun populateSearchRecyclerView() {
         var searchTerm = editSearch.text.toString()
 
         if (searchRadioShow.isChecked)
         {
+            // Remove observers since we keep adding one when button is pressed.
+            viewModel.shows.removeObservers(viewLifecycleOwner)
+
             viewModel.fetchShows(searchTerm)
 
             viewModel.shows.observe(viewLifecycleOwner, Observer{
                 shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show)
             })
-
-            showsRecyclerViewAdapter.notifyDataSetChanged()
         }
         else if (searchRadioActor.isChecked)
         {
+            // Remove observers since we keep adding one when button is pressed.
+            viewModel.actors.removeObservers(viewLifecycleOwner)
+
             viewModel.fetchActors(searchTerm)
 
-            viewModel.actors.observe(viewLifecycleOwner, Observer {
-                //actors -> searchListView.adapter = ActorListViewAdapter(requireContext(), actors)
+            viewModel.actors.observe(viewLifecycleOwner, Observer{
+                actors -> searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_show)
             })
         }
 
