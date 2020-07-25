@@ -10,7 +10,6 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +20,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.R
-import edu.uc.muhammus.stara.dto.ScheduleJSON
 import edu.uc.muhammus.stara.ui.location.LocationViewModel
-import edu.uc.muhammus.stara.ui.misc.ScheduleListViewAdapter
-import edu.uc.muhammus.stara.ui.recyclerview.ScheduleRecyclerViewHolder
 import edu.uc.muhammus.stara.ui.recyclerview.SchedulesRecyclerViewAdapter
 import kotlinx.android.synthetic.main.schedule_fragment.*
-import kotlinx.android.synthetic.main.search_fragment.*
 import java.util.*
 
 class ScheduleFragment : StaraFragment() {
@@ -84,6 +79,8 @@ class ScheduleFragment : StaraFragment() {
 
     // User has granted permission to access location, time to use it to get user's country's schedule.
     private fun requestLocationUpdates() {
+        showToast("Getting Schedule...", false)
+
         locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
             latitude = it.latitude
@@ -100,7 +97,7 @@ class ScheduleFragment : StaraFragment() {
             Log.d("ScheduleFragment.kt", "Country name is: $countryName")
 
             // Populate view with schedule for country user is in.
-            populateScheduleListView(countryCode)
+            populateScheduleRecyclerView(countryCode)
             // Update text to indicate which country schedule is being gotten for
             txtScheduleSubtitle.text = countryName
 
@@ -122,8 +119,8 @@ class ScheduleFragment : StaraFragment() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocationUpdates()
                 } else {
-                    Toast.makeText(context, "Unable to update location without permission. Showing USA Schedule.", Toast.LENGTH_LONG).show()
-                    populateScheduleListView("US")
+                    showToast("Unable to update location without permission. Showing USA Schedule.", true)
+                    populateScheduleRecyclerView("US")
                 }
             }
             else -> {
@@ -133,7 +130,7 @@ class ScheduleFragment : StaraFragment() {
     }
 
     // Fetch schedule for countryCode specified
-    private fun populateScheduleListView(countryCode: String) {
+    private fun populateScheduleRecyclerView(countryCode: String) {
         viewModel.fetchSchedule(countryCode)
 
         viewModel.schedule.observe(viewLifecycleOwner, Observer {

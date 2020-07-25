@@ -8,6 +8,7 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import edu.uc.muhammus.stara.dto.Show
 
@@ -25,8 +26,20 @@ open class StaraFragment : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    protected fun showToast(text: String, isLong: Boolean)
+    {
+        if (isLong)
+        {
+            Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+        }
+        else
+        {
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     // Used for debugging, in case API is not working
-    private val listOfShows = listOf(
+    protected val listOfShows = listOf(
         Show("Community", "English", "Ended"),
         Show("Still Game", "Japanese", "Ended"),
         Show("Bobs Burgers", "Korean", "Ended"),
