@@ -8,17 +8,6 @@
     android:layout_marginBottom="56dp"
     tools:context=".ui.main.ScheduleFragment">
 
-    <ListView
-        android:id="@+id/scheduleListView"
-        android:layout_width="0dp"
-        android:layout_height="458dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtScheduleSubtitle" />
-
     <TextView
         android:id="@+id/txtScheduleTitle"
         android:layout_width="wrap_content"
@@ -40,5 +29,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtScheduleTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/scheduleRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtScheduleSubtitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

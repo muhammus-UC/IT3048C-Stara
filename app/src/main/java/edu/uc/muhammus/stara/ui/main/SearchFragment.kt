@@ -39,10 +39,6 @@ class SearchFragment : StaraFragment() {
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
         searchRecyclerView.itemAnimator = DefaultItemAnimator()
 
-        // Set default recycler view adapter so that it doesn't disappear
-        // This adapter configuration is not really used
-        searchRecyclerView.adapter = ShowsRecyclerViewAdapter(ArrayList<ShowJSON>(), R.layout.list_item_show)
-
         btnSearch.setOnClickListener{populateSearchRecyclerView()}
     }
 

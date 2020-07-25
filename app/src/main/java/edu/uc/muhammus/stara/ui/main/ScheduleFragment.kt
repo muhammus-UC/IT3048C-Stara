@@ -18,10 +18,16 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.R
+import edu.uc.muhammus.stara.dto.ScheduleJSON
 import edu.uc.muhammus.stara.ui.location.LocationViewModel
 import edu.uc.muhammus.stara.ui.misc.ScheduleListViewAdapter
+import edu.uc.muhammus.stara.ui.recyclerview.ScheduleRecyclerViewHolder
+import edu.uc.muhammus.stara.ui.recyclerview.SchedulesRecyclerViewAdapter
 import kotlinx.android.synthetic.main.schedule_fragment.*
+import kotlinx.android.synthetic.main.search_fragment.*
 import java.util.*
 
 class ScheduleFragment : StaraFragment() {
@@ -51,6 +57,11 @@ class ScheduleFragment : StaraFragment() {
 
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        // Configure recycler view options with sane defaults
+        scheduleRecyclerView.hasFixedSize()
+        scheduleRecyclerView.layoutManager = LinearLayoutManager(context)
+        scheduleRecyclerView.itemAnimator = DefaultItemAnimator()
 
         /**
          * Check for location permissions.
@@ -94,7 +105,7 @@ class ScheduleFragment : StaraFragment() {
             txtScheduleSubtitle.text = countryName
 
             // Don't expect to update country schedule often. Remove Observer after one location received.
-            locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
+            //locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
         })
     }
 
@@ -126,7 +137,7 @@ class ScheduleFragment : StaraFragment() {
         viewModel.fetchSchedule(countryCode)
 
         viewModel.schedule.observe(viewLifecycleOwner, Observer {
-            schedule -> scheduleListView.adapter = ScheduleListViewAdapter(requireContext(), schedule)
+            schedule -> scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item_show)
         })
     }
 
