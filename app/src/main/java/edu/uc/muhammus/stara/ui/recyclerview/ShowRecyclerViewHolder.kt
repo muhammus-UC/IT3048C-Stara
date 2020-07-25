@@ -41,6 +41,7 @@ class ShowRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) 
         subtitleTextView.text = showStatus
         detailTextView.text = showLanguage
 
+        // If API gave image URL, display that image
         if (showJSON.show.image != null && showJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
@@ -49,6 +50,7 @@ class ShowRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) 
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
+        // Else display a placeholder indicating no image
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }

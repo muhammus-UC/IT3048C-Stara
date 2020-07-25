@@ -36,6 +36,7 @@ class ActorRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
         subtitleTextView.text = actorGender
         detailTextView.text = actorCountry
 
+        // If API gave image URL, display that image
         if (actorJSON.actor.image != null && actorJSON.actor.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             val encryptedImageURL = actorJSON.actor.image?.medium!!.replace("http", "https")
@@ -44,6 +45,7 @@ class ActorRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
+        // Else display a placeholder indicating no image
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
