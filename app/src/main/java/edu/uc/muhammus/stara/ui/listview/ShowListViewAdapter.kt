@@ -1,6 +1,6 @@
 /**
  * Used to format how Show List View looks like.
- * Used in SearchFragment.kt.
+ * No longer used. Kept for archival purposes. Refer to recyclerview package.
  * Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
  */
 package edu.uc.muhammus.stara.ui.listview
