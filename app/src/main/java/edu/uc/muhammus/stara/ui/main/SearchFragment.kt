@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
-import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.recyclerview.ActorsRecyclerViewAdapter
 import edu.uc.muhammus.stara.ui.recyclerview.ShowsRecyclerViewAdapter
 import kotlinx.android.synthetic.main.search_fragment.*
@@ -64,7 +63,7 @@ class SearchFragment : StaraFragment() {
             viewModel.fetchShows(searchTerm)
 
             viewModel.shows.observe(viewLifecycleOwner, Observer{
-                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show, viewModel, myActivity)
+                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_favorite, viewModel, myActivity)
             })
         }
         else if (searchRadioActor.isChecked)
@@ -75,7 +74,7 @@ class SearchFragment : StaraFragment() {
             viewModel.fetchActors(searchTerm)
 
             viewModel.actors.observe(viewLifecycleOwner, Observer{
-                actors -> searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_show)
+                actors -> searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_favorite)
             })
         }
 
