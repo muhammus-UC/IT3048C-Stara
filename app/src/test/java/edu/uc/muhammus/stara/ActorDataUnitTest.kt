@@ -27,7 +27,7 @@ class ActorDataUnitTest {
     @Test
     fun confirmJoelMcHale_outputsJoelMcHale () {
         var country = ActorCountry("Italy", "IT", "Europe/Rome")
-        var actor = Actor("Joel McHale", country, "Male")
+        var actor = Actor("11615","Joel McHale", country, "Male")
         assertEquals("Joel McHale", actor.toString())
     }
 
@@ -56,14 +56,14 @@ class ActorDataUnitTest {
         var allActors = ArrayList<ActorJSON>()
         // create and add actors to our collection
         var mcHaleCountry = ActorCountry ("Italy", "IT", "Europe/Rome")
-        var mcHale = Actor("Joel McHale", mcHaleCountry, "Male")
+        var mcHale = Actor("11615", "Joel McHale", mcHaleCountry, "Male")
         var mcHaleJSON = ActorJSON(50.0, mcHale)
         allActors.add(mcHaleJSON)
         var barriosCountry = ActorCountry("United States", "US", "America/New_York")
-        var barrios = Actor("Joseph Barrios", barriosCountry, "Male")
+        var barrios = Actor("212615", "Joseph Barrios", barriosCountry, "Male")
         var barriosJSON = ActorJSON(25.0, barrios)
         allActors.add(barriosJSON)
-        var kramer = Actor("Joel Michael Kramer", null, "Male")
+        var kramer = Actor("170621", "Joel Michael Kramer", null, "Male")
         var kramerJSON = ActorJSON(12.5, kramer)
         allActors.add(kramerJSON)
         allActorsLiveData.postValue(allActors)
