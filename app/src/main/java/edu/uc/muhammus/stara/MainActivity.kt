@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import edu.uc.muhammus.stara.ui.main.FavoritesFragment
 import edu.uc.muhammus.stara.ui.main.ScheduleFragment
 import edu.uc.muhammus.stara.ui.main.SearchFragment
 import kotlinx.android.synthetic.main.main_activity.*
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     // Used to switch fragments without having to initialize them again.
     private lateinit var searchFragment: SearchFragment
     private lateinit var scheduleFragment: ScheduleFragment
+    private lateinit var favoritesFragment: FavoritesFragment
 
     // Keep track of which fragment is currently on screen or active
     private lateinit var activeFragment: Fragment
@@ -26,12 +28,15 @@ class MainActivity : AppCompatActivity() {
         // Reference: https://stackoverflow.com/a/25151895
         searchFragment = SearchFragment.newInstance()
         scheduleFragment = ScheduleFragment.newInstance()
+        favoritesFragment = FavoritesFragment.newInstance()
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.container, scheduleFragment)
                 .add(R.id.container, searchFragment)
+                .add(R.id.container, favoritesFragment)
                 .hide(searchFragment)
+                .hide(favoritesFragment)
                 .commitNow()
             activeFragment = scheduleFragment
         }
@@ -46,6 +51,14 @@ class MainActivity : AppCompatActivity() {
                     {
                         showToast("Schedule already showing.", true)
                     }
+                    else if (activeFragment == favoritesFragment)
+                    {
+                        supportFragmentManager.beginTransaction()
+                            .hide(favoritesFragment)
+                            .show(scheduleFragment)
+                            .commitNow()
+                        activeFragment = scheduleFragment
+                    }
                     else if (activeFragment == searchFragment)
                     {
                         supportFragmentManager.beginTransaction()
@@ -57,13 +70,40 @@ class MainActivity : AppCompatActivity() {
                 }
                 // Favorites clicked
                 R.id.action_favorites -> {
-                    showToast("Favorites Under Construction")
+                    if (activeFragment == favoritesFragment)
+                    {
+                        showToast("Favorites already showing.", true)
+                    }
+                    else if (activeFragment == scheduleFragment)
+                    {
+                        supportFragmentManager.beginTransaction()
+                            .hide(scheduleFragment)
+                            .show(favoritesFragment)
+                            .commitNow()
+                        activeFragment = favoritesFragment
+                    }
+                    else if (activeFragment == searchFragment)
+                    {
+                        supportFragmentManager.beginTransaction()
+                            .hide(searchFragment)
+                            .show(favoritesFragment)
+                            .commitNow()
+                        activeFragment = favoritesFragment
+                    }
                 }
                 // Search clicked
                 R.id.action_search -> {
                     if (activeFragment == searchFragment)
                     {
                         showToast("Search already showing.", true)
+                    }
+                    else if (activeFragment == favoritesFragment)
+                    {
+                        supportFragmentManager.beginTransaction()
+                            .hide(favoritesFragment)
+                            .show(searchFragment)
+                            .commitNow()
+                        activeFragment = searchFragment
                     }
                     else if (activeFragment == scheduleFragment)
                     {

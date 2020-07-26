@@ -24,8 +24,10 @@ class SearchFragment : StaraFragment() {
     private lateinit var viewModel: MainViewModel
     private var fragmentTitle = "Stara - Search"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.search_fragment, container, false)
     }
 
