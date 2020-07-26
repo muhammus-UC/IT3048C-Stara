@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        // Ensure user is signed out
+        FirebaseAuth.getInstance().signOut()
+
         // Initialize fragments in variables to keep them running when switching
         // Reference: https://stackoverflow.com/a/25151895
         searchFragment = SearchFragment.newInstance()
@@ -160,14 +163,11 @@ class MainActivity : AppCompatActivity() {
      * Reference: https://youtu.be/cqEawweiLEM
      */
     internal fun logon() {
-        // Ensure user is signed out
-        FirebaseAuth.getInstance().signOut()
-
         var providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
         startActivityForResult(
-            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build(), AUTH_REQUEST_CODE
+            AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(providers).build(), AUTH_REQUEST_CODE
         )
     }
 
