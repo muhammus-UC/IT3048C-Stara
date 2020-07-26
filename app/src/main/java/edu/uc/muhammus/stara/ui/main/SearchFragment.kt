@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.search_fragment.*
 class SearchFragment : StaraFragment() {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var myActivity: MainActivity
     private var fragmentTitle = "Stara - Search"
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -38,6 +39,8 @@ class SearchFragment : StaraFragment() {
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        myActivity = (activity as MainActivity)
+
         // Configure recycler view options with sane defaults
         searchRecyclerView.hasFixedSize()
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -51,7 +54,6 @@ class SearchFragment : StaraFragment() {
     }
 
     private fun populateSearchRecyclerView() {
-        var email = (activity as MainActivity).email
         var searchTerm = editSearch.text.toString()
 
         if (searchRadioShow.isChecked)
@@ -62,7 +64,7 @@ class SearchFragment : StaraFragment() {
             viewModel.fetchShows(searchTerm)
 
             viewModel.shows.observe(viewLifecycleOwner, Observer{
-                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show, viewModel, email)
+                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show, viewModel, myActivity)
             })
         }
         else if (searchRadioActor.isChecked)

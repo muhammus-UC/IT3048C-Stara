@@ -80,7 +80,7 @@ class MainViewModel : ViewModel() {
         set(value) {_favorites = value}
 
     /**
-     * Add show or actor to Firestore favorites
+     * Add show or actor to Firestore favorites for user logged in
      * Reference: https://youtu.be/CuP1elpCuEA
      */
     fun addFavorite(favorite: Favorite, email: String) {
@@ -90,10 +90,27 @@ class MainViewModel : ViewModel() {
                 .document(favorite.id)
                 .set(favorite)
                 .addOnSuccessListener {
-                    Log.d("Firebase", "Favorite succeeded")
+                    Log.d("Firebase", "Favorite add succeeded")
                 }
                 .addOnFailureListener{
-                    Log.d("Firebase", "Favorite failed")
+                    Log.d("Firebase", "Favorite add failed")
                 }
+    }
+
+    /**
+     * Remove show or actor from Firestore favorites for user logged in
+     */
+    fun removeFavorite(favorite: Favorite, email: String) {
+        firestore.collection(firestoreCollectionUsers)
+            .document(email)
+            .collection(firestoreCollectionFavorites)
+            .document(favorite.id)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("Firebase", "Favorite deletion succeeded")
+            }
+            .addOnFailureListener{
+                Log.d("Firebase", "Favorite deletion failed")
+            }
     }
 }

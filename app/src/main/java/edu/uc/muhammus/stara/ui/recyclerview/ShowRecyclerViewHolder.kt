@@ -17,12 +17,14 @@ import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val email: String): RecyclerView.ViewHolder(itemView) {
+class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
     private val detailTextView: TextView = itemView.findViewById(R.id.list_detail)
     private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
+
+    private var alreadyFavorite: Boolean = false
 
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
@@ -61,11 +63,22 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val e
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
 
+
+
         btnFavorite.setOnClickListener{addShowToFavorites(showJSON.show)}
     }
 
     private fun addShowToFavorites(favoriteShow: Show) {
         println("favorite clicked")
+
+        // Default email is "email". This means user has not logged in.
+        if (myActivity.email == "email")
+        {
+            myActivity.showToast("You can not add to favorites without logging in.", true)
+            myActivity.logon()
+            return
+        }
+
 
         var favorite = Favorite().apply {
             id = "Show_" + favoriteShow.id
@@ -78,7 +91,17 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val e
             }
         }
 
-
-        viewModel.addFavorite(favorite, email)
+        if (!alreadyFavorite)
+        {
+            viewModel.addFavorite(favorite, myActivity.email)
+            alreadyFavorite = true
+            btnFavorite.setImageResource((android.R.drawable.star_big_on))
+        }
+        else
+        {
+            viewModel.removeFavorite(favorite, myActivity.email)
+            alreadyFavorite = false
+            btnFavorite.setImageResource((android.R.drawable.star_big_off))
+        }
     }
 }

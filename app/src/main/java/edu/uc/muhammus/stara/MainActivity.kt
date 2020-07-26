@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(text: String, isLong: Boolean = false)
+    internal fun showToast(text: String, isLong: Boolean = false)
     {
         if (isLong)
         {
@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity() {
      * Firebase Authentication
      * Reference: https://youtu.be/cqEawweiLEM
      */
-    private fun logon() {
+    internal fun logon() {
         // Ensure user is signed out
         FirebaseAuth.getInstance().signOut()
 
