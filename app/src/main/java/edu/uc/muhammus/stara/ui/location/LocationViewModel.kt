@@ -1,5 +1,5 @@
 /**
- * Used to get Location. (View Model)
+ * Used to get Location via GPS. (View Model)
  * Reference: https://youtu.be/VgZZemAwLTk
  */
 package edu.uc.muhammus.stara.ui.location

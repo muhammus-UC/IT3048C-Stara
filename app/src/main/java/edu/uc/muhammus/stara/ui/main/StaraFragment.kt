@@ -26,6 +26,9 @@ open class StaraFragment : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    /**
+     * Used to quickly show Toasts within a Fragment.
+     */
     protected fun showToast(text: String, isLong: Boolean = false)
     {
         if (isLong)

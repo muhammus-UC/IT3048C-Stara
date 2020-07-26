@@ -1,6 +1,6 @@
 /**
+ * No longer used. Kept for reference purposes. Refer to recyclerview package for what is actually used.
  * Used to format how Show List View looks like.
- * No longer used. Kept for archival purposes. Refer to recyclerview package.
  * Reference: https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin
  */
 package edu.uc.muhammus.stara.ui.listview

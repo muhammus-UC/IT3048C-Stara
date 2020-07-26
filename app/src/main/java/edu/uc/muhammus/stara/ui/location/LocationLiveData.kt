@@ -1,5 +1,5 @@
 /**
- * Used to get Location. (Live Data)
+ * Used to get Location via GPS. (Live Data)
  * Reference: https://youtu.be/VgZZemAwLTk
  */
 package edu.uc.muhammus.stara.ui.location

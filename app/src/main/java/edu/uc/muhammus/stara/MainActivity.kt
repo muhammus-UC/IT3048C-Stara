@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     // Keep track of which fragment is currently on screen or active
     private lateinit var activeFragment: Fragment
 
-    // Firebase Authentication
+    // Used for Firebase Authentication
     // Reference: https://youtu.be/cqEawweiLEM
     private val AUTH_REQUEST_CODE = 2002
     private var user: FirebaseUser? = null
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        // Ensure user is signed out
+        // Ensure user is signed out from Firebase Authentication
         FirebaseAuth.getInstance().signOut()
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
         scheduleFragment = ScheduleFragment.newInstance()
         favoritesFragment = FavoritesFragment.newInstance()
 
+        /**
+         * Add all the fragments that were initialized above.
+         * Then hide all of them except for schedule fragment.
+         */
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.container, scheduleFragment)
@@ -61,8 +65,10 @@ class MainActivity : AppCompatActivity() {
             activeFragment = scheduleFragment
         }
 
-        // Configure bottom navigation bar buttons
-        // Reference: https://stackoverflow.com/a/44611348
+        /**
+         * Configure bottom navigation bar button actions
+         * Reference: https://stackoverflow.com/a/44611348
+         */
         staraBottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 // Schedule clicked
@@ -147,6 +153,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Used to quickly show Toasts
+     */
     internal fun showToast(text: String, isLong: Boolean = false)
     {
         if (isLong)

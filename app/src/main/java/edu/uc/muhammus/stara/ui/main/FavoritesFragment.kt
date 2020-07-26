@@ -1,3 +1,8 @@
+/**
+ * Fragment that displays currently logged in user's favorite shows.
+ * In MainViewModel, Gets shows from Firebase Firestore.
+ * In MainActivity, User is logged in via Firebase Authentication.
+ */
 package edu.uc.muhammus.stara.ui.main
 
 import android.os.Bundle
