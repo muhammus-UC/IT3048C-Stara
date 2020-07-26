@@ -7,14 +7,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthUI
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import edu.uc.muhammus.stara.ui.main.FavoritesFragment
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 import edu.uc.muhammus.stara.ui.main.ScheduleFragment
 import edu.uc.muhammus.stara.ui.main.SearchFragment
-import kotlinx.android.synthetic.main.favorites_fragment.*
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signOut()
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.initializeFirebase()
 
         // Initialize fragments in variables to keep them running when switching
         // Reference: https://stackoverflow.com/a/25151895

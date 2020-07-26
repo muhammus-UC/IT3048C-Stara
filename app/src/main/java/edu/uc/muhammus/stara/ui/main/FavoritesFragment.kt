@@ -1,9 +1,6 @@
 package edu.uc.muhammus.stara.ui.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.ui.recyclerview.FavoriteRecyclerViewAdapter
-import edu.uc.muhammus.stara.ui.recyclerview.ShowsRecyclerViewAdapter
 import kotlinx.android.synthetic.main.favorites_fragment.*
-import kotlinx.android.synthetic.main.search_fragment.*
 
 class FavoritesFragment : StaraFragment() {
 
@@ -40,6 +35,7 @@ class FavoritesFragment : StaraFragment() {
 
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.initializeFirebase()
 
         myActivity = (activity as MainActivity)
 

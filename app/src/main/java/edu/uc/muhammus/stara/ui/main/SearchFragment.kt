@@ -37,6 +37,7 @@ class SearchFragment : StaraFragment() {
 
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.initializeFirebase()
 
         myActivity = (activity as MainActivity)
 

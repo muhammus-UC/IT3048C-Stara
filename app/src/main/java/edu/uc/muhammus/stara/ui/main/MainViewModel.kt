@@ -18,10 +18,10 @@ class MainViewModel : ViewModel() {
     private val firestoreCollectionUsers = "users"
     private var _favorites: MutableLiveData<ArrayList<Favorite>> = MutableLiveData<ArrayList<Favorite>>()
 
-    init {
+    // Can not use init to initalize firebase as it causes unit & integration tests to crash
+    internal fun initializeFirebase() {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        //listenToFavorites()
     }
 
     var shows: MutableLiveData<ArrayList<ShowJSON>> = MutableLiveData<ArrayList<ShowJSON>>()
