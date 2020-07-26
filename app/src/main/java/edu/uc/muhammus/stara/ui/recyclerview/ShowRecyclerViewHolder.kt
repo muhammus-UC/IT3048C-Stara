@@ -22,8 +22,8 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
     private val detailTextView: TextView = itemView.findViewById(R.id.list_detail)
-    private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
 
+    private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
     private var alreadyFavorite: Boolean = false
 
     /**
@@ -83,8 +83,8 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
         var favorite = Favorite().apply {
             id = "Show_" + favoriteShow.id
             name = favoriteShow.name
-            subtitle = favoriteShow.status
-            detail = favoriteShow.language
+            subtitle = "Status: " + favoriteShow.status
+            detail = favoriteShow.language ?: "Language Unknown"
             if (favoriteShow.image != null && favoriteShow.image?.medium != null)
             {
                 image = favoriteShow.image?.medium
@@ -95,13 +95,13 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
         {
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true
-            btnFavorite.setImageResource((android.R.drawable.star_big_on))
+            btnFavorite.setImageResource(android.R.drawable.star_big_on)
         }
         else
         {
             viewModel.removeFavorite(favorite, myActivity.email)
             alreadyFavorite = false
-            btnFavorite.setImageResource((android.R.drawable.star_big_off))
+            btnFavorite.setImageResource(android.R.drawable.star_big_off)
         }
     }
 }

@@ -74,7 +74,7 @@ class SearchFragment : StaraFragment() {
             viewModel.fetchActors(searchTerm)
 
             viewModel.actors.observe(viewLifecycleOwner, Observer{
-                actors -> searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_favorite)
+                actors -> searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_favorite, viewModel, myActivity)
             })
         }
 
