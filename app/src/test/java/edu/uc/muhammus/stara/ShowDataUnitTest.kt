@@ -78,7 +78,10 @@ class ShowDataUnitTest {
             assertNotNull(it)
             assertTrue(it.size > 0)
             it.forEach {
-                if (it.show.name == "Community" && it.show.language == "English" && it.show.status == "Ended") {
+                if (it.show.id == "318" &&
+                    it.show.name == "Community" &&
+                    it.show.language == "English" &&
+                    it.show.status == "Ended") {
                     communityFound = true
                 }
             }
