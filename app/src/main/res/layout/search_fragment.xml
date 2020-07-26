@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="56dp"
-    android:background="@drawable/gradient_color"
     tools:context=".ui.main.SearchFragment">
 
     <Button
