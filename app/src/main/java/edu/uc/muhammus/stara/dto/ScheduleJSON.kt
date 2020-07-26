@@ -4,7 +4,7 @@
  * @param ScheduleJSON.episodeName - A string to hold new episode name. Ex: "Daisy Chain Gang"
  * @param ScheduleJSON.airtime - A string to hold premiere time in 24-Hour format. Ex: "19:00"
  *
- * @param ScheduleJSON.show - A Show object used to parse nested JSON about a show. Uses ShowJSON.kt
+ * @param ScheduleJSON.show - A Show object used to parse nested JSON about a show. Defined in ShowJSON.kt
  */
 
 package edu.uc.muhammus.stara.dto

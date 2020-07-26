@@ -1,5 +1,5 @@
 /**
- * Allows user to search for actor or show data via TVMaze API.
+ * Fragment for user to search for actor or show data via TVMaze API.
  */
 package edu.uc.muhammus.stara.ui.main
 
@@ -23,6 +23,8 @@ class SearchFragment : StaraFragment() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var myActivity: MainActivity
+
+    // Title of Fragment currently shown. Used to set title when Fragment is shown from hide state.
     private var fragmentTitle = "Stara - Search"
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -53,6 +55,9 @@ class SearchFragment : StaraFragment() {
         changeSearchHintText()
     }
 
+    /**
+     * Populate searchRecyclerView with search results for Actor or Show as requested via TVMazeAPI.
+     */
     private fun populateSearchRecyclerView() {
         var searchTerm = editSearch.text.toString()
 
@@ -82,6 +87,9 @@ class SearchFragment : StaraFragment() {
         hideKeyboard()
     }
 
+    /**
+     * Change hint text of editSearch depending on which radio button is selected by adding a Listener.
+     */
     private fun changeSearchHintText() {
         searchRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener(
             fun (_, checkedId) {
@@ -95,7 +103,10 @@ class SearchFragment : StaraFragment() {
         ))
     }
 
-    // When fragment is hidden or shown
+    /**
+     * Runs when Fragment is hidden or shown via FragmentManager.
+     * Used to set proper title.
+     */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
 

@@ -1,7 +1,7 @@
 /**
  * Fragment shown by default.
- * Shows a schedule of new episodes premiering today in United States via TVMaze API.
- * Feature to add: Get user location and get schedule data for country they are in.
+ * If location access denied, shows a schedule of new episodes premiering today for United States via TVMaze API.
+ * If location access granted, shows a schedule of new episodes premiering today for country device is located via TVMaze API.
  */
 package edu.uc.muhammus.stara.ui.main
 
@@ -129,7 +129,9 @@ class ScheduleFragment : StaraFragment() {
         }
     }
 
-    // Fetch schedule for countryCode specified
+    /**
+     * Fetch schedule for countryCode specified
+     */
     private fun populateScheduleRecyclerView(countryCode: String) {
         viewModel.fetchSchedule(countryCode)
 
@@ -138,7 +140,10 @@ class ScheduleFragment : StaraFragment() {
         })
     }
 
-    // When fragment is hidden or shown
+    /**
+     * Runs when Fragment is hidden or shown via FragmentManager.
+     * Used to set proper title.
+     */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
 

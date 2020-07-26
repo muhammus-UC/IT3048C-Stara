@@ -70,7 +70,11 @@ class ShowDataIntegrationTest {
             assertNotNull(it)
             assertTrue(it.size > 0)
             it.forEach{
-                if (it.show.name == "Black Books" && it.show.language == "English" && it.show.status == "Ended") {
+                if (it.show.id == "1641" &&
+                    it.show.name == "Black Books" &&
+                    it.show.language == "English" &&
+                    it.show.status == "Ended" &&
+                    it.show.image?.medium == "http://static.tvmaze.com/uploads/images/medium_portrait/81/204617.jpg") {
                     blackBooksFound = true
                 }
             }

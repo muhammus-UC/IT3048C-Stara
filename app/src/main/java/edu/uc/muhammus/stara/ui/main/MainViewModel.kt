@@ -18,29 +18,45 @@ class MainViewModel : ViewModel() {
     private val firestoreCollectionUsers = "users"
     private var _favorites: MutableLiveData<ArrayList<Favorite>> = MutableLiveData<ArrayList<Favorite>>()
 
-    // Can not use init to initalize firebase as it causes unit & integration tests to crash
+    /**
+     * Initialize necessary variables for Firebase usage.
+     * Can not use built in init as it causes unit & integration tests to crash.
+     * This needs to be manually run whenever Firebase will be interacted with.
+     */
     internal fun initializeFirebase() {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
 
+    /**
+     * shows - Hold latest show search results from TVMaze API
+     * showService - Used to get search results via TVMaze API
+     * fetchShows() - Get show search results for search term given
+     */
     var shows: MutableLiveData<ArrayList<ShowJSON>> = MutableLiveData<ArrayList<ShowJSON>>()
     var showService: ShowService = ShowService()
-
     fun fetchShows(showName: String) {
         shows = showService.fetchShows(showName)
     }
 
+    /**
+     * actors - Hold latest actors search results from TVMaze API
+     * actorService - Used to get search results via TVMaze API
+     * fetchActors() - Get actor search results for search term given
+     */
     var actors: MutableLiveData<ArrayList<ActorJSON>> = MutableLiveData<ArrayList<ActorJSON>>()
     var actorService: ActorService = ActorService()
-
     fun fetchActors(actorName: String) {
         actors = actorService.fetchActors(actorName)
     }
 
+    /**
+     * schedule - Holds today's schedule for premiering episodes from TVMaze API
+     * scheduleService - Used to get schedule via TVMaze API
+     * fetchSchedule() - Get schedule for country code given
+     */
     var schedule: MutableLiveData<ArrayList<ScheduleJSON>> = MutableLiveData<ArrayList<ScheduleJSON>>()
     var scheduleService: ScheduleService = ScheduleService()
-
     fun fetchSchedule(countryCode: String) {
         schedule = scheduleService.fetchSchedule(countryCode)
     }
@@ -75,6 +91,9 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Allow getting and setting private variable that holds logged in user's favorite shows and actors.
+     */
     internal var favorites:MutableLiveData<ArrayList<Favorite>>
         get() {return _favorites}
         set(value) {_favorites = value}

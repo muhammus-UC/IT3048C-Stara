@@ -82,7 +82,10 @@ class ActorDataUnitTest {
             assertNotNull(it)
             assertTrue(it.size > 0)
             it.forEach {
-                if (it.actor.name == "Joel McHale" && it.actor.country?.name == "Italy" && it.actor.gender == "Male") {
+                if (it.actor.id == "11615" &&
+                    it.actor.name == "Joel McHale" &&
+                    it.actor.country?.name == "Italy" &&
+                    it.actor.gender == "Male") {
                     mchaleFound = true
                 }
             }

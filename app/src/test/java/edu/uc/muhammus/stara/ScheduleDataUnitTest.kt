@@ -67,7 +67,10 @@ class ScheduleDataUnitTest {
             assertNotNull(it)
             assertTrue(it.size > 0)
             it.forEach{
-                if (it.episodeName == "Backdraft to School") {
+                if (it.episodeName == "Backdraft to School" &&
+                    it.airtime == "09:15" &&
+                    it.show.id == "42183" &&
+                    it.show.name == "LEGO City Adventures") {
                     backdraftFound = true
                 }
             }
