@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.*
 import edu.uc.muhammus.stara.service.ActorService
 import edu.uc.muhammus.stara.service.ScheduleService
@@ -13,7 +14,8 @@ import edu.uc.muhammus.stara.service.ShowService
 
 class MainViewModel : ViewModel() {
     private lateinit var firestore: FirebaseFirestore
-    private val firestoreFavoritesCollection = "favorites"
+    private val firestoreCollectionFavorites = "favorites"
+    private val firestoreCollectionUsers = "users"
     private var _favorites: MutableLiveData<ArrayList<Favorite>> = MutableLiveData<ArrayList<Favorite>>()
 
     init {
@@ -47,8 +49,10 @@ class MainViewModel : ViewModel() {
      * This will hear any updates from Firestore
      * Reference: https://youtu.be/65OX1cBqkzw
      */
-    internal fun listenToFavorites() {
-        firestore.collection(firestoreFavoritesCollection).addSnapshotListener {
+    internal fun listenToFavorites(email: String) {
+        firestore.collection(firestoreCollectionUsers)
+            .document(email)
+            .collection(firestoreCollectionFavorites).addSnapshotListener {
             snapshot, e ->
             // If there is an exception, we want to skip
             if (e != null) {
@@ -79,15 +83,17 @@ class MainViewModel : ViewModel() {
      * Add show or actor to Firestore favorites
      * Reference: https://youtu.be/CuP1elpCuEA
      */
-    fun addFavorite(favorite: Favorite) {
-        firestore.collection(firestoreFavoritesCollection)
-            .document(favorite.id)
-            .set(favorite)
-            .addOnSuccessListener {
-                Log.d("Firebase", "Favorite succeeded")
-            }
-            .addOnFailureListener{
-                Log.d("Firebase", "Favorite failed")
-            }
+    fun addFavorite(favorite: Favorite, email: String) {
+        firestore.collection(firestoreCollectionUsers)
+            .document(email)
+            .collection(firestoreCollectionFavorites)
+                .document(favorite.id)
+                .set(favorite)
+                .addOnSuccessListener {
+                    Log.d("Firebase", "Favorite succeeded")
+                }
+                .addOnFailureListener{
+                    Log.d("Firebase", "Favorite failed")
+                }
     }
 }

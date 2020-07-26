@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.recyclerview.ActorsRecyclerViewAdapter
@@ -50,6 +51,7 @@ class SearchFragment : StaraFragment() {
     }
 
     private fun populateSearchRecyclerView() {
+        var email = (activity as MainActivity).email
         var searchTerm = editSearch.text.toString()
 
         if (searchRadioShow.isChecked)
@@ -60,7 +62,7 @@ class SearchFragment : StaraFragment() {
             viewModel.fetchShows(searchTerm)
 
             viewModel.shows.observe(viewLifecycleOwner, Observer{
-                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show, viewModel)
+                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show, viewModel, email)
             })
         }
         else if (searchRadioActor.isChecked)

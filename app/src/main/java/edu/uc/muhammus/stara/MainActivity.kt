@@ -5,16 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import edu.uc.muhammus.stara.ui.main.FavoritesFragment
+import edu.uc.muhammus.stara.ui.main.MainViewModel
 import edu.uc.muhammus.stara.ui.main.ScheduleFragment
 import edu.uc.muhammus.stara.ui.main.SearchFragment
+import kotlinx.android.synthetic.main.favorites_fragment.*
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: MainViewModel
 
     // Used to switch fragments without having to initialize them again.
     private lateinit var searchFragment: SearchFragment
@@ -29,13 +34,11 @@ class MainActivity : AppCompatActivity() {
     private val AUTH_REQUEST_CODE = 2002
     private var user: FirebaseUser? = null
     var userDisplayName: String? = "You"
+    internal var email: String = "email"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-
-        // Ensure user is signed out
-        FirebaseAuth.getInstance().signOut()
 
         // Initialize fragments in variables to keep them running when switching
         // Reference: https://stackoverflow.com/a/25151895
@@ -97,9 +100,6 @@ class MainActivity : AppCompatActivity() {
 
                         if (user == null){
                             logon()
-                            if (user != null) {
-                                println("user not null :D")
-                            }
                         }
                     }
                     else if (activeFragment == searchFragment)
@@ -178,9 +178,14 @@ class MainActivity : AppCompatActivity() {
             if (requestCode == AUTH_REQUEST_CODE)
             {
                 user = FirebaseAuth.getInstance().currentUser
-                if (user != null)
+                if (user != null && !userDisplayName.isNullOrBlank())
                 {
-                    userDisplayName = user?.displayName
+                    if (!userDisplayName.isNullOrBlank())
+                    {
+                        userDisplayName = user?.displayName
+                        favoritesFragment.setDisplayName(userDisplayName)
+                    }
+                    email = user?.email!!
                 }
             }
         }

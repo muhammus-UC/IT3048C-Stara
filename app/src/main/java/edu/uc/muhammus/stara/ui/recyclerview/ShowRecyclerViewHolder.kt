@@ -10,13 +10,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel): RecyclerView.ViewHolder(itemView) {
+class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val email: String): RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -78,6 +79,6 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel): Recy
         }
 
 
-        viewModel.addFavorite(favorite)
+        viewModel.addFavorite(favorite, email)
     }
 }

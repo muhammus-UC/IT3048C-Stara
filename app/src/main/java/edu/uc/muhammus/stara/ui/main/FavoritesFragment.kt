@@ -2,6 +2,7 @@ package edu.uc.muhammus.stara.ui.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.ui.recyclerview.FavoriteRecyclerViewAdapter
 import edu.uc.muhammus.stara.ui.recyclerview.ShowsRecyclerViewAdapter
@@ -44,14 +46,19 @@ class FavoritesFragment : StaraFragment() {
         favoritesRecyclerView.itemAnimator = DefaultItemAnimator()
 
         btnFavorites.setOnClickListener{
-            viewModel.listenToFavorites()
+            var email = (activity as MainActivity).email
+            viewModel.listenToFavorites(email)
 
             viewModel.favorites.observe(viewLifecycleOwner, Observer{
                     favorites -> favoritesRecyclerView.adapter = FavoriteRecyclerViewAdapter(favorites, R.layout.list_item, viewModel)
-                println("button finished")
             })
         }
 
+    }
+
+    fun setDisplayName(displayName : String?)
+    {
+        txtFavoritesSubtitle.text = displayName
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
