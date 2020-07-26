@@ -7,10 +7,11 @@ package edu.uc.muhammus.stara.ui.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class FavoriteRecyclerViewAdapter(val favorites: List<Favorite>, val itemLayout: Int, val viewModel: MainViewModel): RecyclerView.Adapter<FavoriteRecyclerViewHolder>() {
+class FavoriteRecyclerViewAdapter(val favorites: List<Favorite>, val itemLayout: Int, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.Adapter<FavoriteRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -36,7 +37,7 @@ class FavoriteRecyclerViewAdapter(val favorites: List<Favorite>, val itemLayout:
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
-        return FavoriteRecyclerViewHolder(view, viewModel)
+        return FavoriteRecyclerViewHolder(view, viewModel, myActivity)
     }
 
     /**

@@ -25,6 +25,7 @@ class FavoritesFragment : StaraFragment() {
     }
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var myActivity: MainActivity
     private var fragmentTitle = "Stara - Favorites"
 
     override fun onCreateView(
@@ -40,6 +41,8 @@ class FavoritesFragment : StaraFragment() {
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        myActivity = (activity as MainActivity)
+
         // Configure recycler view options with sane defaults
         favoritesRecyclerView.hasFixedSize()
         favoritesRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -50,7 +53,7 @@ class FavoritesFragment : StaraFragment() {
             viewModel.listenToFavorites(email)
 
             viewModel.favorites.observe(viewLifecycleOwner, Observer{
-                    favorites -> favoritesRecyclerView.adapter = FavoriteRecyclerViewAdapter(favorites, R.layout.list_item, viewModel)
+                    favorites -> favoritesRecyclerView.adapter = FavoriteRecyclerViewAdapter(favorites, R.layout.list_item_favorite, viewModel, myActivity)
             })
         }
 
