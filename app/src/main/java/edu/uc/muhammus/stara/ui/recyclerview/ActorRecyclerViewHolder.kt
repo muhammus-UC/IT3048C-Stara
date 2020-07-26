@@ -59,10 +59,10 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val 
         }
 
 
-        btnFavorite.setOnClickListener{addActorToFavorites(actorJSON.actor)}
+        btnFavorite.setOnClickListener{addRemoveFavoriteActor(actorJSON.actor)}
     }
 
-    private fun addActorToFavorites(favoriteActor: Actor) {
+    private fun addRemoveFavoriteActor(favoriteActor: Actor) {
         println("favorite clicked")
 
         // Default email is "email". This mean user has not logged in.

@@ -65,10 +65,10 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
 
 
 
-        btnFavorite.setOnClickListener{addShowToFavorites(showJSON.show)}
+        btnFavorite.setOnClickListener{addRemoveFavoriteShow(showJSON.show)}
     }
 
-    private fun addShowToFavorites(favoriteShow: Show) {
+    private fun addRemoveFavoriteShow(favoriteShow: Show) {
         println("favorite clicked")
 
         // Default email is "email". This means user has not logged in.
