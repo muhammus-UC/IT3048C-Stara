@@ -5,4 +5,5 @@
     <string name="search_title">Search</string>
     <string name="search_text">Type to search…</string>
     <string name="search_button">Search</string>
+    <string name="favorites_title">Favorites</string>
 </resources>

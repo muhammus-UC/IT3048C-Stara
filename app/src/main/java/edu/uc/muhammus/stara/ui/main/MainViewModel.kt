@@ -1,24 +1,25 @@
 package edu.uc.muhammus.stara.ui.main
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import edu.uc.muhammus.stara.dto.ActorJSON
-import edu.uc.muhammus.stara.dto.ScheduleJSON
-import edu.uc.muhammus.stara.dto.Show
-import edu.uc.muhammus.stara.dto.ShowJSON
+import edu.uc.muhammus.stara.dto.*
 import edu.uc.muhammus.stara.service.ActorService
 import edu.uc.muhammus.stara.service.ScheduleService
 import edu.uc.muhammus.stara.service.ShowService
 
 class MainViewModel : ViewModel() {
     private lateinit var firestore: FirebaseFirestore
+    private val firestoreFavoritesCollection = "favorites"
+    private var _favorites: MutableLiveData<ArrayList<Favorite>> = MutableLiveData<ArrayList<Favorite>>()
 
     init {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
+        //listenToFavorites()
     }
 
     var shows: MutableLiveData<ArrayList<ShowJSON>> = MutableLiveData<ArrayList<ShowJSON>>()
@@ -42,16 +43,51 @@ class MainViewModel : ViewModel() {
         schedule = scheduleService.fetchSchedule(countryCode)
     }
 
-    // Add favorite show to Firebase
-    fun favorite(show: Show) {
-        firestore.collection("favorites")
-            .document("Show_" + show.id)
-            .set(show)
+    /**
+     * This will hear any updates from Firestore
+     * Reference: https://youtu.be/65OX1cBqkzw
+     */
+    internal fun listenToFavorites() {
+        firestore.collection(firestoreFavoritesCollection).addSnapshotListener {
+            snapshot, e ->
+            // If there is an exception, we want to skip
+            if (e != null) {
+                Log.w(TAG, "Listen Failed", e)
+                return@addSnapshotListener
+            }
+            // If we are here, we did not encounter an exception
+            if (snapshot != null) {
+                // Now, we have a populated snapshot
+                val allFavorites = ArrayList<Favorite>()
+                val documents = snapshot.documents
+                documents.forEach {
+                    val favorite = it.toObject(Favorite::class.java)
+                    if (favorite != null) {
+                        allFavorites.add(favorite!!)
+                    }
+                }
+                _favorites.value = allFavorites
+            }
+        }
+    }
+
+    internal var favorites:MutableLiveData<ArrayList<Favorite>>
+        get() {return _favorites}
+        set(value) {_favorites = value}
+
+    /**
+     * Add show or actor to Firestore favorites
+     * Reference: https://youtu.be/CuP1elpCuEA
+     */
+    fun addFavorite(favorite: Favorite) {
+        firestore.collection(firestoreFavoritesCollection)
+            .document(favorite.id)
+            .set(favorite)
             .addOnSuccessListener {
-                Log.d("Firebase", "Favorite show succeeded")
+                Log.d("Firebase", "Favorite succeeded")
             }
             .addOnFailureListener{
-                Log.d("Firebase", "Favorite show failed")
+                Log.d("Firebase", "Favorite failed")
             }
     }
 }

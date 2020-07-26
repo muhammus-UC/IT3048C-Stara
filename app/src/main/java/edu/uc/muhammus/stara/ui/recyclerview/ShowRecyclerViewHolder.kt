@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
+import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
@@ -65,6 +66,18 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel): Recy
     private fun addShowToFavorites(favoriteShow: Show) {
         println("favorite clicked")
 
-        viewModel.favorite(favoriteShow)
+        var favorite = Favorite().apply {
+            id = "Show_" + favoriteShow.id
+            name = favoriteShow.name
+            subtitle = favoriteShow.status
+            detail = favoriteShow.language
+            if (favoriteShow.image != null && favoriteShow.image?.medium != null)
+            {
+                image = favoriteShow.image?.medium
+            }
+        }
+
+
+        viewModel.addFavorite(favorite)
     }
 }
