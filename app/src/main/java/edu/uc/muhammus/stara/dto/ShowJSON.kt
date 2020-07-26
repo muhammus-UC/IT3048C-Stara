@@ -20,17 +20,19 @@ data class ShowJSON(var score: Double, var show: Show) {
     }
 }
 
-data class Show(var name: String,
+data class Show(var id: String,
+                var name: String,
                 var language: String? = "Language Unknown",
                 var status: String? = "Status Unknown",
-                var image: Image? = null) {
+                var image: Image? = null
+) {
     override fun toString(): String {
         return this.name
     }
 }
 
-data class Image(var medium: String, var original: String) {
+data class Image(var medium: String) {
     override fun toString(): String {
-        return this.original
+        return this.medium
     }
 }

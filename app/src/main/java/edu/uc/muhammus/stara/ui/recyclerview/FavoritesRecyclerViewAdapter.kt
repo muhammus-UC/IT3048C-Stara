@@ -1,5 +1,5 @@
 /**
- * RecyclerView Adapter for ActorJSON data.
+ * RecyclerView Adapter for Favorite data.
  * Reference: https://www.youtube.com/watch?v=__gxd4IKVvk
  */
 package edu.uc.muhammus.stara.ui.recyclerview
@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.uc.muhammus.stara.MainActivity
-import edu.uc.muhammus.stara.dto.ActorJSON
+import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout: Int, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.Adapter<ActorRecyclerViewHolder>() {
+class FavoriteRecyclerViewAdapter(val favorites: List<Favorite>, val itemLayout: Int, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.Adapter<FavoriteRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -35,9 +35,9 @@ class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout:
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorRecyclerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
-        return ActorRecyclerViewHolder(view, viewModel, myActivity)
+        return FavoriteRecyclerViewHolder(view, viewModel, myActivity)
     }
 
     /**
@@ -46,7 +46,7 @@ class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout:
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return actorJSONs.size
+        return favorites.size
     }
 
     /**
@@ -70,8 +70,8 @@ class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout:
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ActorRecyclerViewHolder, position: Int) {
-        val actorJSON = actorJSONs.get(position)
-        holder.updateActorJSON(actorJSON)
+    override fun onBindViewHolder(holder: FavoriteRecyclerViewHolder, position: Int) {
+        val favorite = favorites.get(position)
+        holder.updateFavorite(favorite)
     }
 }

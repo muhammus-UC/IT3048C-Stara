@@ -15,7 +15,7 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ShowJSON
-import kotlinx.android.synthetic.main.list_item_show.view.*
+import kotlinx.android.synthetic.main.list_item_favorite.view.*
 
 class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<ShowJSON>) : BaseAdapter() {
     private val inflater: LayoutInflater
@@ -41,7 +41,7 @@ class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<Sh
 
         // Check if view already exists. If it does not, create it
         if (convertView == null) {
-            view = inflater.inflate(R.layout.list_item_show, parent, false)
+            view = inflater.inflate(R.layout.list_item_favorite, parent, false)
 
             // Use ViewHolder private class to optimize performance
             holder = ViewHolder()

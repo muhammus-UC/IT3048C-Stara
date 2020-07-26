@@ -48,6 +48,7 @@ class ScheduleRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemVi
         subtitleTextView.text = episodeName
         detailTextView.text = airtime
 
+        // If API gave image URL, display that image
         if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
@@ -56,6 +57,7 @@ class ScheduleRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemVi
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
+        // Else display a placeholder indicating no image
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }

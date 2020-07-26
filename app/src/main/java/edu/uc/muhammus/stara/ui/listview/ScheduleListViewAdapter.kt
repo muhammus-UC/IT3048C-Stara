@@ -15,7 +15,7 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ScheduleJSON
-import kotlinx.android.synthetic.main.list_item_show.view.*
+import kotlinx.android.synthetic.main.list_item_favorite.view.*
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -43,7 +43,7 @@ class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayLis
 
         // Check if view already exists. If it does not, create it
         if (convertView == null) {
-            view = inflater.inflate(R.layout.list_item_show, parent, false)
+            view = inflater.inflate(R.layout.list_item_favorite, parent, false)
 
             // Use ViewHolder private class to optimize performance
             holder = ViewHolder()

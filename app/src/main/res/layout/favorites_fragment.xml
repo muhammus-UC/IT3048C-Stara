@@ -2,36 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scheduleConstraintLayout"
+    android:id="@+id/favoritesConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="56dp"
-    tools:context=".ui.main.ScheduleFragment">
+    tools:context=".ui.main.FavoritesFragment">
 
     <TextView
-        android:id="@+id/txtScheduleTitle"
+        android:id="@+id/txtFavoritesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/schedule_title"
+        android:text="@string/favorites_title"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtScheduleSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/schedule_subtitle"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtScheduleTitle" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/scheduleRecyclerView"
+        android:id="@+id/favoritesRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -41,6 +30,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtScheduleSubtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txtFavoritesSubtitle" />
+
+    <TextView
+        android:id="@+id/txtFavoritesSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="You"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFavoritesTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

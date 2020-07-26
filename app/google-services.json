@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "230202569952",
+    "firebase_url": "https://stara-it3048c.firebaseio.com",
+    "project_id": "stara-it3048c",
+    "storage_bucket": "stara-it3048c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230202569952:android:0a56ba714dc4c7ee39cc85",
+        "android_client_info": {
+          "package_name": "edu.uc.muhammus.stara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230202569952-cpotmj98ltg57f3i07292ova9h13bob0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtls8tJH9_Q9q1j03pPAx7fEy9kxniYrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230202569952-cpotmj98ltg57f3i07292ova9h13bob0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

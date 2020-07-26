@@ -24,7 +24,7 @@ class ShowDataUnitTest {
 
     @Test
     fun confirmCommunity_outputsCommunity () {
-        var show = Show("Community", "English", "Ended")
+        var show = Show("318", "Community", "English", "Ended")
         assertEquals("Community", show.toString())
     }
 
@@ -52,13 +52,13 @@ class ShowDataUnitTest {
         var allShowsLiveData = MutableLiveData<ArrayList<ShowJSON>>()
         var allShows = ArrayList<ShowJSON>()
         // create and add shows to our collection
-        var community = Show("Community", "English", "Ended")
+        var community = Show("318", "Community", "English", "Ended")
         var communityJSON = ShowJSON(50.0, community)
         allShows.add(communityJSON)
-        var communityLife = Show("Community Life", "English", "To Be Determined")
+        var communityLife = Show("28145", "Community Life", "English", "To Be Determined")
         var communityLifeJSON = ShowJSON(25.0, communityLife)
         allShows.add(communityLifeJSON)
-        var diplomatic = Show("Diplomatic Immunity", "English", "Ended")
+        var diplomatic = Show("6191", "Diplomatic Immunity", "English", "Ended")
         var diplomaticJSON = ShowJSON(12.5, diplomatic)
         allShows.add(diplomaticJSON)
         allShowsLiveData.postValue(allShows)

@@ -21,7 +21,8 @@ import com.google.gson.annotations.SerializedName
 
 data class ActorJSON(var score: Double, @SerializedName("person") var actor: Actor)
 
-data class Actor(var name: String,
+data class Actor(var id: String,
+                 var name: String,
                  var country: ActorCountry? = ActorCountry("Country Unknown", "Country Code Unknown", "Timezone Unknown"),
                  var gender: String? = "Gender Unknown",
                  var image: ImageURL? = null

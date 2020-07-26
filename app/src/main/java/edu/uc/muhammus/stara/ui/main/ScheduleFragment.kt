@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -52,6 +51,7 @@ class ScheduleFragment : StaraFragment() {
 
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.initializeFirebase()
 
         // Configure recycler view options with sane defaults
         scheduleRecyclerView.hasFixedSize()
@@ -134,7 +134,7 @@ class ScheduleFragment : StaraFragment() {
         viewModel.fetchSchedule(countryCode)
 
         viewModel.schedule.observe(viewLifecycleOwner, Observer {
-            schedule -> scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item_show)
+            schedule -> scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item)
         })
     }
 

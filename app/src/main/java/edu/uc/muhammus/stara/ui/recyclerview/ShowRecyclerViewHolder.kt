@@ -5,18 +5,26 @@
 package edu.uc.muhammus.stara.ui.recyclerview
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
+import edu.uc.muhammus.stara.dto.Favorite
+import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
+import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
     private val detailTextView: TextView = itemView.findViewById(R.id.list_detail)
+
+    private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
+    private var alreadyFavorite: Boolean = false
 
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
@@ -41,6 +49,7 @@ class ShowRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) 
         subtitleTextView.text = showStatus
         detailTextView.text = showLanguage
 
+        // If API gave image URL, display that image
         if (showJSON.show.image != null && showJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
@@ -49,8 +58,50 @@ class ShowRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) 
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
             Picasso.get().load(encryptedImageURL).placeholder(R.mipmap.ic_launcher_round).into(thumbnailImageView)
         }
+        // Else display a placeholder indicating no image
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
+        }
+
+
+
+        btnFavorite.setOnClickListener{addRemoveFavoriteShow(showJSON.show)}
+    }
+
+    private fun addRemoveFavoriteShow(favoriteShow: Show) {
+        println("favorite clicked")
+
+        // Default email is "email". This means user has not logged in.
+        if (myActivity.email == "email")
+        {
+            myActivity.showToast("You can not add to favorites without logging in.", true)
+            myActivity.logon()
+            return
+        }
+
+
+        var favorite = Favorite().apply {
+            id = "Show_" + favoriteShow.id
+            name = favoriteShow.name
+            subtitle = "Status: " + favoriteShow.status
+            detail = favoriteShow.language ?: "Language Unknown"
+            if (favoriteShow.image != null && favoriteShow.image?.medium != null)
+            {
+                image = favoriteShow.image?.medium
+            }
+        }
+
+        if (!alreadyFavorite)
+        {
+            viewModel.addFavorite(favorite, myActivity.email)
+            alreadyFavorite = true
+            btnFavorite.setImageResource(android.R.drawable.star_big_on)
+        }
+        else
+        {
+            viewModel.removeFavorite(favorite, myActivity.email)
+            alreadyFavorite = false
+            btnFavorite.setImageResource(android.R.drawable.star_big_off)
         }
     }
 }

@@ -14,7 +14,7 @@
 
         <ImageView
             android:id="@+id/list_thumbnail"
-            android:layout_width="90dp"
+            android:layout_width="64dp"
             android:layout_height="90dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -30,20 +30,22 @@
             android:id="@+id/list_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="28dp"
             android:maxLines="1"
             android:paddingEnd="4dp"
             android:textColor="#000000"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFavorite"
+            app:layout_constraintVertical_bias="0.659"
             tools:text="Detail" />
 
         <TextView
             android:id="@+id/list_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:maxLines="3"
@@ -56,11 +58,23 @@
             android:id="@+id/list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/list_thumbnail"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
+
+        <ImageButton
+            android:id="@+id/btnFavorite"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/star_big_off" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
