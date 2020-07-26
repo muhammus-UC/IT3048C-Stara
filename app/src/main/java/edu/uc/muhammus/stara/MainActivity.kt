@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         // Ensure user is signed out
         FirebaseAuth.getInstance().signOut()
 
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
         // Initialize fragments in variables to keep them running when switching
         // Reference: https://stackoverflow.com/a/25151895
         searchFragment = SearchFragment.newInstance()
@@ -163,6 +165,8 @@ class MainActivity : AppCompatActivity() {
      * Reference: https://youtu.be/cqEawweiLEM
      */
     internal fun logon() {
+        showToast("Login to manager your favorites", true)
+
         var providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
@@ -186,6 +190,8 @@ class MainActivity : AppCompatActivity() {
                         favoritesFragment.setDisplayName(userDisplayName)
                     }
                     email = user?.email!!
+
+                    favoritesFragment.populateFavorites()
                 }
             }
         }

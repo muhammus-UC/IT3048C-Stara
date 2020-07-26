@@ -48,15 +48,14 @@ class FavoritesFragment : StaraFragment() {
         favoritesRecyclerView.layoutManager = LinearLayoutManager(context)
         favoritesRecyclerView.itemAnimator = DefaultItemAnimator()
 
-        btnFavorites.setOnClickListener{
-            var email = (activity as MainActivity).email
-            viewModel.listenToFavorites(email)
+    }
 
-            viewModel.favorites.observe(viewLifecycleOwner, Observer{
-                    favorites -> favoritesRecyclerView.adapter = FavoriteRecyclerViewAdapter(favorites, R.layout.list_item_favorite, viewModel, myActivity)
-            })
-        }
+    fun populateFavorites() {
+        viewModel.listenToFavorites(myActivity.email)
 
+        viewModel.favorites.observe(viewLifecycleOwner, Observer{
+                favorites -> favoritesRecyclerView.adapter = FavoriteRecyclerViewAdapter(favorites, R.layout.list_item_favorite, viewModel, myActivity)
+        })
     }
 
     fun setDisplayName(displayName : String?)
