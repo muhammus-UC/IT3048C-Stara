@@ -58,7 +58,7 @@ class SearchFragment : StaraFragment() {
             viewModel.fetchShows(searchTerm)
 
             viewModel.shows.observe(viewLifecycleOwner, Observer{
-                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show)
+                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_show, viewModel)
             })
         }
         else if (searchRadioActor.isChecked)

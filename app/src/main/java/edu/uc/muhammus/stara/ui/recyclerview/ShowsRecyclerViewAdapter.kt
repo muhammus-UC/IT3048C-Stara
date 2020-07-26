@@ -8,8 +8,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.uc.muhammus.stara.dto.ShowJSON
+import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowsRecyclerViewAdapter(val showJSONs: List<ShowJSON>, val itemLayout: Int): RecyclerView.Adapter<ShowRecyclerViewHolder>() {
+class ShowsRecyclerViewAdapter(val showJSONs: List<ShowJSON>, val itemLayout: Int, val viewModel: MainViewModel): RecyclerView.Adapter<ShowRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -35,7 +36,7 @@ class ShowsRecyclerViewAdapter(val showJSONs: List<ShowJSON>, val itemLayout: In
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
-        return ShowRecyclerViewHolder(view)
+        return ShowRecyclerViewHolder(view, viewModel)
     }
 
     /**

@@ -5,18 +5,22 @@
 package edu.uc.muhammus.stara.ui.recyclerview
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
+import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
+import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel): RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
     private val detailTextView: TextView = itemView.findViewById(R.id.list_detail)
+    private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
 
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
@@ -54,5 +58,13 @@ class ShowRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) 
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
+
+        btnFavorite.setOnClickListener{addShowToFavorites(showJSON.show)}
+    }
+
+    private fun addShowToFavorites(favoriteShow: Show) {
+        println("favorite clicked")
+
+        viewModel.favorite(favoriteShow)
     }
 }

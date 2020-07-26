@@ -134,7 +134,7 @@ class ScheduleFragment : StaraFragment() {
         viewModel.fetchSchedule(countryCode)
 
         viewModel.schedule.observe(viewLifecycleOwner, Observer {
-            schedule -> scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item_show)
+            schedule -> scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item)
         })
     }
 
