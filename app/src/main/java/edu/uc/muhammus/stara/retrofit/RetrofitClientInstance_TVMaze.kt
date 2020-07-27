@@ -18,7 +18,7 @@ object RetrofitClientInstance_TVMaze {
             // Has this object been created yet?
             if (retrofit == null) {
                 // If not, then create it
-                retrofit = retrofit2.Retrofit.Builder()
+                retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

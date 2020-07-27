@@ -18,8 +18,9 @@ import retrofit2.Response
 
 class ShowService {
     internal fun fetchShows(showName: String) : MutableLiveData<ArrayList<ShowJSON>> {
-        val _shows = MutableLiveData<ArrayList<ShowJSON>>()
-        val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IShowDAO_TVMaze::class.java)
+        val shows = MutableLiveData<ArrayList<ShowJSON>>()
+        val service =
+            RetrofitClientInstance_TVMaze.retrofitInstance?.create(IShowDAO_TVMaze::class.java)
         val call = service?.getShows(showName)
 
         call?.enqueue(object: Callback<ArrayList<ShowJSON>> {
@@ -44,13 +45,13 @@ class ShowService {
             ) {
                 if (response.isSuccessful) {
                     Log.d("ShowService.kt", "ShowService Response SUCCEEDED")
-                    _shows.value = response.body()
+                    shows.value = response.body()
                 }
                 else {
                     Log.d("ShowService.kt", "ShowService Response ERROR")
                 }
             }
         })
-        return _shows
+        return shows
     }
 }
