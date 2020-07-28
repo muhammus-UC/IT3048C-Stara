@@ -13,5 +13,5 @@ import retrofit2.http.Query
 
 interface IShowDAO_TVMaze {
     @GET("/search/shows")
-    fun getShows(@Query("q") showName: String) : Call<ArrayList<ShowJSON>>
+    fun getShows(@Query("q") showName: String): Call<ArrayList<ShowJSON>>
 }

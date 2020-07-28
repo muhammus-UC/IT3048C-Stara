@@ -14,5 +14,5 @@ import retrofit2.http.Query
 
 interface IActorDAO_TVMaze {
     @GET("/search/people")
-    fun getActors(@Query("q") actorName: String) : Call<ArrayList<ActorJSON>>
+    fun getActors(@Query("q") actorName: String): Call<ArrayList<ActorJSON>>
 }
