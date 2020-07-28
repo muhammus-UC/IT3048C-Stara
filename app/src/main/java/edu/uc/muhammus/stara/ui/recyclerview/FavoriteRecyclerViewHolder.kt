@@ -32,9 +32,9 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
      */
     fun updateFavorite(favorite: Favorite) {
         var favoriteName = favorite.name
-        var favoriteSubtitle = favorite.subtitle
-        var favoriteDetail = favorite.detail
-        var favoriteImage = favorite.image
+        val favoriteSubtitle = favorite.subtitle
+        val favoriteDetail = favorite.detail
+        val favoriteImage = favorite.image
 
         // Truncate names to keep UI clean
         if (favoriteName.length > TRUNCATE_LENGTH) {
@@ -48,7 +48,7 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
         // If API gave image URL, display that image
         if (favoriteImage != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = favoriteImage.replace("http", "https")
+            val encryptedImageURL = favoriteImage.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso

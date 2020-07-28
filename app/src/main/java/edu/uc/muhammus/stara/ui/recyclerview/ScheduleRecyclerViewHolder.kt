@@ -51,7 +51,7 @@ class ScheduleRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemVi
         // If API gave image URL, display that image
         if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
+            val encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso

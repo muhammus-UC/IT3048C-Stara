@@ -59,7 +59,7 @@ class SearchFragment : StaraFragment() {
      * Populate searchRecyclerView with search results for Actor or Show as requested via TVMazeAPI.
      */
     private fun populateSearchRecyclerView() {
-        var searchTerm = editSearch.text.toString()
+        val searchTerm = editSearch.text.toString()
 
         if (searchRadioShow.isChecked)
         {

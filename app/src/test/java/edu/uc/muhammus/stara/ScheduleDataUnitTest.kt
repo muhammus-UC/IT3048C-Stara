@@ -24,7 +24,7 @@ class ScheduleDataUnitTest {
 
     @Test
     fun confirmDaisy_returnsDaisy() {
-        var schedule = ScheduleJSON("Daisy Chain Gang", "09:00", Show("42183","LEGO City Adventures"))
+        val schedule = ScheduleJSON("Daisy Chain Gang", "09:00", Show("42183","LEGO City Adventures"))
         assertEquals("Episode Daisy Chain Gang airs at 09:00 for show LEGO City Adventures", schedule.toString())
     }
 
@@ -42,14 +42,14 @@ class ScheduleDataUnitTest {
     }
 
     private fun createMockData() {
-        var scheduleLiveData = MutableLiveData<ArrayList<ScheduleJSON>>()
-        var schedule = ArrayList<ScheduleJSON>()
+        val scheduleLiveData = MutableLiveData<ArrayList<ScheduleJSON>>()
+        val schedule = ArrayList<ScheduleJSON>()
         // create and add episodes to schedule
-        var backdraft = ScheduleJSON("Backdraft to School", "09:15", Show("42183", "LEGO City Adventures"))
+        val backdraft = ScheduleJSON("Backdraft to School", "09:15", Show("42183", "LEGO City Adventures"))
         schedule.add(backdraft)
-        var outdoor = ScheduleJSON("Outdoor Dishes", "11:00", Show("42750", "Delicious Miss Brown"))
+        val outdoor = ScheduleJSON("Outdoor Dishes", "11:00", Show("42750", "Delicious Miss Brown"))
         schedule.add(outdoor)
-        var thrill = ScheduleJSON("The Thrill of Pizza on a Grill", "12:30", Show("48531", "Symon's Dinners Cooking Out"))
+        val thrill = ScheduleJSON("The Thrill of Pizza on a Grill", "12:30", Show("48531", "Symon's Dinners Cooking Out"))
         schedule.add(thrill)
         scheduleLiveData.postValue(schedule)
         every {scheduleService.fetchSchedule("US")} returns scheduleLiveData

@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
     internal fun logon() {
         showToast("Login to manager your favorites", true)
 
-        var providers = arrayListOf(
+        val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
         startActivityForResult(

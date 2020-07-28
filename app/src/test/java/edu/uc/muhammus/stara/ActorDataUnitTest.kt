@@ -26,8 +26,8 @@ class ActorDataUnitTest {
 
     @Test
     fun confirmJoelMcHale_outputsJoelMcHale () {
-        var country = ActorCountry("Italy", "IT", "Europe/Rome")
-        var actor = Actor("11615","Joel McHale", country, "Male")
+        val country = ActorCountry("Italy", "IT", "Europe/Rome")
+        val actor = Actor("11615","Joel McHale", country, "Male")
         assertEquals("Joel McHale", actor.toString())
     }
 
@@ -52,19 +52,19 @@ class ActorDataUnitTest {
     }
 
     private fun createMockData() {
-        var allActorsLiveData = MutableLiveData<ArrayList<ActorJSON>>()
-        var allActors = ArrayList<ActorJSON>()
+        val allActorsLiveData = MutableLiveData<ArrayList<ActorJSON>>()
+        val allActors = ArrayList<ActorJSON>()
         // create and add actors to our collection
-        var mcHaleCountry = ActorCountry ("Italy", "IT", "Europe/Rome")
-        var mcHale = Actor("11615", "Joel McHale", mcHaleCountry, "Male")
-        var mcHaleJSON = ActorJSON(50.0, mcHale)
+        val mcHaleCountry = ActorCountry ("Italy", "IT", "Europe/Rome")
+        val mcHale = Actor("11615", "Joel McHale", mcHaleCountry, "Male")
+        val mcHaleJSON = ActorJSON(50.0, mcHale)
         allActors.add(mcHaleJSON)
-        var barriosCountry = ActorCountry("United States", "US", "America/New_York")
-        var barrios = Actor("212615", "Joseph Barrios", barriosCountry, "Male")
-        var barriosJSON = ActorJSON(25.0, barrios)
+        val barriosCountry = ActorCountry("United States", "US", "America/New_York")
+        val barrios = Actor("212615", "Joseph Barrios", barriosCountry, "Male")
+        val barriosJSON = ActorJSON(25.0, barrios)
         allActors.add(barriosJSON)
-        var kramer = Actor("170621", "Joel Michael Kramer", null, "Male")
-        var kramerJSON = ActorJSON(12.5, kramer)
+        val kramer = Actor("170621", "Joel Michael Kramer", null, "Male")
+        val kramerJSON = ActorJSON(12.5, kramer)
         allActors.add(kramerJSON)
         allActorsLiveData.postValue(allActors)
         every {actorService.fetchActors("Joel McHale")} returns allActorsLiveData

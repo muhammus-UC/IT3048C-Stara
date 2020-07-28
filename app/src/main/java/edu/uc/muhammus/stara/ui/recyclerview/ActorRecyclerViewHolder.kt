@@ -75,7 +75,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
             return
         }
 
-        var favorite = Favorite().apply {
+        val favorite = Favorite().apply {
             id = "Actor_" + favoriteActor.id
             name = favoriteActor.name
             subtitle = favoriteActor.gender ?: "Gender Unknown"

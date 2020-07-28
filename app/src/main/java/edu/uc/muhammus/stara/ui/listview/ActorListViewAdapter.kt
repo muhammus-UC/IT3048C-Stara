@@ -66,8 +66,8 @@ class ActorListViewAdapter(context: Context, private val dataSource: ArrayList<A
 
         val actorJSON = getItem(position) as ActorJSON
         var actorName = actorJSON.actor.name
-        var actorGender = actorJSON.actor.gender ?: "Gender Unknown"
-        var actorCountry = actorJSON.actor.country?.name ?: "Country Unknown"
+        val actorGender = actorJSON.actor.gender ?: "Gender Unknown"
+        val actorCountry = actorJSON.actor.country?.name ?: "Country Unknown"
 
         // Truncate names to keep UI clean
         if (actorName.length > 32) {
@@ -81,7 +81,7 @@ class ActorListViewAdapter(context: Context, private val dataSource: ArrayList<A
         // If API gave image URL, display that image
         if (actorJSON.actor.image != null && actorJSON.actor.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = actorJSON.actor.image?.medium!!.replace("http", "https")
+            val encryptedImageURL = actorJSON.actor.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso

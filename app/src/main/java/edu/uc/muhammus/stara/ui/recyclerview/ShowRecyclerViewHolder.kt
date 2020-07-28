@@ -34,7 +34,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
      */
     fun updateShowJSON(showJSON: ShowJSON) {
         var showName = showJSON.show.name
-        var showLanguage = showJSON.show.language ?: "Language Unknown"
+        val showLanguage = showJSON.show.language ?: "Language Unknown"
         var showStatus = "Status: " + showJSON.show.status
 
         // Truncate names to keep UI clean
@@ -54,7 +54,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
         // If API gave image URL, display that image
         if (showJSON.show.image != null && showJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
+            val encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
@@ -82,7 +82,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
         }
 
 
-        var favorite = Favorite().apply {
+        val favorite = Favorite().apply {
             id = "Show_" + favoriteShow.id
             name = favoriteShow.name
             subtitle = "Status: " + favoriteShow.status
