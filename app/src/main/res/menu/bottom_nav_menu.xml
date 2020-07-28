@@ -6,19 +6,19 @@
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_my_calendar"
         android:title="@string/schedule_label"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
         android:icon="@android:drawable/star_big_off"
         android:title="@string/favorites_label"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_search"
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/search_label"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>
