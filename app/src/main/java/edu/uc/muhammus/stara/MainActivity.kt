@@ -153,14 +153,10 @@ class MainActivity : AppCompatActivity() {
     /**
      * Used to quickly show Toasts
      */
-    internal fun showToast(text: String, isLong: Boolean = false)
-    {
-        if (isLong)
-        {
+    internal fun showToast(text: String, isLong: Boolean = false) {
+        if (isLong) {
             Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
-        }
-        else
-        {
+        } else {
             Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
         }
     }
@@ -170,7 +166,7 @@ class MainActivity : AppCompatActivity() {
      * Reference: https://youtu.be/cqEawweiLEM
      */
     internal fun logon() {
-        showToast("Login to manager your favorites", true)
+        showToast("Login to manage your favorites", true)
 
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
@@ -182,21 +178,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK)
-        {
-            if (requestCode == AUTH_REQUEST_CODE)
-            {
-                user = FirebaseAuth.getInstance().currentUser
-                if (user != null && !userDisplayName.isNullOrBlank())
-                {
-                    if (!userDisplayName.isNullOrBlank())
-                    {
-                        userDisplayName = user?.displayName
-                        favoritesFragment.setDisplayName(userDisplayName)
-                    }
-                    email = user?.email!!
+        if (resultCode == RESULT_OK) {
+            when (requestCode) {
+                (AUTH_REQUEST_CODE) -> {
+                    user = FirebaseAuth.getInstance().currentUser
+                    if (user != null && !userDisplayName.isNullOrBlank()) {
+                        if (!userDisplayName.isNullOrBlank()) {
+                            userDisplayName = user?.displayName
+                            favoritesFragment.setDisplayName(userDisplayName)
+                        }
+                        email = user?.email!!
 
-                    favoritesFragment.populateFavorites()
+                        favoritesFragment.populateFavorites()
+                    }
                 }
             }
         }
