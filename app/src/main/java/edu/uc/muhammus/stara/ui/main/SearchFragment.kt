@@ -3,7 +3,6 @@
  */
 package edu.uc.muhammus.stara.ui.main
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,9 +26,10 @@ class SearchFragment : StaraFragment() {
     // Title of Fragment currently shown. Used to set title when Fragment is shown from hide state.
     private var fragmentTitle = "Stara - Search"
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.search_fragment, container, false)
     }
@@ -49,7 +49,7 @@ class SearchFragment : StaraFragment() {
         searchRecyclerView.itemAnimator = DefaultItemAnimator()
 
         // Populate SearchRecyclerView when user searches for show or actor
-        btnSearch.setOnClickListener{populateSearchRecyclerView()}
+        btnSearch.setOnClickListener { populateSearchRecyclerView() }
 
         // Change hint text based on which radio button is clicked by adding a listener
         changeSearchHintText()
@@ -61,27 +61,32 @@ class SearchFragment : StaraFragment() {
     private fun populateSearchRecyclerView() {
         val searchTerm = editSearch.text.toString()
 
-        if (searchRadioShow.isChecked)
-        {
+        if (searchRadioShow.isChecked) {
             // Remove observers since we keep adding one when button is pressed.
             viewModel.shows.removeObservers(viewLifecycleOwner)
 
             viewModel.fetchShows(searchTerm)
 
-            viewModel.shows.observe(viewLifecycleOwner, Observer{
-                shows -> searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_favorite, viewModel, myActivity)
-            })
-        }
-        else if (searchRadioActor.isChecked)
-        {
+            viewModel.shows.observe(
+                viewLifecycleOwner,
+                Observer {
+                    shows ->
+                        searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_favorite, viewModel, myActivity)
+                }
+            )
+        } else if (searchRadioActor.isChecked) {
             // Remove observers since we keep adding one when button is pressed.
             viewModel.actors.removeObservers(viewLifecycleOwner)
 
             viewModel.fetchActors(searchTerm)
 
-            viewModel.actors.observe(viewLifecycleOwner, Observer{
-                actors -> searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_favorite, viewModel, myActivity)
-            })
+            viewModel.actors.observe(
+                viewLifecycleOwner,
+                Observer {
+                    actors ->
+                        searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_favorite, viewModel, myActivity)
+                }
+            )
         }
 
         hideKeyboard()
@@ -91,16 +96,17 @@ class SearchFragment : StaraFragment() {
      * Change hint text of editSearch depending on which radio button is selected by adding a Listener.
      */
     private fun changeSearchHintText() {
-        searchRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener(
-            fun (_, checkedId) {
-                if (checkedId == R.id.searchRadioShow) {
-                    editSearch.hint = "Search for Show..."
+        searchRadioGroup.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener(
+                fun (_, checkedId) {
+                    if (checkedId == R.id.searchRadioShow) {
+                        editSearch.hint = "Search for Show..."
+                    } else if (checkedId == R.id.searchRadioActor) {
+                        editSearch.hint = "Search for Actor..."
+                    }
                 }
-                else if (checkedId == R.id.searchRadioActor) {
-                    editSearch.hint = "Search for Actor..."
-                }
-            }
-        ))
+            )
+        )
     }
 
     /**
@@ -111,7 +117,7 @@ class SearchFragment : StaraFragment() {
         super.onHiddenChanged(hidden)
 
         // If fragment is NOT hidden
-        if(!hidden) {
+        if (!hidden) {
             activity?.title = fragmentTitle
         }
     }
