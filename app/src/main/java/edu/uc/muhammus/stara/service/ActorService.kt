@@ -16,7 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ActorService {
-    internal fun fetchActors(actorName: String) : MutableLiveData<ArrayList<ActorJSON>> {
+    internal fun fetchActors(actorName: String): MutableLiveData<ArrayList<ActorJSON>> {
         val _actors = MutableLiveData<ArrayList<ActorJSON>>()
         val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IActorDAO_TVMaze::class.java)
         val call = service?.getActors(actorName)
@@ -44,8 +44,7 @@ class ActorService {
                 if (response.isSuccessful) {
                     Log.d("ActorService.kt", "ActorService Response SUCCEEDED")
                     _actors.value = response.body()
-                }
-                else {
+                } else {
                     Log.e("ActorService.kt", "ActorService Response ERROR")
                 }
             }

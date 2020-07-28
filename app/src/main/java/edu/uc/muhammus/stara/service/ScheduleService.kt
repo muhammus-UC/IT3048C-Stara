@@ -17,12 +17,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ScheduleService {
-    internal fun fetchSchedule(countryCode: String) : MutableLiveData<ArrayList<ScheduleJSON>> {
+    internal fun fetchSchedule(countryCode: String): MutableLiveData<ArrayList<ScheduleJSON>> {
         val _schedule = MutableLiveData<ArrayList<ScheduleJSON>>()
         val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IScheduleDAO_TVMaze::class.java)
         val call = service?.getSchedule(countryCode)
 
-        call?.enqueue(object: Callback<ArrayList<ScheduleJSON>> {
+        call?.enqueue(object : Callback<ArrayList<ScheduleJSON>> {
             /**
              * Invoked when a network exception occurred talking to the server or when an unexpected
              * exception occurred creating the request or processing the response.
@@ -45,8 +45,7 @@ class ScheduleService {
                 if (response.isSuccessful) {
                     Log.d("ScheduleService.kt", "ScheduleService Response SUCCEEDED")
                     _schedule.value = response.body()
-                }
-                else {
+                } else {
                     Log.d("ScheduleService.kt", "ScheduleService Response ERROR")
                 }
             }
