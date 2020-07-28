@@ -14,7 +14,7 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import edu.uc.muhammus.stara.dto.LocationDetails
 
-class LocationLiveData(context: Context): LiveData<LocationDetails>() {
+class LocationLiveData(context: Context) : LiveData<LocationDetails>() {
 
     private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
@@ -31,9 +31,9 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
         super.onActive()
         fusedLocationClient.lastLocation.addOnSuccessListener {
             location: Location ->
-                location.also {
-                    setLocationData(it)
-                }
+            location.also {
+                setLocationData(it)
+            }
         }
         startLocationUpdates()
     }
