@@ -71,7 +71,7 @@ class ShowsRecyclerViewAdapter(private val showJSONs: List<ShowJSON>, private va
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ShowRecyclerViewHolder, position: Int) {
-        val showJSON = showJSONs.get(position)
+        val showJSON = showJSONs[position]
         holder.updateShowJSON(showJSON)
     }
 }

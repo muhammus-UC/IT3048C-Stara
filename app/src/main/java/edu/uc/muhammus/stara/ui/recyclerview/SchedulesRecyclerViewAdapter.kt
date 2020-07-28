@@ -70,7 +70,7 @@ class SchedulesRecyclerViewAdapter(private val scheduleJSONs: List<ScheduleJSON>
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ScheduleRecyclerViewHolder, position: Int) {
-        val scheduleJSON = scheduleJSONs.get(position)
+        val scheduleJSON = scheduleJSONs[position]
         holder.updateScheduleJSON(scheduleJSON)
     }
 }

@@ -71,7 +71,7 @@ class FavoriteRecyclerViewAdapter(private val favorites: List<Favorite>, private
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: FavoriteRecyclerViewHolder, position: Int) {
-        val favorite = favorites.get(position)
+        val favorite = favorites[position]
         holder.updateFavorite(favorite)
     }
 }

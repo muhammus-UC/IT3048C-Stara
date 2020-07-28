@@ -91,8 +91,8 @@ class ScheduleFragment : StaraFragment() {
             // Use Geocoder to convert GPS coordinates into a countryName and countryCode
             var geocoder = Geocoder(context, Locale.getDefault())
             var address = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
-            countryCode = address.get(0).countryCode
-            countryName = address.get(0).countryName
+            countryCode = address[0].countryCode
+            countryName = address[0].countryName
             Log.d("ScheduleFragment.kt", "Country code is: $countryCode")
             Log.d("ScheduleFragment.kt", "Country name is: $countryName")
 

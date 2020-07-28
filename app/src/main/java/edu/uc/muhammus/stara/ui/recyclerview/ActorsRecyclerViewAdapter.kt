@@ -71,7 +71,7 @@ class ActorsRecyclerViewAdapter(private val actorJSONs: List<ActorJSON>, private
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ActorRecyclerViewHolder, position: Int) {
-        val actorJSON = actorJSONs.get(position)
+        val actorJSON = actorJSONs[position]
         holder.updateActorJSON(actorJSON)
     }
 }
