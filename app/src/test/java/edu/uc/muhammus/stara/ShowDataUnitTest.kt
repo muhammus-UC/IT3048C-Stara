@@ -18,13 +18,13 @@ import org.junit.rules.TestRule
 class ShowDataUnitTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
-    lateinit var mvm: MainViewModel
+    private lateinit var mvm: MainViewModel
 
-    var showService = mockk<ShowService>()
+    private var showService = mockk<ShowService>()
 
     @Test
     fun confirmCommunity_outputsCommunity () {
-        var show = Show("318", "Community", "English", "Ended")
+        val show = Show("318", "Community", "English", "Ended")
         assertEquals("Community", show.toString())
     }
 
@@ -49,17 +49,17 @@ class ShowDataUnitTest {
     }
 
     private fun createMockData() {
-        var allShowsLiveData = MutableLiveData<ArrayList<ShowJSON>>()
-        var allShows = ArrayList<ShowJSON>()
+        val allShowsLiveData = MutableLiveData<ArrayList<ShowJSON>>()
+        val allShows = ArrayList<ShowJSON>()
         // create and add shows to our collection
-        var community = Show("318", "Community", "English", "Ended")
-        var communityJSON = ShowJSON(50.0, community)
+        val community = Show("318", "Community", "English", "Ended")
+        val communityJSON = ShowJSON(50.0, community)
         allShows.add(communityJSON)
-        var communityLife = Show("28145", "Community Life", "English", "To Be Determined")
-        var communityLifeJSON = ShowJSON(25.0, communityLife)
+        val communityLife = Show("28145", "Community Life", "English", "To Be Determined")
+        val communityLifeJSON = ShowJSON(25.0, communityLife)
         allShows.add(communityLifeJSON)
-        var diplomatic = Show("6191", "Diplomatic Immunity", "English", "Ended")
-        var diplomaticJSON = ShowJSON(12.5, diplomatic)
+        val diplomatic = Show("6191", "Diplomatic Immunity", "English", "Ended")
+        val diplomaticJSON = ShowJSON(12.5, diplomatic)
         allShows.add(diplomaticJSON)
         allShowsLiveData.postValue(allShows)
         every {showService.fetchShows("Community")} returns allShowsLiveData
@@ -74,10 +74,10 @@ class ShowDataUnitTest {
 
     private fun thenResultContainsCommunity() {
         var communityFound = false
-        mvm.shows.observeForever {
-            assertNotNull(it)
-            assertTrue(it.size > 0)
-            it.forEach {
+        mvm.shows.observeForever { arrayList ->
+            assertNotNull(arrayList)
+            assertTrue(arrayList.size > 0)
+            arrayList.forEach {
                 if (it.show.id == "318" &&
                     it.show.name == "Community" &&
                     it.show.language == "English" &&

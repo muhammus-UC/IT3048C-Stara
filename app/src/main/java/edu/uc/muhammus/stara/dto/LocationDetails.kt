@@ -7,7 +7,7 @@
  */
 package edu.uc.muhammus.stara.dto
 
-data class LocationDetails (val longitude: String, val latitude: String) {
+data class LocationDetails(val longitude: String, val latitude: String) {
     override fun toString(): String {
         return "Longitude: $longitude. Latitude: $latitude."
     }

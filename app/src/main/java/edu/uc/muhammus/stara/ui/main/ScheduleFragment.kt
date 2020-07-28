@@ -38,7 +38,8 @@ class ScheduleFragment : StaraFragment() {
     private lateinit var countryName: String
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.schedule_fragment, container, false)
@@ -70,8 +71,7 @@ class ScheduleFragment : StaraFragment() {
     private fun prepRequestLocationUpdates() {
         if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             requestLocationUpdates()
-        }
-        else {
+        } else {
             val permissionRequest = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
             requestPermissions(permissionRequest, LOCATION_PERMISSION_REQUEST_CODE)
         }
@@ -82,28 +82,31 @@ class ScheduleFragment : StaraFragment() {
         showToast("Getting Schedule...")
 
         locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
-        locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
-            latitude = it.latitude
-            longitude = it.longitude
-            Log.d("ScheduleFragment.kt", "Latitude: $latitude")
-            Log.d("ScheduleFragment.kt", "Longitude: $longitude")
+        locationViewModel.getLocationLiveData().observe(
+            viewLifecycleOwner,
+            Observer {
+                latitude = it.latitude
+                longitude = it.longitude
+                Log.d("ScheduleFragment.kt", "Latitude: $latitude")
+                Log.d("ScheduleFragment.kt", "Longitude: $longitude")
 
-            // Use Geocoder to convert GPS coordinates into a countryName and countryCode
-            var geocoder = Geocoder(context, Locale.getDefault())
-            var address = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
-            countryCode = address.get(0).countryCode
-            countryName = address.get(0).countryName
-            Log.d("ScheduleFragment.kt", "Country code is: $countryCode")
-            Log.d("ScheduleFragment.kt", "Country name is: $countryName")
+                // Use Geocoder to convert GPS coordinates into a countryName and countryCode
+                val geocoder = Geocoder(context, Locale.getDefault())
+                val address = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
+                countryCode = address[0].countryCode
+                countryName = address[0].countryName
+                Log.d("ScheduleFragment.kt", "Country code is: $countryCode")
+                Log.d("ScheduleFragment.kt", "Country name is: $countryName")
 
-            // Populate view with schedule for country user is in.
-            populateScheduleRecyclerView(countryCode)
-            // Update text to indicate which country schedule is being gotten for
-            txtScheduleSubtitle.text = countryName
+                // Populate view with schedule for country user is in.
+                populateScheduleRecyclerView(countryCode)
+                // Update text to indicate which country schedule is being gotten for
+                txtScheduleSubtitle.text = countryName
 
-            // Don't expect to update country schedule often. Remove Observer after one location received.
-            //locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
-        })
+                // Don't expect to update country schedule often. Remove Observer after one location received.
+                //locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
+            }
+        )
     }
 
     /**
@@ -114,7 +117,7 @@ class ScheduleFragment : StaraFragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        when(requestCode) {
+        when (requestCode) {
             LOCATION_PERMISSION_REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocationUpdates()
@@ -135,9 +138,13 @@ class ScheduleFragment : StaraFragment() {
     private fun populateScheduleRecyclerView(countryCode: String) {
         viewModel.fetchSchedule(countryCode)
 
-        viewModel.schedule.observe(viewLifecycleOwner, Observer {
-            schedule -> scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item)
-        })
+        viewModel.schedule.observe(
+            viewLifecycleOwner,
+            Observer {
+                schedule ->
+                    scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item)
+            }
+        )
     }
 
     /**
@@ -148,7 +155,7 @@ class ScheduleFragment : StaraFragment() {
         super.onHiddenChanged(hidden)
 
         // If fragment is NOT hidden
-        if(!hidden) {
+        if (!hidden) {
             activity?.title = fragmentTitle
         }
     }

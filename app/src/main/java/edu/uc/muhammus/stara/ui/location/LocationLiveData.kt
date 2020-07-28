@@ -4,13 +4,9 @@
  */
 package edu.uc.muhammus.stara.ui.location
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageManager
 import android.location.Location
-import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -18,7 +14,7 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import edu.uc.muhammus.stara.dto.LocationDetails
 
-class LocationLiveData(context: Context): LiveData<LocationDetails>() {
+class LocationLiveData(context: Context) : LiveData<LocationDetails>() {
 
     private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
@@ -35,9 +31,9 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
         super.onActive()
         fusedLocationClient.lastLocation.addOnSuccessListener {
             location: Location ->
-                location.also {
-                    setLocationData(it)
-                }
+            location.also {
+                setLocationData(it)
+            }
         }
         startLocationUpdates()
     }
@@ -67,8 +63,8 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
     }
 
     companion object {
-        val ONE_MINUTE: Long = 60000
-        val ONE_DAY: Long = 86400000
+        const val ONE_MINUTE: Long = 60000
+        private const val ONE_DAY: Long = 86400000
         val locationRequest: LocationRequest = LocationRequest.create().apply {
             interval = ONE_DAY
             fastestInterval = ONE_DAY / 4

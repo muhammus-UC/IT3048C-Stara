@@ -3,6 +3,7 @@
 
 package android.util;
 
+@SuppressWarnings({"SameReturnValue", "unused"})
 public class Log {
     public static int d(String tag, String msg) {
         System.out.println("DEBUG: " + tag + ": " + msg);

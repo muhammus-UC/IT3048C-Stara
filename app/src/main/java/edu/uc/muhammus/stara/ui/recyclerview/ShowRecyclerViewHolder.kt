@@ -17,7 +17,7 @@ import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
+class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -26,22 +26,24 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
     private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
     private var alreadyFavorite: Boolean = false
 
+    private val TRUNCATE_LENGTH = 29
+
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this showJSON data class.
      */
     fun updateShowJSON(showJSON: ShowJSON) {
         var showName = showJSON.show.name
-        var showLanguage = showJSON.show.language ?: "Language Unknown"
+        val showLanguage = showJSON.show.language ?: "Language Unknown"
         var showStatus = "Status: " + showJSON.show.status
 
         // Truncate names to keep UI clean
-        if (showName.length > 32) {
-            showName = showName.substring(0, 32).trim() + "..."
+        if (showName.length > TRUNCATE_LENGTH) {
+            showName = showName.substring(0, TRUNCATE_LENGTH).trim() + "..."
         }
 
         // If showStatus is "Status: ", we don't know the status
-        if (showStatus.equals("Status: ")) {
+        if (showStatus == "Status: ") {
             showStatus = "Status: Unknown"
         }
 
@@ -52,7 +54,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
         // If API gave image URL, display that image
         if (showJSON.show.image != null && showJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
+            val encryptedImageURL = showJSON.show.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
@@ -63,42 +65,34 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
 
-
-
-        btnFavorite.setOnClickListener{addRemoveFavoriteShow(showJSON.show)}
+        btnFavorite.setOnClickListener { addRemoveFavoriteShow(showJSON.show) }
     }
 
     private fun addRemoveFavoriteShow(favoriteShow: Show) {
         println("favorite clicked")
 
         // Default email is "email". This means user has not logged in.
-        if (myActivity.email == "email")
-        {
+        if (myActivity.email == "email") {
             myActivity.showToast("You can not add to favorites without logging in.", true)
             myActivity.logon()
             return
         }
 
-
-        var favorite = Favorite().apply {
+        val favorite = Favorite().apply {
             id = "Show_" + favoriteShow.id
             name = favoriteShow.name
             subtitle = "Status: " + favoriteShow.status
             detail = favoriteShow.language ?: "Language Unknown"
-            if (favoriteShow.image != null && favoriteShow.image?.medium != null)
-            {
+            if (favoriteShow.image != null && favoriteShow.image?.medium != null) {
                 image = favoriteShow.image?.medium
             }
         }
 
-        if (!alreadyFavorite)
-        {
+        if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true
             btnFavorite.setImageResource(android.R.drawable.star_big_on)
-        }
-        else
-        {
+        } else {
             viewModel.removeFavorite(favorite, myActivity.email)
             alreadyFavorite = false
             btnFavorite.setImageResource(android.R.drawable.star_big_off)

@@ -11,7 +11,7 @@ import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.ActorJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout: Int, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.Adapter<ActorRecyclerViewHolder>() {
+class ActorsRecyclerViewAdapter(private val actorJSONs: List<ActorJSON>, private val itemLayout: Int, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.Adapter<ActorRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -71,7 +71,7 @@ class ActorsRecyclerViewAdapter(val actorJSONs: List<ActorJSON>, val itemLayout:
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ActorRecyclerViewHolder, position: Int) {
-        val actorJSON = actorJSONs.get(position)
+        val actorJSON = actorJSONs[position]
         holder.updateActorJSON(actorJSON)
     }
 }

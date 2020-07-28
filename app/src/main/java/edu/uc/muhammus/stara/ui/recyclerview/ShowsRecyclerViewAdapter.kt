@@ -11,7 +11,7 @@ import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowsRecyclerViewAdapter(val showJSONs: List<ShowJSON>, val itemLayout: Int, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.Adapter<ShowRecyclerViewHolder>() {
+class ShowsRecyclerViewAdapter(private val showJSONs: List<ShowJSON>, private val itemLayout: Int, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.Adapter<ShowRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -71,7 +71,7 @@ class ShowsRecyclerViewAdapter(val showJSONs: List<ShowJSON>, val itemLayout: In
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ShowRecyclerViewHolder, position: Int) {
-        val showJSON = showJSONs.get(position)
+        val showJSON = showJSONs[position]
         holder.updateShowJSON(showJSON)
     }
 }

@@ -20,8 +20,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayList<ScheduleJSON>) : BaseAdapter() {
-    private val inflater: LayoutInflater
-            = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
         return dataSource.size
@@ -92,7 +91,7 @@ class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayLis
         // If API gave image URL, display that image
         if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
+            val encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso

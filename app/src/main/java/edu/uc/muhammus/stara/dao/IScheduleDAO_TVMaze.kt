@@ -13,5 +13,5 @@ import retrofit2.http.Query
 
 interface IScheduleDAO_TVMaze {
     @GET("/schedule")
-    fun getSchedule(@Query("country") countryCode: String) : Call<ArrayList<ScheduleJSON>>
+    fun getSchedule(@Query("country") countryCode: String): Call<ArrayList<ScheduleJSON>>
 }

@@ -22,30 +22,31 @@ package edu.uc.muhammus.stara.dto
 
 import com.google.gson.annotations.SerializedName
 
-
 data class ActorJSON(var score: Double, @SerializedName("person") var actor: Actor)
 
-data class Actor(var id: String,
-                 var name: String,
-                 var country: ActorCountry? = ActorCountry("Country Unknown", "Country Code Unknown", "Timezone Unknown"),
-                 var gender: String? = "Gender Unknown",
-                 var image: ActorImageURL? = null
+data class Actor(
+    var id: String,
+    var name: String,
+    var country: ActorCountry? = ActorCountry("Country Unknown", "Country Code Unknown", "Timezone Unknown"),
+    var gender: String? = "Gender Unknown",
+    var image: ActorImageURL? = null
 ) {
     override fun toString(): String {
-        return this.name
+        return name
     }
 }
-data class ActorCountry(var name: String? = "Country Unknown",
-                        var code: String? = "Country Code Unknown",
-                        var timezone: String? = "Timezone Unknown"
+data class ActorCountry(
+    var name: String? = "Country Unknown",
+    var code: String? = "Country Code Unknown",
+    var timezone: String? = "Timezone Unknown"
 ) {
     override fun toString(): String {
-        return this.name!!
+        return name!!
     }
 }
 
 data class ActorImageURL(var medium: String) {
     override fun toString(): String {
-        return this.medium
+        return medium
     }
 }

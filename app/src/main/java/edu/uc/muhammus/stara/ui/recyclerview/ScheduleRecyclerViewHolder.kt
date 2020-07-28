@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ScheduleJSON
-import edu.uc.muhammus.stara.dto.ShowJSON
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-class ScheduleRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class ScheduleRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -51,7 +50,7 @@ class ScheduleRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemVi
         // If API gave image URL, display that image
         if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
+            val encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso

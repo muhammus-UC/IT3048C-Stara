@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import edu.uc.muhammus.stara.MainActivity
-import edu.uc.muhammus.stara.dto.*
+import edu.uc.muhammus.stara.dto.ActorJSON
+import edu.uc.muhammus.stara.dto.Favorite
+import edu.uc.muhammus.stara.dto.ScheduleJSON
+import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.service.ActorService
 import edu.uc.muhammus.stara.service.ScheduleService
 import edu.uc.muhammus.stara.service.ShowService
@@ -69,34 +71,34 @@ class MainViewModel : ViewModel() {
         firestore.collection(firestoreCollectionUsers)
             .document(email)
             .collection(firestoreCollectionFavorites).addSnapshotListener {
-            snapshot, e ->
-            // If there is an exception, we want to skip
-            if (e != null) {
-                Log.w(TAG, "Listen Failed", e)
-                return@addSnapshotListener
-            }
-            // If we are here, we did not encounter an exception
-            if (snapshot != null) {
-                // Now, we have a populated snapshot
-                val allFavorites = ArrayList<Favorite>()
-                val documents = snapshot.documents
-                documents.forEach {
-                    val favorite = it.toObject(Favorite::class.java)
-                    if (favorite != null) {
-                        allFavorites.add(favorite!!)
-                    }
+                snapshot, e ->
+                // If there is an exception, we want to skip
+                if (e != null) {
+                    Log.w(TAG, "Listen Failed", e)
+                    return@addSnapshotListener
                 }
-                _favorites.value = allFavorites
+                // If we are here, we did not encounter an exception
+                if (snapshot != null) {
+                    // Now, we have a populated snapshot
+                    val allFavorites = ArrayList<Favorite>()
+                    val documents = snapshot.documents
+                    documents.forEach {
+                        val favorite = it.toObject(Favorite::class.java)
+                        if (favorite != null) {
+                            allFavorites.add(favorite)
+                        }
+                    }
+                    _favorites.value = allFavorites
+                }
             }
-        }
     }
 
     /**
      * Allow getting and setting private variable that holds logged in user's favorite shows and actors.
      */
-    internal var favorites:MutableLiveData<ArrayList<Favorite>>
-        get() {return _favorites}
-        set(value) {_favorites = value}
+    internal var favorites: MutableLiveData<ArrayList<Favorite>>
+        get() { return _favorites }
+        set(value) { _favorites = value }
 
     /**
      * Add show or actor to Firestore favorites for user logged in
@@ -106,14 +108,14 @@ class MainViewModel : ViewModel() {
         firestore.collection(firestoreCollectionUsers)
             .document(email)
             .collection(firestoreCollectionFavorites)
-                .document(favorite.id)
-                .set(favorite)
-                .addOnSuccessListener {
-                    Log.d("Firebase", "Favorite add succeeded")
-                }
-                .addOnFailureListener{
-                    Log.d("Firebase", "Favorite add failed")
-                }
+            .document(favorite.id)
+            .set(favorite)
+            .addOnSuccessListener {
+                Log.d("Firebase", "Favorite add succeeded")
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "Favorite add failed")
+            }
     }
 
     /**
@@ -128,7 +130,7 @@ class MainViewModel : ViewModel() {
             .addOnSuccessListener {
                 Log.d("Firebase", "Favorite deletion succeeded")
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 Log.d("Firebase", "Favorite deletion failed")
             }
     }

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     // Reference: https://youtu.be/cqEawweiLEM
     private val AUTH_REQUEST_CODE = 2002
     private var user: FirebaseUser? = null
-    var userDisplayName: String? = "You"
+    private var userDisplayName: String? = "You"
     internal var email: String = "email"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,78 +73,75 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 // Schedule clicked
                 R.id.action_schedule -> {
-                    if (activeFragment == scheduleFragment)
-                    {
-                        showToast("Schedule already showing.", true)
-                    }
-                    else if (activeFragment == favoritesFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(favoritesFragment)
-                            .show(scheduleFragment)
-                            .commitNow()
-                        activeFragment = scheduleFragment
-                    }
-                    else if (activeFragment == searchFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(searchFragment)
-                            .show(scheduleFragment)
-                            .commitNow()
-                        activeFragment = scheduleFragment
+                    when (activeFragment) {
+                        scheduleFragment -> {
+                            showToast("Schedule already showing.", true)
+                        }
+                        favoritesFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(favoritesFragment)
+                                .show(scheduleFragment)
+                                .commitNow()
+                            activeFragment = scheduleFragment
+                        }
+                        searchFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(searchFragment)
+                                .show(scheduleFragment)
+                                .commitNow()
+                            activeFragment = scheduleFragment
+                        }
                     }
                 }
                 // Favorites clicked
                 R.id.action_favorites -> {
-                    if (activeFragment == favoritesFragment)
-                    {
-                        showToast("Favorites already showing.", true)
-                    }
-                    else if (activeFragment == scheduleFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(scheduleFragment)
-                            .show(favoritesFragment)
-                            .commitNow()
-                        activeFragment = favoritesFragment
-
-                        if (user == null){
-                            logon()
+                    when (activeFragment) {
+                        favoritesFragment -> {
+                            showToast("Favorites already showing.", true)
                         }
-                    }
-                    else if (activeFragment == searchFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(searchFragment)
-                            .show(favoritesFragment)
-                            .commitNow()
-                        activeFragment = favoritesFragment
-                        if (user == null){
-                            logon()
+                        scheduleFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(scheduleFragment)
+                                .show(favoritesFragment)
+                                .commitNow()
+                            activeFragment = favoritesFragment
+
+                            if (user == null) {
+                                logon()
+                            }
+                        }
+                        searchFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(searchFragment)
+                                .show(favoritesFragment)
+                                .commitNow()
+                            activeFragment = favoritesFragment
+                            if (user == null) {
+                                logon()
+                            }
                         }
                     }
                 }
                 // Search clicked
                 R.id.action_search -> {
-                    if (activeFragment == searchFragment)
-                    {
-                        showToast("Search already showing.", true)
-                    }
-                    else if (activeFragment == favoritesFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(favoritesFragment)
-                            .show(searchFragment)
-                            .commitNow()
-                        activeFragment = searchFragment
-                    }
-                    else if (activeFragment == scheduleFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(scheduleFragment)
-                            .show(searchFragment)
-                            .commitNow()
-                        activeFragment = searchFragment
+                    when (activeFragment) {
+                        searchFragment -> {
+                            showToast("Search already showing.", true)
+                        }
+                        favoritesFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(favoritesFragment)
+                                .show(searchFragment)
+                                .commitNow()
+                            activeFragment = searchFragment
+                        }
+                        scheduleFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(scheduleFragment)
+                                .show(searchFragment)
+                                .commitNow()
+                            activeFragment = searchFragment
+                        }
                     }
                 }
             }
@@ -156,14 +153,10 @@ class MainActivity : AppCompatActivity() {
     /**
      * Used to quickly show Toasts
      */
-    internal fun showToast(text: String, isLong: Boolean = false)
-    {
-        if (isLong)
-        {
+    internal fun showToast(text: String, isLong: Boolean = false) {
+        if (isLong) {
             Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
-        }
-        else
-        {
+        } else {
             Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
         }
     }
@@ -173,9 +166,9 @@ class MainActivity : AppCompatActivity() {
      * Reference: https://youtu.be/cqEawweiLEM
      */
     internal fun logon() {
-        showToast("Login to manager your favorites", true)
+        showToast("Login to manage your favorites", true)
 
-        var providers = arrayListOf(
+        val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
         startActivityForResult(
@@ -185,21 +178,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK)
-        {
-            if (requestCode == AUTH_REQUEST_CODE)
-            {
-                user = FirebaseAuth.getInstance().currentUser
-                if (user != null && !userDisplayName.isNullOrBlank())
-                {
-                    if (!userDisplayName.isNullOrBlank())
-                    {
-                        userDisplayName = user?.displayName
-                        favoritesFragment.setDisplayName(userDisplayName)
-                    }
-                    email = user?.email!!
+        if (resultCode == RESULT_OK) {
+            when (requestCode) {
+                (AUTH_REQUEST_CODE) -> {
+                    user = FirebaseAuth.getInstance().currentUser
+                    if (user != null && !userDisplayName.isNullOrBlank()) {
+                        if (!userDisplayName.isNullOrBlank()) {
+                            userDisplayName = user?.displayName
+                            favoritesFragment.setDisplayName(userDisplayName)
+                        }
+                        email = user?.email!!
 
-                    favoritesFragment.populateFavorites()
+                        favoritesFragment.populateFavorites()
+                    }
                 }
             }
         }

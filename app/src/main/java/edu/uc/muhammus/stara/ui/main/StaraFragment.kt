@@ -29,14 +29,10 @@ open class StaraFragment : Fragment() {
     /**
      * Used to quickly show Toasts within a Fragment.
      */
-    protected fun showToast(text: String, isLong: Boolean = false)
-    {
-        if (isLong)
-        {
+    protected fun showToast(text: String, isLong: Boolean = false) {
+        if (isLong) {
             Toast.makeText(context, text, Toast.LENGTH_LONG).show()
-        }
-        else
-        {
+        } else {
             Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
         }
     }

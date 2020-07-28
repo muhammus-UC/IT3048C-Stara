@@ -15,7 +15,7 @@ import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
+class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -24,19 +24,21 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, v
     private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
     private var alreadyFavorite = true
 
+    private val TRUNCATE_LENGTH = 29
+
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this Favorite data class.
      */
     fun updateFavorite(favorite: Favorite) {
         var favoriteName = favorite.name
-        var favoriteSubtitle = favorite.subtitle
-        var favoriteDetail = favorite.detail
-        var favoriteImage = favorite.image
+        val favoriteSubtitle = favorite.subtitle
+        val favoriteDetail = favorite.detail
+        val favoriteImage = favorite.image
 
         // Truncate names to keep UI clean
-        if (favoriteName.length > 32) {
-            favoriteName = favoriteName.substring(0, 32).trim() + "..."
+        if (favoriteName.length > TRUNCATE_LENGTH) {
+            favoriteName = favoriteName.substring(0, TRUNCATE_LENGTH).trim() + "..."
         }
 
         titleTextView.text = favoriteName
@@ -46,7 +48,7 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, v
         // If API gave image URL, display that image
         if (favoriteImage != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            var encryptedImageURL = favoriteImage.replace("http", "https")
+            val encryptedImageURL = favoriteImage.replace("http", "https")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
@@ -60,27 +62,22 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, v
         // Since item is already a favorite, star should be on by default
         btnFavorite.setImageResource(android.R.drawable.star_big_on)
 
-        btnFavorite.setOnClickListener{addRemoveFavorite(favorite)}
+        btnFavorite.setOnClickListener { addRemoveFavorite(favorite) }
     }
 
-    private fun addRemoveFavorite(favorite: Favorite)
-    {
+    private fun addRemoveFavorite(favorite: Favorite) {
         println("favorite clicked")
 
         // Do not need to check for email like did for RecycleViewHolders, since user has to be logged in already to access screen
 
-        if (!alreadyFavorite)
-        {
+        if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true
             btnFavorite.setImageResource(android.R.drawable.star_big_on)
-        }
-        else
-        {
+        } else {
             viewModel.removeFavorite(favorite, myActivity.email)
             alreadyFavorite = false
             btnFavorite.setImageResource(android.R.drawable.star_big_off)
         }
-
     }
 }

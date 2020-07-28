@@ -17,7 +17,7 @@ class FavoriteDataUnitTest {
 
     @Test
     fun confirmFavoriteShow_outputsFavoriteShow() {
-        var favoriteShow = Favorite("11025", "Still Game", "Ended", "English", "http://static.tvmaze.com/uploads/images/medium_portrait/37/92691.jpg")
+        val favoriteShow = Favorite("11025", "Still Game", "Ended", "English", "http://static.tvmaze.com/uploads/images/medium_portrait/37/92691.jpg")
 
         assertEquals("11025", favoriteShow.id)
         assertEquals("Still Game", favoriteShow.name)
@@ -30,7 +30,7 @@ class FavoriteDataUnitTest {
 
     @Test
     fun confirmFavoriteActor_outputsFavoriteActor() {
-        var favoriteActor = Favorite("56368", "Dylan Moran", "Male", "Ireland", "http://static.tvmaze.com/uploads/images/medium_portrait/9/23040.jpg")
+        val favoriteActor = Favorite("56368", "Dylan Moran", "Male", "Ireland", "http://static.tvmaze.com/uploads/images/medium_portrait/9/23040.jpg")
 
         assertEquals("56368", favoriteActor.id)
         assertEquals("Dylan Moran", favoriteActor.name)
@@ -41,4 +41,3 @@ class FavoriteDataUnitTest {
         assertEquals("Dylan Moran", favoriteActor.toString())
     }
 }
-

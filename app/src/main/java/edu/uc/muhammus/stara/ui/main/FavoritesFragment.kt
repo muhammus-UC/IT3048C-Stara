@@ -15,21 +15,18 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
-import edu.uc.muhammus.stara.ui.recyclerview.FavoriteRecyclerViewAdapter
+import edu.uc.muhammus.stara.ui.recyclerview.FavoritesRecyclerViewAdapter
 import kotlinx.android.synthetic.main.favorites_fragment.*
 
 class FavoritesFragment : StaraFragment() {
-
-    companion object {
-        fun newInstance() = FavoritesFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
     private lateinit var myActivity: MainActivity
     private var fragmentTitle = "Stara - Favorites"
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.favorites_fragment, container, false)
@@ -48,19 +45,21 @@ class FavoritesFragment : StaraFragment() {
         favoritesRecyclerView.hasFixedSize()
         favoritesRecyclerView.layoutManager = LinearLayoutManager(context)
         favoritesRecyclerView.itemAnimator = DefaultItemAnimator()
-
     }
 
     fun populateFavorites() {
         viewModel.listenToFavorites(myActivity.email)
 
-        viewModel.favorites.observe(viewLifecycleOwner, Observer{
-                favorites -> favoritesRecyclerView.adapter = FavoriteRecyclerViewAdapter(favorites, R.layout.list_item_favorite, viewModel, myActivity)
-        })
+        viewModel.favorites.observe(
+            viewLifecycleOwner,
+            Observer {
+                favorites ->
+                    favoritesRecyclerView.adapter = FavoritesRecyclerViewAdapter(favorites, R.layout.list_item_favorite, viewModel, myActivity)
+            }
+        )
     }
 
-    fun setDisplayName(displayName : String?)
-    {
+    fun setDisplayName(displayName: String?) {
         txtFavoritesSubtitle.text = displayName
     }
 
@@ -73,4 +72,7 @@ class FavoritesFragment : StaraFragment() {
         }
     }
 
+    companion object {
+        fun newInstance() = FavoritesFragment()
+    }
 }
