@@ -85,7 +85,7 @@ class MainViewModel : ViewModel() {
                 documents.forEach {
                     val favorite = it.toObject(Favorite::class.java)
                     if (favorite != null) {
-                        allFavorites.add(favorite!!)
+                        allFavorites.add(favorite)
                     }
                 }
                 _favorites.value = allFavorites
