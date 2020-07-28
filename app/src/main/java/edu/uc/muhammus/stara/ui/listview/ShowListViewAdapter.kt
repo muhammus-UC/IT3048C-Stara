@@ -75,7 +75,7 @@ class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<Sh
         }
 
         // If showStatus is "Status: ", we don't know the status
-        if (showStatus.equals("Status: ")) {
+        if (showStatus == "Status: ") {
             showStatus = "Status: Unknown"
         }
 

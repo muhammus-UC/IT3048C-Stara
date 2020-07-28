@@ -41,7 +41,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val m
         }
 
         // If showStatus is "Status: ", we don't know the status
-        if (showStatus.equals("Status: ")) {
+        if (showStatus == "Status: ") {
             showStatus = "Status: Unknown"
         }
 
