@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import edu.uc.muhammus.stara.MainActivity
-import edu.uc.muhammus.stara.dto.*
+import edu.uc.muhammus.stara.dto.ActorJSON
+import edu.uc.muhammus.stara.dto.Favorite
+import edu.uc.muhammus.stara.dto.ScheduleJSON
+import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.service.ActorService
 import edu.uc.muhammus.stara.service.ScheduleService
 import edu.uc.muhammus.stara.service.ShowService

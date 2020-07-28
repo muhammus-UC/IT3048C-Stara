@@ -4,13 +4,9 @@
  */
 package edu.uc.muhammus.stara.ui.location
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageManager
 import android.location.Location
-import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest

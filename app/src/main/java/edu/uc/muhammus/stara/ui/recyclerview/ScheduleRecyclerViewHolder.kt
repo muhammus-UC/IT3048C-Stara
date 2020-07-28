@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ScheduleJSON
-import edu.uc.muhammus.stara.dto.ShowJSON
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
