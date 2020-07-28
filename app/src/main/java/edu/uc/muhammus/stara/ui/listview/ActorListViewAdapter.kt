@@ -18,8 +18,7 @@ import edu.uc.muhammus.stara.dto.ActorJSON
 import kotlinx.android.synthetic.main.list_item_favorite.view.*
 
 class ActorListViewAdapter(context: Context, private val dataSource: ArrayList<ActorJSON>) : BaseAdapter() {
-    private val inflater: LayoutInflater
-            = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
         return dataSource.size

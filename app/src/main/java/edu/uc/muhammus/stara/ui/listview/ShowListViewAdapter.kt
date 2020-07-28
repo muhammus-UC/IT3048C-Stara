@@ -18,8 +18,7 @@ import edu.uc.muhammus.stara.dto.ShowJSON
 import kotlinx.android.synthetic.main.list_item_favorite.view.*
 
 class ShowListViewAdapter(context: Context, private val dataSource: ArrayList<ShowJSON>) : BaseAdapter() {
-    private val inflater: LayoutInflater
-        = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
         return dataSource.size

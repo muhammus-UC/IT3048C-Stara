@@ -20,8 +20,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class ScheduleListViewAdapter(context: Context, private val dataSource: ArrayList<ScheduleJSON>) : BaseAdapter() {
-    private val inflater: LayoutInflater
-            = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
         return dataSource.size
