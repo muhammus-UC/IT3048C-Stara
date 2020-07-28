@@ -14,7 +14,7 @@ import edu.uc.muhammus.stara.dto.ScheduleJSON
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-class ScheduleRecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class ScheduleRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)

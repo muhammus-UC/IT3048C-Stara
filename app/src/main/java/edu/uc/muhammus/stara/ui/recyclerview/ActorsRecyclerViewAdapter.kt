@@ -11,7 +11,7 @@ import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.ActorJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ActorsRecyclerViewAdapter(private val actorJSONs: List<ActorJSON>, private val itemLayout: Int, val viewModel: MainViewModel, private val myActivity: MainActivity): RecyclerView.Adapter<ActorRecyclerViewHolder>() {
+class ActorsRecyclerViewAdapter(private val actorJSONs: List<ActorJSON>, private val itemLayout: Int, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.Adapter<ActorRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.

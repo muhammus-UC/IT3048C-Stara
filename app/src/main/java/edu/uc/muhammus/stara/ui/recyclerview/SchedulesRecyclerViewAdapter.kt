@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.uc.muhammus.stara.dto.ScheduleJSON
 
-class SchedulesRecyclerViewAdapter(private val scheduleJSONs: List<ScheduleJSON>, private val itemLayout: Int): RecyclerView.Adapter<ScheduleRecyclerViewHolder>() {
+class SchedulesRecyclerViewAdapter(private val scheduleJSONs: List<ScheduleJSON>, private val itemLayout: Int) : RecyclerView.Adapter<ScheduleRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.

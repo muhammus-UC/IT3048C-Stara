@@ -11,7 +11,7 @@ import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class FavoriteRecyclerViewAdapter(private val favorites: List<Favorite>, private val itemLayout: Int, val viewModel: MainViewModel, private val myActivity: MainActivity): RecyclerView.Adapter<FavoriteRecyclerViewHolder>() {
+class FavoritesRecyclerViewAdapter(private val favorites: List<Favorite>, private val itemLayout: Int, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.Adapter<FavoriteRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.

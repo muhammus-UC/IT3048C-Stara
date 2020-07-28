@@ -17,7 +17,7 @@ import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
+class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -65,42 +65,34 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
 
-
-
-        btnFavorite.setOnClickListener{addRemoveFavoriteShow(showJSON.show)}
+        btnFavorite.setOnClickListener { addRemoveFavoriteShow(showJSON.show) }
     }
 
     private fun addRemoveFavoriteShow(favoriteShow: Show) {
         println("favorite clicked")
 
         // Default email is "email". This means user has not logged in.
-        if (myActivity.email == "email")
-        {
+        if (myActivity.email == "email") {
             myActivity.showToast("You can not add to favorites without logging in.", true)
             myActivity.logon()
             return
         }
-
 
         val favorite = Favorite().apply {
             id = "Show_" + favoriteShow.id
             name = favoriteShow.name
             subtitle = "Status: " + favoriteShow.status
             detail = favoriteShow.language ?: "Language Unknown"
-            if (favoriteShow.image != null && favoriteShow.image?.medium != null)
-            {
+            if (favoriteShow.image != null && favoriteShow.image?.medium != null) {
                 image = favoriteShow.image?.medium
             }
         }
 
-        if (!alreadyFavorite)
-        {
+        if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true
             btnFavorite.setImageResource(android.R.drawable.star_big_on)
-        }
-        else
-        {
+        } else {
             viewModel.removeFavorite(favorite, myActivity.email)
             alreadyFavorite = false
             btnFavorite.setImageResource(android.R.drawable.star_big_off)
