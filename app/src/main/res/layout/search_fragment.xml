@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/search_button"
+        android:textColor="@color/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/editSearch"
@@ -35,15 +37,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:buttonTint="@color/text"
             android:checked="true"
-            android:text="@string/radio_search" />
+            android:text="@string/radio_search"
+            android:textColor="@color/text" />
 
         <RadioButton
             android:id="@+id/searchRadioActor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/radio_actor" />
+            android:buttonTint="@color/text"
+            android:text="@string/radio_actor"
+            android:textColor="@color/text" />
     </RadioGroup>
 
     <EditText
@@ -55,6 +61,8 @@
         android:ems="10"
         android:hint="@string/search_hint"
         android:inputType="textPersonName"
+        android:textColor="@color/text"
+        android:textColorHint="@color/textHint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchRadioGroup" />
 
