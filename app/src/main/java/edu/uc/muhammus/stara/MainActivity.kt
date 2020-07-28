@@ -73,78 +73,75 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 // Schedule clicked
                 R.id.action_schedule -> {
-                    if (activeFragment == scheduleFragment)
-                    {
-                        showToast("Schedule already showing.", true)
-                    }
-                    else if (activeFragment == favoritesFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(favoritesFragment)
-                            .show(scheduleFragment)
-                            .commitNow()
-                        activeFragment = scheduleFragment
-                    }
-                    else if (activeFragment == searchFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(searchFragment)
-                            .show(scheduleFragment)
-                            .commitNow()
-                        activeFragment = scheduleFragment
+                    when (activeFragment) {
+                        scheduleFragment -> {
+                            showToast("Schedule already showing.", true)
+                        }
+                        favoritesFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(favoritesFragment)
+                                .show(scheduleFragment)
+                                .commitNow()
+                            activeFragment = scheduleFragment
+                        }
+                        searchFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(searchFragment)
+                                .show(scheduleFragment)
+                                .commitNow()
+                            activeFragment = scheduleFragment
+                        }
                     }
                 }
                 // Favorites clicked
                 R.id.action_favorites -> {
-                    if (activeFragment == favoritesFragment)
-                    {
-                        showToast("Favorites already showing.", true)
-                    }
-                    else if (activeFragment == scheduleFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(scheduleFragment)
-                            .show(favoritesFragment)
-                            .commitNow()
-                        activeFragment = favoritesFragment
-
-                        if (user == null){
-                            logon()
+                    when (activeFragment) {
+                        favoritesFragment -> {
+                            showToast("Favorites already showing.", true)
                         }
-                    }
-                    else if (activeFragment == searchFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(searchFragment)
-                            .show(favoritesFragment)
-                            .commitNow()
-                        activeFragment = favoritesFragment
-                        if (user == null){
-                            logon()
+                        scheduleFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(scheduleFragment)
+                                .show(favoritesFragment)
+                                .commitNow()
+                            activeFragment = favoritesFragment
+
+                            if (user == null) {
+                                logon()
+                            }
+                        }
+                        searchFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(searchFragment)
+                                .show(favoritesFragment)
+                                .commitNow()
+                            activeFragment = favoritesFragment
+                            if (user == null) {
+                                logon()
+                            }
                         }
                     }
                 }
                 // Search clicked
                 R.id.action_search -> {
-                    if (activeFragment == searchFragment)
-                    {
-                        showToast("Search already showing.", true)
-                    }
-                    else if (activeFragment == favoritesFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(favoritesFragment)
-                            .show(searchFragment)
-                            .commitNow()
-                        activeFragment = searchFragment
-                    }
-                    else if (activeFragment == scheduleFragment)
-                    {
-                        supportFragmentManager.beginTransaction()
-                            .hide(scheduleFragment)
-                            .show(searchFragment)
-                            .commitNow()
-                        activeFragment = searchFragment
+                    when (activeFragment) {
+                        searchFragment -> {
+                            showToast("Search already showing.", true)
+                        }
+                        favoritesFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(favoritesFragment)
+                                .show(searchFragment)
+                                .commitNow()
+                            activeFragment = searchFragment
+                        }
+                        scheduleFragment -> {
+                            supportFragmentManager.beginTransaction()
+                                .hide(scheduleFragment)
+                                .show(searchFragment)
+                                .commitNow()
+                            activeFragment = searchFragment
+                        }
                     }
                 }
             }
