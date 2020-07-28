@@ -24,6 +24,8 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
     private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
     private var alreadyFavorite = true
 
+    private val TRUNCATE_LENGTH = 29
+
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this Favorite data class.
@@ -35,8 +37,8 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
         var favoriteImage = favorite.image
 
         // Truncate names to keep UI clean
-        if (favoriteName.length > 32) {
-            favoriteName = favoriteName.substring(0, 32).trim() + "..."
+        if (favoriteName.length > TRUNCATE_LENGTH) {
+            favoriteName = favoriteName.substring(0, TRUNCATE_LENGTH).trim() + "..."
         }
 
         titleTextView.text = favoriteName

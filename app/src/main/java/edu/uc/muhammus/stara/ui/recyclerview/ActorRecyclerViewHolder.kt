@@ -26,6 +26,8 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
     private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
     private var alreadyFavorite: Boolean = false
 
+    private val TRUNCATE_LENGTH = 29
+
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this actorJSON data class.
@@ -36,8 +38,8 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
         val actorCountry = actorJSON.actor.country?.name ?: "Country Unknown"
 
         // Truncate names to keep UI clean
-        if (actorName.length > 32) {
-            actorName = actorName.substring(0, 32).trim() + "..."
+        if (actorName.length > TRUNCATE_LENGTH) {
+            actorName = actorName.substring(0, TRUNCATE_LENGTH).trim() + "..."
         }
 
         titleTextView.text = actorName

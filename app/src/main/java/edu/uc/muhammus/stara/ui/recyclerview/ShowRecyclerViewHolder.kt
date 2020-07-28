@@ -26,6 +26,8 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
     private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavorite)
     private var alreadyFavorite: Boolean = false
 
+    private val TRUNCATE_LENGTH = 29
+
     /**
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this showJSON data class.
@@ -36,8 +38,8 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
         var showStatus = "Status: " + showJSON.show.status
 
         // Truncate names to keep UI clean
-        if (showName.length > 32) {
-            showName = showName.substring(0, 32).trim() + "..."
+        if (showName.length > TRUNCATE_LENGTH) {
+            showName = showName.substring(0, TRUNCATE_LENGTH).trim() + "..."
         }
 
         // If showStatus is "Status: ", we don't know the status
