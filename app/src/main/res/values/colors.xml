@@ -4,8 +4,6 @@
     <color name="colorPrimaryDark">#024873</color>
     <color name="colorAccent">#027368</color>
     <color name="colorAccentDark">#025959</color>
-    <color name="gradientStart">#D7816A</color>
-    <color name="gradientEnd">#BD4F6C</color>
     <color name="text">#F0F0F0</color>
     <color name="textDark">#1A1A1A</color>
     <color name="textHint">#C0C0C0</color>
