@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     // Reference: https://youtu.be/cqEawweiLEM
     private val AUTH_REQUEST_CODE = 2002
     private var user: FirebaseUser? = null
-    var userDisplayName: String? = "You"
+    private var userDisplayName: String? = "You"
     internal var email: String = "email"
 
     override fun onCreate(savedInstanceState: Bundle?) {

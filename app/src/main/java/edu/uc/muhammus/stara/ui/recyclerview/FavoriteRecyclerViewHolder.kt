@@ -15,7 +15,7 @@ import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
+class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)

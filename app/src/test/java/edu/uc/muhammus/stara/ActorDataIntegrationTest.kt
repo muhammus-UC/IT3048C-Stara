@@ -12,7 +12,7 @@ class ActorDataIntegrationTest {
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
-    lateinit var mvm: MainViewModel
+    private lateinit var mvm: MainViewModel
 
     @Test
     fun actorDTO_isPopulated() {

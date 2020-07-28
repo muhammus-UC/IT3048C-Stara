@@ -13,7 +13,7 @@ import org.junit.rules.TestRule
 class ScheduleDataIntegrationTest {
     @get: Rule
     var rule: TestRule = InstantTaskExecutorRule()
-    lateinit var mvm: MainViewModel
+    private lateinit var mvm: MainViewModel
 
     @Test
     fun scheduleDTO_isPopulated() {

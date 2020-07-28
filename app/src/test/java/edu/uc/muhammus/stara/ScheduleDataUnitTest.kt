@@ -18,9 +18,9 @@ import org.junit.rules.TestRule
 class ScheduleDataUnitTest {
     @get: Rule
     var rule: TestRule = InstantTaskExecutorRule()
-    lateinit var mvm: MainViewModel
+    private lateinit var mvm: MainViewModel
 
-    var scheduleService = mockk<ScheduleService>()
+    private var scheduleService = mockk<ScheduleService>()
 
     @Test
     fun confirmDaisy_returnsDaisy() {

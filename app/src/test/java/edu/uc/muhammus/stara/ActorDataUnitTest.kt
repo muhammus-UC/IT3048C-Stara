@@ -20,9 +20,9 @@ import org.junit.rules.TestRule
 class ActorDataUnitTest {
     @get: Rule
     var rule: TestRule = InstantTaskExecutorRule()
-    lateinit var mvm: MainViewModel
+    private lateinit var mvm: MainViewModel
 
-    var actorService = mockk<ActorService>()
+    private var actorService = mockk<ActorService>()
 
     @Test
     fun confirmJoelMcHale_outputsJoelMcHale () {

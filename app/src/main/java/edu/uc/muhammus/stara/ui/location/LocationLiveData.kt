@@ -68,7 +68,7 @@ class LocationLiveData(context: Context): LiveData<LocationDetails>() {
 
     companion object {
         val ONE_MINUTE: Long = 60000
-        val ONE_DAY: Long = 86400000
+        private val ONE_DAY: Long = 86400000
         val locationRequest: LocationRequest = LocationRequest.create().apply {
             interval = ONE_DAY
             fastestInterval = ONE_DAY / 4

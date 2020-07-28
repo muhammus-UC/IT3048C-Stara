@@ -17,7 +17,7 @@ import edu.uc.muhammus.stara.dto.Show
 import edu.uc.muhammus.stara.dto.ShowJSON
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
+class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity): RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)

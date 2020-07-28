@@ -18,9 +18,9 @@ import org.junit.rules.TestRule
 class ShowDataUnitTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
-    lateinit var mvm: MainViewModel
+    private lateinit var mvm: MainViewModel
 
-    var showService = mockk<ShowService>()
+    private var showService = mockk<ShowService>()
 
     @Test
     fun confirmCommunity_outputsCommunity () {
