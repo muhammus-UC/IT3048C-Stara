@@ -87,10 +87,12 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true
             btnFavorite.setImageResource(android.R.drawable.star_big_on)
+            myActivity.showToast(favorite.name + " added to favorites.")
         } else {
             viewModel.removeFavorite(favorite, myActivity.email)
             alreadyFavorite = false
             btnFavorite.setImageResource(android.R.drawable.star_big_off)
+            myActivity.showToast(favorite.name + " added to favorites.")
         }
     }
 }

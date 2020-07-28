@@ -15,8 +15,7 @@
     <string name="radio_actor">Actor</string>
     <string name="radio_search">Search</string>
     <string name="search_button">Search</string>
-    <string name="search_hint">Search for Show…</string>
+    <string name="search_hint_actor">Search for Actor…</string>
+    <string name="search_hint_show">Search for Show…</string>
     <string name="search_label">Search</string>
-    <string name="search_title">Search</string>
-    <string name="search_text">Type to search…</string>
 </resources>

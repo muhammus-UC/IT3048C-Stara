@@ -5,8 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_color"
-    tools:context=".MainActivity">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".MainActivity"
+    tools:ignore="Overdraw">
 
     <!-- Reference: https://medium.com/@suragch/how-to-add-a-bottom-navigation-bar-in-android-958ed728ef6c -->
 
@@ -14,7 +15,7 @@
         android:id="@+id/staraBottomNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimary"
+        app:itemBackground="@color/colorAccentDark"
         app:itemIconTint="@color/bottom_nav_color"
         app:itemTextColor="@color/bottom_nav_color"
         app:layout_constraintBottom_toBottomOf="parent"

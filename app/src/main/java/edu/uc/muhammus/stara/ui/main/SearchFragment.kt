@@ -100,9 +100,9 @@ class SearchFragment : StaraFragment() {
             RadioGroup.OnCheckedChangeListener(
                 fun (_, checkedId) {
                     if (checkedId == R.id.searchRadioShow) {
-                        editSearch.hint = "Search for Show..."
+                        editSearch.hint = getString(R.string.search_hint_show)
                     } else if (checkedId == R.id.searchRadioActor) {
-                        editSearch.hint = "Search for Actor..."
+                        editSearch.hint = getString(R.string.search_hint_actor)
                     }
                 }
             )
