@@ -24,11 +24,12 @@ data class ShowJSON(var score: Double, var show: Show) {
     }
 }
 
-data class Show(var id: String,
-                var name: String,
-                var language: String? = "Language Unknown",
-                var status: String? = "Status Unknown",
-                var image: ShowImageURL? = null
+data class Show(
+    var id: String,
+    var name: String,
+    var language: String? = "Language Unknown",
+    var status: String? = "Status Unknown",
+    var image: ShowImageURL? = null
 ) {
     override fun toString(): String {
         return name
