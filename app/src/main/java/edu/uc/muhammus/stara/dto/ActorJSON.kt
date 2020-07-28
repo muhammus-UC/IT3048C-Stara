@@ -32,7 +32,7 @@ data class Actor(var id: String,
                  var image: ActorImageURL? = null
 ) {
     override fun toString(): String {
-        return this.name
+        return name
     }
 }
 data class ActorCountry(var name: String? = "Country Unknown",
@@ -40,12 +40,12 @@ data class ActorCountry(var name: String? = "Country Unknown",
                         var timezone: String? = "Timezone Unknown"
 ) {
     override fun toString(): String {
-        return this.name!!
+        return name!!
     }
 }
 
 data class ActorImageURL(var medium: String) {
     override fun toString(): String {
-        return this.medium
+        return medium
     }
 }

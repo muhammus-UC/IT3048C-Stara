@@ -20,7 +20,7 @@ package edu.uc.muhammus.stara.dto
 
 data class ShowJSON(var score: Double, var show: Show) {
     override fun toString(): String {
-        return this.show.name
+        return show.name
     }
 }
 
@@ -31,7 +31,7 @@ data class Show(var id: String,
                 var image: ShowImageURL? = null
 ) {
     override fun toString(): String {
-        return this.name
+        return name
     }
 }
 
