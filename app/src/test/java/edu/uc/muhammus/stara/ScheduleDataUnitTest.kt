@@ -63,10 +63,10 @@ class ScheduleDataUnitTest {
 
     private fun thenResultContainsBackdraft() {
         var backdraftFound = false
-        mvm.schedule.observeForever{
-            assertNotNull(it)
-            assertTrue(it.size > 0)
-            it.forEach{
+        mvm.schedule.observeForever{ arrayList ->
+            assertNotNull(arrayList)
+            assertTrue(arrayList.size > 0)
+            arrayList.forEach{
                 if (it.episodeName == "Backdraft to School" &&
                     it.airtime == "09:15" &&
                     it.show.id == "42183" &&

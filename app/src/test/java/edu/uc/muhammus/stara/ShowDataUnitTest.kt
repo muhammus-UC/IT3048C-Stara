@@ -74,10 +74,10 @@ class ShowDataUnitTest {
 
     private fun thenResultContainsCommunity() {
         var communityFound = false
-        mvm.shows.observeForever {
-            assertNotNull(it)
-            assertTrue(it.size > 0)
-            it.forEach {
+        mvm.shows.observeForever { arrayList ->
+            assertNotNull(arrayList)
+            assertTrue(arrayList.size > 0)
+            arrayList.forEach {
                 if (it.show.id == "318" &&
                     it.show.name == "Community" &&
                     it.show.language == "English" &&

@@ -66,10 +66,10 @@ class ShowDataIntegrationTest {
 
     private fun thenResultsShouldContainBlackBooks() {
         var blackBooksFound = false
-        mvm.shows.observeForever {
-            assertNotNull(it)
-            assertTrue(it.size > 0)
-            it.forEach{
+        mvm.shows.observeForever { arrayList ->
+            assertNotNull(arrayList)
+            assertTrue(arrayList.size > 0)
+            arrayList.forEach{
                 if (it.show.id == "1641" &&
                     it.show.name == "Black Books" &&
                     it.show.language == "English" &&

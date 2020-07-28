@@ -78,10 +78,10 @@ class ActorDataUnitTest {
 
     private fun thenResultContainsJoelMcHale() {
         var mchaleFound = false
-        mvm.actors.observeForever {
-            assertNotNull(it)
-            assertTrue(it.size > 0)
-            it.forEach {
+        mvm.actors.observeForever { arrayList ->
+            assertNotNull(arrayList)
+            assertTrue(arrayList.size > 0)
+            arrayList.forEach {
                 if (it.actor.id == "11615" &&
                     it.actor.name == "Joel McHale" &&
                     it.actor.country?.name == "Italy" &&

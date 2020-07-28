@@ -66,10 +66,10 @@ class ActorDataIntegrationTest {
 
     private fun thenResultsShouldContainTomHanks() {
         var tomHanksFound = false
-        mvm.actors.observeForever {
-            assertNotNull(it)
-            assertTrue(it.size > 0)
-            it.forEach{
+        mvm.actors.observeForever { arrayList ->
+            assertNotNull(arrayList)
+            assertTrue(arrayList.size > 0)
+            arrayList.forEach{
                 if (it.actor.id == "46432" &&
                     it.actor.name == "Tom Hanks" &&
                     it.actor.country?.name == "United States" &&
