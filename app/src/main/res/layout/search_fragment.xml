@@ -59,7 +59,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="@string/search_hint"
+        android:hint="@string/search_hint_show"
         android:inputType="textPersonName"
         android:textColor="@color/text"
         android:textColorHint="@color/textHint"
