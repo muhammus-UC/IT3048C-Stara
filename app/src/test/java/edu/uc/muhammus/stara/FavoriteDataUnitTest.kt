@@ -41,4 +41,3 @@ class FavoriteDataUnitTest {
         assertEquals("Dylan Moran", favoriteActor.toString())
     }
 }
-

@@ -48,7 +48,6 @@ class ActorDataIntegrationTest {
 
     private fun whenJSONDataAreReadAndParsed() {
         mvm.fetchActors("Joel McHale")
-
     }
 
     private fun thenTheCollectionSizeShouldBeGreaterThanZero() {
@@ -69,13 +68,13 @@ class ActorDataIntegrationTest {
         mvm.actors.observeForever { arrayList ->
             assertNotNull(arrayList)
             assertTrue(arrayList.size > 0)
-            arrayList.forEach{
+            arrayList.forEach {
                 if (it.actor.id == "46432" &&
                     it.actor.name == "Tom Hanks" &&
                     it.actor.country?.name == "United States" &&
                     it.actor.gender == "Male" &&
-                    it.actor.image?.medium == "http://static.tvmaze.com/uploads/images/medium_portrait/28/72307.jpg")
-                {
+                    it.actor.image?.medium == "http://static.tvmaze.com/uploads/images/medium_portrait/28/72307.jpg"
+                ) {
                     tomHanksFound = true
                 }
             }
@@ -92,5 +91,4 @@ class ActorDataIntegrationTest {
             assertEquals(0, it.size)
         }
     }
-
 }

@@ -11,10 +11,9 @@ import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.rules.TestRule
 
 class ActorDataUnitTest {
@@ -25,9 +24,9 @@ class ActorDataUnitTest {
     private var actorService = mockk<ActorService>()
 
     @Test
-    fun confirmJoelMcHale_outputsJoelMcHale () {
+    fun confirmJoelMcHale_outputsJoelMcHale() {
         val country = ActorCountry("Italy", "IT", "Europe/Rome")
-        val actor = Actor("11615","Joel McHale", country, "Male")
+        val actor = Actor("11615", "Joel McHale", country, "Male")
         assertEquals("Joel McHale", actor.toString())
     }
 
@@ -55,7 +54,7 @@ class ActorDataUnitTest {
         val allActorsLiveData = MutableLiveData<ArrayList<ActorJSON>>()
         val allActors = ArrayList<ActorJSON>()
         // create and add actors to our collection
-        val mcHaleCountry = ActorCountry ("Italy", "IT", "Europe/Rome")
+        val mcHaleCountry = ActorCountry("Italy", "IT", "Europe/Rome")
         val mcHale = Actor("11615", "Joel McHale", mcHaleCountry, "Male")
         val mcHaleJSON = ActorJSON(50.0, mcHale)
         allActors.add(mcHaleJSON)
@@ -67,8 +66,8 @@ class ActorDataUnitTest {
         val kramerJSON = ActorJSON(12.5, kramer)
         allActors.add(kramerJSON)
         allActorsLiveData.postValue(allActors)
-        every {actorService.fetchActors("Joel McHale")} returns allActorsLiveData
-        every {actorService.fetchActors(not("Joel McHale"))} returns MutableLiveData<ArrayList<ActorJSON>>()
+        every { actorService.fetchActors("Joel McHale") } returns allActorsLiveData
+        every { actorService.fetchActors(not("Joel McHale")) } returns MutableLiveData<ArrayList<ActorJSON>>()
         mvm.actorService = actorService
     }
 
@@ -85,7 +84,8 @@ class ActorDataUnitTest {
                 if (it.actor.id == "11615" &&
                     it.actor.name == "Joel McHale" &&
                     it.actor.country?.name == "Italy" &&
-                    it.actor.gender == "Male") {
+                    it.actor.gender == "Male"
+                ) {
                     mchaleFound = true
                 }
             }
@@ -95,7 +95,7 @@ class ActorDataUnitTest {
 
     private fun thenVerifyFunctionsInvoked() {
         verify { actorService.fetchActors("Joel McHale") }
-        verify(exactly = 0) {actorService.fetchActors("Jim Rash")}
+        verify(exactly = 0) { actorService.fetchActors("Jim Rash") }
         confirmVerified(actorService)
     }
 

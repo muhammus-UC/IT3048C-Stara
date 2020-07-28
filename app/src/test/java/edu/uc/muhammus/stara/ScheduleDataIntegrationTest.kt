@@ -45,7 +45,7 @@ class ScheduleDataIntegrationTest {
 
     private fun thenTheCollectionSizeShouldBeGreaterThanZero() {
         var schedule = ArrayList<ScheduleJSON>()
-        mvm.schedule.observeForever{
+        mvm.schedule.observeForever {
             schedule = it
         }
         assertNotNull(schedule)
@@ -55,11 +55,10 @@ class ScheduleDataIntegrationTest {
     private fun thenTheCollectionShouldHaveShow() {
         var scheduleContainsShow = false
         var schedule = ArrayList<ScheduleJSON>()
-        mvm.schedule.observeForever{
+        mvm.schedule.observeForever {
             schedule = it
         }
-        if (schedule[0].show is Show)
-        {
+        if (schedule[0].show is Show) {
             scheduleContainsShow = true
         }
         assertTrue(scheduleContainsShow)

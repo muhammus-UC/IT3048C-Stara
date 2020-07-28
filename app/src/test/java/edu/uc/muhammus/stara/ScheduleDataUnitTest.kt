@@ -24,7 +24,7 @@ class ScheduleDataUnitTest {
 
     @Test
     fun confirmDaisy_returnsDaisy() {
-        val schedule = ScheduleJSON("Daisy Chain Gang", "09:00", Show("42183","LEGO City Adventures"))
+        val schedule = ScheduleJSON("Daisy Chain Gang", "09:00", Show("42183", "LEGO City Adventures"))
         assertEquals("Episode Daisy Chain Gang airs at 09:00 for show LEGO City Adventures", schedule.toString())
     }
 
@@ -52,8 +52,8 @@ class ScheduleDataUnitTest {
         val thrill = ScheduleJSON("The Thrill of Pizza on a Grill", "12:30", Show("48531", "Symon's Dinners Cooking Out"))
         schedule.add(thrill)
         scheduleLiveData.postValue(schedule)
-        every {scheduleService.fetchSchedule("US")} returns scheduleLiveData
-        every {scheduleService.fetchSchedule(not("US"))} returns MutableLiveData<ArrayList<ScheduleJSON>>()
+        every { scheduleService.fetchSchedule("US") } returns scheduleLiveData
+        every { scheduleService.fetchSchedule(not("US")) } returns MutableLiveData<ArrayList<ScheduleJSON>>()
         mvm.scheduleService = scheduleService
     }
 
@@ -63,14 +63,15 @@ class ScheduleDataUnitTest {
 
     private fun thenResultContainsBackdraft() {
         var backdraftFound = false
-        mvm.schedule.observeForever{ arrayList ->
+        mvm.schedule.observeForever { arrayList ->
             assertNotNull(arrayList)
             assertTrue(arrayList.size > 0)
-            arrayList.forEach{
+            arrayList.forEach {
                 if (it.episodeName == "Backdraft to School" &&
                     it.airtime == "09:15" &&
                     it.show.id == "42183" &&
-                    it.show.name == "LEGO City Adventures") {
+                    it.show.name == "LEGO City Adventures"
+                ) {
                     backdraftFound = true
                 }
             }
@@ -79,8 +80,8 @@ class ScheduleDataUnitTest {
     }
 
     private fun thenVerifyFunctionsInvoked() {
-        verify {scheduleService.fetchSchedule("US")}
-        verify(exactly = 0) {scheduleService.fetchSchedule("GB")}
+        verify { scheduleService.fetchSchedule("US") }
+        verify(exactly = 0) { scheduleService.fetchSchedule("GB") }
         confirmVerified(scheduleService)
     }
 }
