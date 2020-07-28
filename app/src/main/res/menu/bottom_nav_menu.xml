@@ -5,20 +5,20 @@
         android:id="@+id/action_schedule"
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_my_calendar"
-        android:title="Schedule"
+        android:title="@string/schedule_label"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
         android:icon="@android:drawable/star_big_off"
-        android:title="Favorites"
+        android:title="@string/favorites_label"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_search"
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="Search"
+        android:title="@string/search_label"
         app:showAsAction="always" />
 </menu>

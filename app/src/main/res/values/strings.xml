@@ -2,8 +2,17 @@
     <string name="app_name">Stara</string>
     <string name="schedule_title">Today\'s TV Premieres for</string>
     <string name="schedule_subtitle">United States</string>
+    <string name="schedule_label">Schedule</string>
     <string name="search_title">Search</string>
+    <string name="search_label">Search</string>
     <string name="search_text">Type to search…</string>
     <string name="search_button">Search</string>
     <string name="favorites_title">Favorites for</string>
+    <string name="favorites_label">Favorites</string>
+    <string name="favorite_subtitle">You</string>
+    <string name="thumbnail_label">thumbnail</string>
+    <string name="favorite_button">Favorite</string>
+    <string name="radio_search">Search</string>
+    <string name="radio_actor">Actor</string>
+    <string name="search_hint">Search for Show...</string>
 </resources>
