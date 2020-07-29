@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6C58A7</color>
-    <color name="colorPrimaryDark">#024873</color>
-    <color name="colorAccent">#027368</color>
-    <color name="colorAccentDark">#025959</color>
-    <color name="text">#F0F0F0</color>
-    <color name="textDark">#1A1A1A</color>
-    <color name="textHint">#C0C0C0</color>
+    <color name="colorPrimary">#3F8C44</color>
+    <color name="colorPrimaryDark">#2D4459</color>
+    <color name="colorAccent">#D9653B</color>
+    <!--Text Colors-->
+    <color name="text">#F2F2F2</color>
+    <color name="textDark">#212121</color>
+    <color name="textHint">#D9CBBA</color>
+    <!--Background Colors-->
+    <color name="background">@color/colorPrimaryDark</color>
+    <color name="backgroundBottomNav">@color/colorPrimary</color>
+    <color name="backgroundCard">#D9CBBA</color>
+    <color name="backgroundRadio">@color/colorAccent</color>
 </resources>
