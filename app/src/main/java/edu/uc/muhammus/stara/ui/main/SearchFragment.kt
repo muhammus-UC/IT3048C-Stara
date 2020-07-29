@@ -4,6 +4,7 @@
 package edu.uc.muhammus.stara.ui.main
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,8 @@ class SearchFragment : StaraFragment() {
 
         // Populate SearchRecyclerView when user searches for show or actor
         btnSearch.setOnClickListener { populateSearchRecyclerView() }
+        // Do same as above when user presses enter key while in search field
+        searchOnEnterPress()
 
         // Change hint text based on which radio button is clicked by adding a listener
         changeSearchHintText()
@@ -90,6 +93,18 @@ class SearchFragment : StaraFragment() {
         }
 
         hideKeyboard()
+    }
+
+    /**
+     * Listen for key press on Search EditText. Run Search if Enter pressed.
+     */
+    private fun searchOnEnterPress() {
+        editSearch.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                populateSearchRecyclerView()
+            }
+            false
+        }
     }
 
     /**
