@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:cardBackgroundColor="@color/backgroundCard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout2"
@@ -32,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="28dp"
             android:maxLines="1"
-            android:paddingEnd="4dp"
             android:paddingStart="4dp"
+            android:paddingEnd="4dp"
             android:textColor="@color/textDark"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="56dp"
+    android:background="@color/background"
     tools:context=".ui.main.SearchFragment">
 
     <Button
@@ -37,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:buttonTint="@color/text"
+            android:buttonTint="@color/backgroundRadio"
             android:checked="true"
             android:text="@string/radio_search"
             android:textColor="@color/text" />
@@ -47,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:buttonTint="@color/text"
+            android:buttonTint="@color/backgroundRadio"
             android:text="@string/radio_actor"
             android:textColor="@color/text" />
     </RadioGroup>
@@ -60,12 +61,12 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/search_hint_show"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@color/text"
         android:textColorHint="@color/textHint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchRadioGroup"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/searchRadioGroup" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecyclerView"
