@@ -99,7 +99,7 @@ class SearchFragment : StaraFragment() {
      * Listen for key press on Search EditText. Run Search if Enter pressed.
      */
     private fun searchOnEnterPress() {
-        editSearch.setOnKeyListener { v, keyCode, event ->
+        editSearch.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 populateSearchRecyclerView()
             }
