@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.schedule_fragment.*
 import java.util.*
 
 class ScheduleFragment : StaraFragment() {
+    private val fileName = "ScheduleFragment.kt"
 
     private lateinit var viewModel: MainViewModel
     private var fragmentTitle = "Stara - Schedule"
@@ -87,16 +88,16 @@ class ScheduleFragment : StaraFragment() {
             Observer {
                 latitude = it.latitude
                 longitude = it.longitude
-                Log.d("ScheduleFragment.kt", "Latitude: $latitude")
-                Log.d("ScheduleFragment.kt", "Longitude: $longitude")
+                Log.d(fileName, "Latitude: $latitude")
+                Log.d(fileName, "Longitude: $longitude")
 
                 // Use Geocoder to convert GPS coordinates into a countryName and countryCode
                 val geocoder = Geocoder(context, Locale.getDefault())
                 val address = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
                 countryCode = address[0].countryCode
                 countryName = address[0].countryName
-                Log.d("ScheduleFragment.kt", "Country code is: $countryCode")
-                Log.d("ScheduleFragment.kt", "Country name is: $countryName")
+                Log.d(fileName, "Country code is: $countryCode")
+                Log.d(fileName, "Country name is: $countryName")
 
                 // Populate view with schedule for country user is in.
                 populateScheduleRecyclerView(countryCode)

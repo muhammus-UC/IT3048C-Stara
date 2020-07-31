@@ -17,6 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ShowService {
+    private val fileName = "ShowService.kt"
+
     internal fun fetchShows(showName: String): MutableLiveData<ArrayList<ShowJSON>> {
         val _shows = MutableLiveData<ArrayList<ShowJSON>>()
         val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IShowDAO_TVMaze::class.java)
@@ -29,7 +31,7 @@ class ShowService {
              */
             override fun onFailure(call: Call<ArrayList<ShowJSON>>, t: Throwable) {
                 println("ShowService Response FAILED")
-                Log.e("ShowService.kt", "ShowService Response FAILED")
+                Log.e(fileName, "ShowService Response FAILED")
             }
 
             /**
@@ -43,10 +45,10 @@ class ShowService {
                 response: Response<ArrayList<ShowJSON>>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("ShowService.kt", "ShowService Response SUCCEEDED")
+                    Log.d(fileName, "ShowService Response SUCCEEDED")
                     _shows.value = response.body()
                 } else {
-                    Log.d("ShowService.kt", "ShowService Response ERROR")
+                    Log.e(fileName, "ShowService Response ERROR")
                 }
             }
         })

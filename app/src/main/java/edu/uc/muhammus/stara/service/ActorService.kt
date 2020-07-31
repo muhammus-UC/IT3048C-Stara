@@ -16,6 +16,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ActorService {
+    val fileName = "ActorService.kt"
+
     internal fun fetchActors(actorName: String): MutableLiveData<ArrayList<ActorJSON>> {
         val _actors = MutableLiveData<ArrayList<ActorJSON>>()
         val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IActorDAO_TVMaze::class.java)
@@ -28,7 +30,7 @@ class ActorService {
              */
             override fun onFailure(call: Call<ArrayList<ActorJSON>>, t: Throwable) {
                 println("ActorService Response FAILED")
-                Log.e("ActorService.kt", "ActorService Response FAILED")
+                Log.e(fileName, "ActorService Response FAILED")
             }
 
             /**
@@ -42,10 +44,10 @@ class ActorService {
                 response: Response<ArrayList<ActorJSON>>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("ActorService.kt", "ActorService Response SUCCEEDED")
+                    Log.d(fileName, "ActorService Response SUCCEEDED")
                     _actors.value = response.body()
                 } else {
-                    Log.e("ActorService.kt", "ActorService Response ERROR")
+                    Log.e(fileName, "ActorService Response ERROR")
                 }
             }
         })

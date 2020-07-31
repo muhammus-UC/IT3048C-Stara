@@ -17,6 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ScheduleService {
+    private val fileName = "ScheduleService.kt"
+
     internal fun fetchSchedule(countryCode: String): MutableLiveData<ArrayList<ScheduleJSON>> {
         val _schedule = MutableLiveData<ArrayList<ScheduleJSON>>()
         val service = RetrofitClientInstance_TVMaze.retrofitInstance?.create(IScheduleDAO_TVMaze::class.java)
@@ -29,7 +31,7 @@ class ScheduleService {
              */
             override fun onFailure(call: Call<ArrayList<ScheduleJSON>>, t: Throwable) {
                 println("ScheduleService Response FAILED")
-                Log.e("ScheduleService.kt", "ShowService Response FAILED")
+                Log.e(fileName, "ShowService Response FAILED")
             }
 
             /**
@@ -43,10 +45,10 @@ class ScheduleService {
                 response: Response<ArrayList<ScheduleJSON>>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("ScheduleService.kt", "ScheduleService Response SUCCEEDED")
+                    Log.d(fileName, "ScheduleService Response SUCCEEDED")
                     _schedule.value = response.body()
                 } else {
-                    Log.d("ScheduleService.kt", "ScheduleService Response ERROR")
+                    Log.e(fileName, "ScheduleService Response ERROR")
                 }
             }
         })
