@@ -65,10 +65,61 @@ class MainActivity : AppCompatActivity() {
             activeFragment = scheduleFragment
         }
 
-        /**
-         * Configure bottom navigation bar button actions
-         * Reference: https://stackoverflow.com/a/44611348
-         */
+        // Configure bottom navigation bar
+        staraBottomNavInitialize()
+    }
+
+    /**
+     * Used to quickly show Toasts
+     */
+    internal fun showToast(text: String, isLong: Boolean = false) {
+        if (isLong) {
+            Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /**
+     * Firebase Authentication
+     * Reference: https://youtu.be/cqEawweiLEM
+     */
+    internal fun logon() {
+        showToast("Login to manage your favorites", true)
+
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build()
+        )
+        startActivityForResult(
+            AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(providers).build(), AUTH_REQUEST_CODE
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            when (requestCode) {
+                (AUTH_REQUEST_CODE) -> {
+                    user = FirebaseAuth.getInstance().currentUser
+                    if (user != null && !userDisplayName.isNullOrBlank()) {
+                        if (!userDisplayName.isNullOrBlank()) {
+                            userDisplayName = user?.displayName
+                            favoritesFragment.setDisplayName(userDisplayName)
+                        }
+                        email = user?.email!!
+
+                        favoritesFragment.populateFavorites()
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Configure bottom navigation bar button actions
+     * Reference: https://stackoverflow.com/a/44611348
+     */
+    private fun staraBottomNavInitialize() {
         staraBottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 // Schedule clicked
@@ -147,52 +198,6 @@ class MainActivity : AppCompatActivity() {
             }
             // Must return boolean for setOnNavigationItemSelectedListener
             true
-        }
-    }
-
-    /**
-     * Used to quickly show Toasts
-     */
-    internal fun showToast(text: String, isLong: Boolean = false) {
-        if (isLong) {
-            Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    /**
-     * Firebase Authentication
-     * Reference: https://youtu.be/cqEawweiLEM
-     */
-    internal fun logon() {
-        showToast("Login to manage your favorites", true)
-
-        val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build()
-        )
-        startActivityForResult(
-            AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(providers).build(), AUTH_REQUEST_CODE
-        )
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                (AUTH_REQUEST_CODE) -> {
-                    user = FirebaseAuth.getInstance().currentUser
-                    if (user != null && !userDisplayName.isNullOrBlank()) {
-                        if (!userDisplayName.isNullOrBlank()) {
-                            userDisplayName = user?.displayName
-                            favoritesFragment.setDisplayName(userDisplayName)
-                        }
-                        email = user?.email!!
-
-                        favoritesFragment.populateFavorites()
-                    }
-                }
-            }
         }
     }
 }
