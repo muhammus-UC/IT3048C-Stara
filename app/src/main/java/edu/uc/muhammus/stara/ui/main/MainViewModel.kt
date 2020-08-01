@@ -114,7 +114,7 @@ class MainViewModel : ViewModel() {
                 Log.d("Firebase", "Favorite add succeeded")
             }
             .addOnFailureListener {
-                Log.d("Firebase", "Favorite add failed")
+                Log.w("Firebase", "Favorite add failed")
             }
     }
 
@@ -131,7 +131,7 @@ class MainViewModel : ViewModel() {
                 Log.d("Firebase", "Favorite deletion succeeded")
             }
             .addOnFailureListener {
-                Log.d("Firebase", "Favorite deletion failed")
+                Log.w("Firebase", "Favorite deletion failed")
             }
     }
 }
