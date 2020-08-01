@@ -48,7 +48,7 @@ class FavoritesFragment : StaraFragment() {
     }
 
     // Populate with Favorites for logged in user
-    fun populateFavorites() {
+    internal fun populateFavorites() {
         viewModel.listenToFavorites(myActivity.email)
 
         viewModel.favorites.observe(
@@ -64,7 +64,7 @@ class FavoritesFragment : StaraFragment() {
      * Uses name from Firebase Authentication.
      * Used in Main Activity after user logs in.
      */
-    fun setDisplayName(displayName: String?) {
+    internal fun setDisplayName(displayName: String?) {
         txtFavoritesSubtitle.text = displayName
     }
 

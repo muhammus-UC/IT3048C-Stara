@@ -32,7 +32,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this showJSON data class.
      */
-    fun updateShowJSON(showJSON: ShowJSON) {
+    internal fun updateShowJSON(showJSON: ShowJSON) {
         var showName = showJSON.show.name
         val showLanguage = showJSON.show.language ?: "Language Unknown"
         var showStatus = "Status: " + showJSON.show.status

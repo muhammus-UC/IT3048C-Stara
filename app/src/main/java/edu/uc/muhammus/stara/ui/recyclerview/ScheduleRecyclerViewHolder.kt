@@ -24,7 +24,7 @@ class ScheduleRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this scheduleJSON data class.
      */
-    fun updateScheduleJSON(scheduleJSON: ScheduleJSON) {
+    internal fun updateScheduleJSON(scheduleJSON: ScheduleJSON) {
         var showName = scheduleJSON.show.name
         var episodeName = scheduleJSON.episodeName
         var airtime = scheduleJSON.airtime

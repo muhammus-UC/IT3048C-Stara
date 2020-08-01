@@ -37,7 +37,7 @@ class MainViewModel : ViewModel() {
      */
     var shows: MutableLiveData<ArrayList<ShowJSON>> = MutableLiveData<ArrayList<ShowJSON>>()
     var showService: ShowService = ShowService()
-    fun fetchShows(showName: String) {
+    internal fun fetchShows(showName: String) {
         shows = showService.fetchShows(showName)
     }
 
@@ -48,7 +48,7 @@ class MainViewModel : ViewModel() {
      */
     var actors: MutableLiveData<ArrayList<ActorJSON>> = MutableLiveData<ArrayList<ActorJSON>>()
     var actorService: ActorService = ActorService()
-    fun fetchActors(actorName: String) {
+    internal fun fetchActors(actorName: String) {
         actors = actorService.fetchActors(actorName)
     }
 
@@ -59,7 +59,7 @@ class MainViewModel : ViewModel() {
      */
     var schedule: MutableLiveData<ArrayList<ScheduleJSON>> = MutableLiveData<ArrayList<ScheduleJSON>>()
     var scheduleService: ScheduleService = ScheduleService()
-    fun fetchSchedule(countryCode: String) {
+    internal fun fetchSchedule(countryCode: String) {
         schedule = scheduleService.fetchSchedule(countryCode)
     }
 
@@ -104,7 +104,7 @@ class MainViewModel : ViewModel() {
      * Add show or actor to Firestore favorites for user logged in
      * Reference: https://youtu.be/CuP1elpCuEA
      */
-    fun addFavorite(favorite: Favorite, email: String) {
+    internal fun addFavorite(favorite: Favorite, email: String) {
         firestore.collection(firestoreCollectionUsers)
             .document(email)
             .collection(firestoreCollectionFavorites)
@@ -121,7 +121,7 @@ class MainViewModel : ViewModel() {
     /**
      * Remove show or actor from Firestore favorites for user logged in
      */
-    fun removeFavorite(favorite: Favorite, email: String) {
+    internal fun removeFavorite(favorite: Favorite, email: String) {
         firestore.collection(firestoreCollectionUsers)
             .document(email)
             .collection(firestoreCollectionFavorites)

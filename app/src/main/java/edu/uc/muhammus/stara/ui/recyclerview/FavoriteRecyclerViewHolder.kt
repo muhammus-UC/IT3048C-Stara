@@ -30,7 +30,7 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this Favorite data class.
      */
-    fun updateFavorite(favorite: Favorite) {
+    internal fun updateFavorite(favorite: Favorite) {
         var favoriteName = favorite.name
         val favoriteSubtitle = favorite.subtitle
         val favoriteDetail = favorite.detail

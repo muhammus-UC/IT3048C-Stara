@@ -32,7 +32,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
      * This function will get called once for each item in the collection that we want to show in our recycler view.
      * Paint a single row of the recycler view with this actorJSON data class.
      */
-    fun updateActorJSON(actorJSON: ActorJSON) {
+    internal fun updateActorJSON(actorJSON: ActorJSON) {
         var actorName = actorJSON.actor.name
         val actorGender = actorJSON.actor.gender ?: "Gender Unknown"
         val actorCountry = actorJSON.actor.country?.name ?: "Country Unknown"
