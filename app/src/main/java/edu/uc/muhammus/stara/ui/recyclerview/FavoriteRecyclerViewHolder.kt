@@ -68,7 +68,7 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
     private fun addRemoveFavorite(favorite: Favorite) {
         println("favorite clicked")
 
-        // Do not need to check for email like did for RecycleViewHolders, since user has to be logged in already to access screen
+        // Do not need to check for email like did for other RecycleViewHolders, since user has to be logged in already to access screen
 
         if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)

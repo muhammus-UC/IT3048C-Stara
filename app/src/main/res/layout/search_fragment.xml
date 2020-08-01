@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:buttonTint="@color/backgroundRadio"
             android:checked="true"
-            android:text="@string/radio_search"
+            android:text="@string/radio_show"
             android:textColor="@color/text" />
 
         <RadioButton

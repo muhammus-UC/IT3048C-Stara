@@ -13,7 +13,7 @@
     <string name="schedule_title">Today\'s TV Premieres for</string>
     <!--Search Fragment-->
     <string name="radio_actor">Actor</string>
-    <string name="radio_search">Search</string>
+    <string name="radio_show">Show</string>
     <string name="search_button">Search</string>
     <string name="search_hint_actor">Search for Actor…</string>
     <string name="search_hint_show">Search for Show…</string>

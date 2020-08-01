@@ -102,8 +102,8 @@ class MainActivity : AppCompatActivity() {
                 // Firebase Authentication Request Code
                 (AUTH_REQUEST_CODE) -> {
                     user = FirebaseAuth.getInstance().currentUser
-                    if (user != null && !userDisplayName.isNullOrBlank()) {
-                        if (!userDisplayName.isNullOrBlank()) {
+                    if (user != null) {
+                        if (!user?.displayName.isNullOrBlank()) {
                             userDisplayName = user?.displayName
                             favoritesFragment.setDisplayName(userDisplayName)
                         }
