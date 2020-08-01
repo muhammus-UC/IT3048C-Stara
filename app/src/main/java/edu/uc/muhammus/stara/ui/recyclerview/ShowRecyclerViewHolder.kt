@@ -68,16 +68,22 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
         btnFavorite.setOnClickListener { addRemoveFavoriteShow(showJSON.show) }
     }
 
+    /**
+     * Add or Remove a show from logged in User's favorites.
+     * Add if not already in favorites, otherwise Remove.
+     */
     private fun addRemoveFavoriteShow(favoriteShow: Show) {
         println("favorite clicked")
 
-        // Default email is "email". This means user has not logged in.
+        // Default value of var email is "email".
+        // If this is not changed, user has not logged in.
         if (myActivity.email == "email") {
             myActivity.showToast("You can not add to favorites without logging in.", true)
             myActivity.logon()
             return
         }
 
+        // Convert provided Show into a Favorite object.
         val favorite = Favorite().apply {
             id = "Show_" + favoriteShow.id
             name = favoriteShow.name
@@ -88,6 +94,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
             }
         }
 
+        // Add to Favorites if not already in favorites, otherwise Remove.
         if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true

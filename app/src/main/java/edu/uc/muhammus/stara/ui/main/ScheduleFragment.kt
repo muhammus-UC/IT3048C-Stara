@@ -150,7 +150,7 @@ class ScheduleFragment : StaraFragment() {
 
     /**
      * Runs when Fragment is hidden or shown via FragmentManager.
-     * Used to set proper title.
+     * Used to update title of activity to correspond to running Fragment.
      */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)

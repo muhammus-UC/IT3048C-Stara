@@ -99,6 +99,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             when (requestCode) {
+                // Firebase Authentication Request Code
                 (AUTH_REQUEST_CODE) -> {
                     user = FirebaseAuth.getInstance().currentUser
                     if (user != null && !userDisplayName.isNullOrBlank()) {

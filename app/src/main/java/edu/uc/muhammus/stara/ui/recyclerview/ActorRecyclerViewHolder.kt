@@ -63,16 +63,22 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
         btnFavorite.setOnClickListener { addRemoveFavoriteActor(actorJSON.actor) }
     }
 
+    /**
+     * Add or Remove an actor from logged in User's favorites.
+     * Add if not already in favorites, otherwise Remove.
+     */
     private fun addRemoveFavoriteActor(favoriteActor: Actor) {
         println("favorite clicked")
 
-        // Default email is "email". This mean user has not logged in.
+        // Default value of var email is "email".
+        // If this is not changed, user has not logged in.
         if (myActivity.email == "email") {
             myActivity.showToast("You can not add to favorites without logging in.", true)
             myActivity.logon()
             return
         }
 
+        // Convert provided Actor into a Favorite object
         val favorite = Favorite().apply {
             id = "Actor_" + favoriteActor.id
             name = favoriteActor.name
@@ -83,6 +89,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
             }
         }
 
+        // Add to Favorites if not already in favorites, otherwise Remove.
         if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true

@@ -47,6 +47,7 @@ class FavoritesFragment : StaraFragment() {
         favoritesRecyclerView.itemAnimator = DefaultItemAnimator()
     }
 
+    // Populate with Favorites for logged in user
     fun populateFavorites() {
         viewModel.listenToFavorites(myActivity.email)
 
@@ -59,10 +60,18 @@ class FavoritesFragment : StaraFragment() {
         )
     }
 
+    /**
+     * Uses name from Firebase Authentication.
+     * Used in Main Activity after user logs in.
+     */
     fun setDisplayName(displayName: String?) {
         txtFavoritesSubtitle.text = displayName
     }
 
+    /**
+     * Runs when Fragment is hidden or shown via FragmentManager.
+     * Used to update title of activity to correspond to running Fragment.
+     */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
 
