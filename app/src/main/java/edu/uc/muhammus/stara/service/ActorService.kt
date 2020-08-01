@@ -29,7 +29,6 @@ class ActorService {
              * exception occurred creating the request or processing the response.
              */
             override fun onFailure(call: Call<ArrayList<ActorJSON>>, t: Throwable) {
-                println("ActorService Response FAILED")
                 Log.e(fileName, "ActorService Response FAILED")
             }
 

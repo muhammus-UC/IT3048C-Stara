@@ -4,6 +4,7 @@
  */
 package edu.uc.muhammus.stara.ui.recyclerview
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -16,6 +17,8 @@ import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
 class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
+    private val fileName = "FavoriteRecyclerViewHolder.kt"
+
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -66,7 +69,7 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
     }
 
     private fun addRemoveFavorite(favorite: Favorite) {
-        println("favorite clicked")
+        Log.d(fileName, "Favorite imageButton clicked.")
 
         // Do not need to check for email like did for other RecycleViewHolders, since user has to be logged in already to access screen
 

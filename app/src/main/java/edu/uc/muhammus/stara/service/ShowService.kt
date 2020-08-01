@@ -30,7 +30,6 @@ class ShowService {
              * exception occurred creating the request or processing the response.
              */
             override fun onFailure(call: Call<ArrayList<ShowJSON>>, t: Throwable) {
-                println("ShowService Response FAILED")
                 Log.e(fileName, "ShowService Response FAILED")
             }
 

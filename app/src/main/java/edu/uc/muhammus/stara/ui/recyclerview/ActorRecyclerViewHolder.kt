@@ -4,6 +4,7 @@
  */
 package edu.uc.muhammus.stara.ui.recyclerview
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -18,6 +19,8 @@ import edu.uc.muhammus.stara.dto.Favorite
 import edu.uc.muhammus.stara.ui.main.MainViewModel
 
 class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
+    private val fileName = "ActorRecyclerViewHolder.kt"
+
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -68,7 +71,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
      * Add if not already in favorites, otherwise Remove.
      */
     private fun addRemoveFavoriteActor(favoriteActor: Actor) {
-        println("favorite clicked")
+        Log.d(fileName, "Favorite imageButton clicked.")
 
         // Default value of var email is "email".
         // If this is not changed, user has not logged in.
