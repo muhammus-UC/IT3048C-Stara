@@ -55,7 +55,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
         detailTextView.text = showLanguage
 
         // If API gave image URL, display that image
-        if (showJSON.show.image != null && showJSON.show.image?.medium != null) {
+        if (showJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             val encryptedImageURL = showJSON.show.image?.medium!!.replace("http://", "https://")
 
@@ -92,7 +92,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
             name = favoriteShow.name
             subtitle = "Status: " + favoriteShow.status
             detail = favoriteShow.language ?: "Language Unknown"
-            if (favoriteShow.image != null && favoriteShow.image?.medium != null) {
+            if (favoriteShow.image?.medium != null) {
                 image = favoriteShow.image?.medium
             }
         }

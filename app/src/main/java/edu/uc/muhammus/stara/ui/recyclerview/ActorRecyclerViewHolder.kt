@@ -50,7 +50,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
         detailTextView.text = actorCountry
 
         // If API gave image URL, display that image
-        if (actorJSON.actor.image != null && actorJSON.actor.image?.medium != null) {
+        if (actorJSON.actor.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             val encryptedImageURL = actorJSON.actor.image?.medium!!.replace("http://", "https://")
 
@@ -87,7 +87,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
             name = favoriteActor.name
             subtitle = favoriteActor.gender ?: "Gender Unknown"
             detail = favoriteActor.country?.name ?: "Country Unknown"
-            if (favoriteActor.image != null && favoriteActor.image?.medium != null) {
+            if (favoriteActor.image?.medium != null) {
                 image = favoriteActor.image?.medium
             }
         }

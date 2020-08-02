@@ -71,7 +71,13 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
     private fun addRemoveFavorite(favorite: Favorite) {
         Log.d(fileName, "Favorite imageButton clicked.")
 
-        // Do not need to check for email like did for other RecycleViewHolders, since user has to be logged in already to access screen
+        // Default value of var email is "email".
+        // If this is not changed, user has not logged in.
+        if (myActivity.email == "email") {
+            myActivity.showToast("You can not add to favorites without logging in.", true)
+            myActivity.logon()
+            return
+        }
 
         if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)

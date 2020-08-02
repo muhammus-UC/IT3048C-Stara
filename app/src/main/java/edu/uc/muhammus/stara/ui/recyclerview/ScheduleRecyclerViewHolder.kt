@@ -48,7 +48,7 @@ class ScheduleRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
         detailTextView.text = airtime
 
         // If API gave image URL, display that image
-        if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
+        if (scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             val encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http://", "https://")
 
