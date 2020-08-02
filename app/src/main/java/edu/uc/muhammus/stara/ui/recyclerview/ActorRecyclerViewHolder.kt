@@ -52,7 +52,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
         // If API gave image URL, display that image
         if (actorJSON.actor.image != null && actorJSON.actor.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
-            val encryptedImageURL = actorJSON.actor.image?.medium!!.replace("http", "https")
+            val encryptedImageURL = actorJSON.actor.image?.medium!!.replace("http://", "https://")
 
             // Using Picasso image library to load thumbnail asynchronously - https://square.github.io/picasso/
             // Picasso.get().isLoggingEnabled = true // Used for debugging Picasso
