@@ -4,6 +4,8 @@
  */
 package edu.uc.muhammus.stara.ui.recyclerview
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
@@ -63,7 +65,20 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
 
+        // Add or Remove Actor from Favorites when btnFavorite clicked.
         btnFavorite.setOnClickListener { addRemoveFavoriteActor(actorJSON.actor) }
+
+        // Open TVMaze URL for Actor when thumbnail clicked.
+        thumbnailImageView.setOnClickListener { openLink(actorJSON.actor.url) }
+    }
+
+    /**
+     * Opens link for Actor in external browser
+     */
+    private fun openLink(url: String) {
+        val openLinkIntent = Intent(Intent.ACTION_VIEW)
+        openLinkIntent.data = Uri.parse(url)
+        myActivity.startActivity(openLinkIntent)
     }
 
     /**
@@ -85,6 +100,7 @@ class ActorRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priv
         val favorite = Favorite().apply {
             id = "Actor_" + favoriteActor.id
             name = favoriteActor.name
+            url = favoriteActor.url
             subtitle = favoriteActor.gender ?: "Gender Unknown"
             detail = favoriteActor.country?.name ?: "Country Unknown"
             if (favoriteActor.image?.medium != null) {

@@ -4,6 +4,8 @@
  */
 package edu.uc.muhammus.stara.ui.recyclerview
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
@@ -65,9 +67,26 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
         // Since item is already a favorite, star should be on by default
         btnFavorite.setImageResource(android.R.drawable.star_big_on)
 
+        // Add or Remove Favorite from Favorites when btnFavorite clicked.
         btnFavorite.setOnClickListener { addRemoveFavorite(favorite) }
+
+        // Open TVMaze URL for Favorite when thumbnail clicked.
+        thumbnailImageView.setOnClickListener { openLink(favorite.url) }
     }
 
+    /**
+     * Opens TVMaze link for Actor in external browser.
+     */
+    private fun openLink(url: String) {
+        val openLinkIntent = Intent(Intent.ACTION_VIEW)
+        openLinkIntent.data = Uri.parse(url)
+        myActivity.startActivity(openLinkIntent)
+    }
+
+    /**
+     * Add or remove a favorite from logged in User's favorites.
+     * Add if not already in favorites, otherwise Remove.
+     */
     private fun addRemoveFavorite(favorite: Favorite) {
         Log.d(fileName, "Favorite imageButton clicked.")
 
@@ -79,6 +98,7 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
             return
         }
 
+        // Add to Favorites if not already in favorites, otherwise Remove.
         if (!alreadyFavorite) {
             viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true

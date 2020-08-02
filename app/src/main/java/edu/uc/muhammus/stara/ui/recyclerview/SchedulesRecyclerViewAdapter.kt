@@ -7,9 +7,10 @@ package edu.uc.muhammus.stara.ui.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.ScheduleJSON
 
-class SchedulesRecyclerViewAdapter(private val scheduleJSONs: List<ScheduleJSON>, private val itemLayout: Int) : RecyclerView.Adapter<ScheduleRecyclerViewHolder>() {
+class SchedulesRecyclerViewAdapter(private val scheduleJSONs: List<ScheduleJSON>, private val itemLayout: Int, private val myActivity: MainActivity) : RecyclerView.Adapter<ScheduleRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -35,7 +36,7 @@ class SchedulesRecyclerViewAdapter(private val scheduleJSONs: List<ScheduleJSON>
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
-        return ScheduleRecyclerViewHolder(view)
+        return ScheduleRecyclerViewHolder(view, myActivity)
     }
 
     /**

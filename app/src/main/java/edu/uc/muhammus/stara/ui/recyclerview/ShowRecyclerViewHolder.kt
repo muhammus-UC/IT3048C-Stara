@@ -4,6 +4,8 @@
  */
 package edu.uc.muhammus.stara.ui.recyclerview
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
@@ -68,7 +70,20 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
 
+        // Add or Remove Show from Favorites when btnFavorite clicked.
         btnFavorite.setOnClickListener { addRemoveFavoriteShow(showJSON.show) }
+
+        // Open TVMaze URL for Show when thumbnail clicked.
+        thumbnailImageView.setOnClickListener { openLink(showJSON.show.url) }
+    }
+
+    /**
+     * Opens TVMaze link for Show in external browser
+     */
+    private fun openLink(url: String) {
+        val openLinkIntent = Intent(Intent.ACTION_VIEW)
+        openLinkIntent.data = Uri.parse(url)
+        myActivity.startActivity(openLinkIntent)
     }
 
     /**
@@ -90,6 +105,7 @@ class ShowRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, priva
         val favorite = Favorite().apply {
             id = "Show_" + favoriteShow.id
             name = favoriteShow.name
+            url = favoriteShow.url
             subtitle = "Status: " + favoriteShow.status
             detail = favoriteShow.language ?: "Language Unknown"
             if (favoriteShow.image?.medium != null) {

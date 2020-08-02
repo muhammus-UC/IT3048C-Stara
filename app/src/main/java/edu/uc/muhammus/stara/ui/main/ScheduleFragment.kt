@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.ui.location.LocationViewModel
 import edu.uc.muhammus.stara.ui.recyclerview.SchedulesRecyclerViewAdapter
@@ -28,6 +29,9 @@ class ScheduleFragment : StaraFragment() {
     private val fileName = "ScheduleFragment.kt"
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var myActivity: MainActivity
+
+    // Title of Fragment currently shown. Used to set title when Fragment is shown from hide state.
     private var fragmentTitle = "Stara - Schedule"
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 2000
@@ -54,6 +58,8 @@ class ScheduleFragment : StaraFragment() {
         // Updated deprecated code: https://stackoverflow.com/q/57534730
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.initializeFirebase()
+
+        myActivity = (activity as MainActivity)
 
         // Configure recycler view options with sane defaults
         scheduleRecyclerView.hasFixedSize()
@@ -143,7 +149,7 @@ class ScheduleFragment : StaraFragment() {
             viewLifecycleOwner,
             Observer {
                 schedule ->
-                    scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item)
+                    scheduleRecyclerView.adapter = SchedulesRecyclerViewAdapter(schedule, R.layout.list_item, myActivity)
             }
         )
     }
