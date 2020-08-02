@@ -17,10 +17,13 @@ class FavoriteDataUnitTest {
 
     @Test
     fun confirmFavoriteShow_outputsFavoriteShow() {
-        val favoriteShow = Favorite("11025", "Still Game", "Ended", "English", "http://static.tvmaze.com/uploads/images/medium_portrait/37/92691.jpg")
+        val favoriteShow = Favorite(
+            "11025", "Still Game", "http://www.tvmaze.com/shows/11025/still-game", "Ended", "English", "http://static.tvmaze.com/uploads/images/medium_portrait/37/92691.jpg"
+        )
 
         assertEquals("11025", favoriteShow.id)
         assertEquals("Still Game", favoriteShow.name)
+        assertEquals("http://www.tvmaze.com/shows/11025/still-game", favoriteShow.url)
         assertEquals("Ended", favoriteShow.subtitle)
         assertEquals("English", favoriteShow.detail)
         assertEquals("http://static.tvmaze.com/uploads/images/medium_portrait/37/92691.jpg", favoriteShow.image)
@@ -30,10 +33,13 @@ class FavoriteDataUnitTest {
 
     @Test
     fun confirmFavoriteActor_outputsFavoriteActor() {
-        val favoriteActor = Favorite("56368", "Dylan Moran", "Male", "Ireland", "http://static.tvmaze.com/uploads/images/medium_portrait/9/23040.jpg")
+        val favoriteActor = Favorite(
+            "56368", "Dylan Moran", "http://www.tvmaze.com/people/56368/dylan-moran", "Male", "Ireland", "http://static.tvmaze.com/uploads/images/medium_portrait/9/23040.jpg"
+        )
 
         assertEquals("56368", favoriteActor.id)
         assertEquals("Dylan Moran", favoriteActor.name)
+        assertEquals("http://www.tvmaze.com/people/56368/dylan-moran", favoriteActor.url)
         assertEquals("Male", favoriteActor.subtitle)
         assertEquals("Ireland", favoriteActor.detail)
         assertEquals("http://static.tvmaze.com/uploads/images/medium_portrait/9/23040.jpg", favoriteActor.image)

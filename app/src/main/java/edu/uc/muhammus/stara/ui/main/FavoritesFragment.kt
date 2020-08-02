@@ -22,6 +22,8 @@ class FavoritesFragment : StaraFragment() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var myActivity: MainActivity
+
+    // Title of Fragment currently shown. Used to set title when Fragment is shown from hide state.
     private var fragmentTitle = "Stara - Favorites"
 
     override fun onCreateView(

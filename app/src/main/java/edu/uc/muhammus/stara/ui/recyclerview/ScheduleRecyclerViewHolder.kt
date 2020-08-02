@@ -4,17 +4,20 @@
  */
 package edu.uc.muhammus.stara.ui.recyclerview
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.ScheduleJSON
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-class ScheduleRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ScheduleRecyclerViewHolder(itemView: View, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
     private val titleTextView: TextView = itemView.findViewById(R.id.list_title)
     private val subtitleTextView: TextView = itemView.findViewById(R.id.list_subtitle)
@@ -48,7 +51,7 @@ class ScheduleRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
         detailTextView.text = airtime
 
         // If API gave image URL, display that image
-        if (scheduleJSON.show.image != null && scheduleJSON.show.image?.medium != null) {
+        if (scheduleJSON.show.image?.medium != null) {
             // Need to encrypt image URL. API returns http but supports https, Android only allows https by default.
             val encryptedImageURL = scheduleJSON.show.image?.medium!!.replace("http://", "https://")
 
@@ -60,5 +63,17 @@ class ScheduleRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
         else {
             thumbnailImageView.setImageResource(android.R.drawable.ic_delete)
         }
+
+        // Open TVMaze URL for Schedule episode when thumbnail clicked.
+        thumbnailImageView.setOnClickListener { openLink(scheduleJSON.url) }
+    }
+
+    /**
+     * Opens TVMaze link for Schedule episode in external browser.
+     */
+    private fun openLink(url: String) {
+        val openLinkIntent = Intent(Intent.ACTION_VIEW)
+        openLinkIntent.data = Uri.parse(url)
+        myActivity.startActivity(openLinkIntent)
     }
 }

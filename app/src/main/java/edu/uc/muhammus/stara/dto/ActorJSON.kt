@@ -27,7 +27,8 @@ data class ActorJSON(var score: Double, @SerializedName("person") var actor: Act
 data class Actor(
     var id: String,
     var name: String,
-    var country: ActorCountry? = ActorCountry("Country Unknown", "Country Code Unknown", "Timezone Unknown"),
+    var url: String,
+    var country: ActorCountry? = ActorCountry("Country Unknown"),
     var gender: String? = "Gender Unknown",
     var image: ActorImageURL? = null
 ) {
@@ -36,9 +37,7 @@ data class Actor(
     }
 }
 data class ActorCountry(
-    var name: String? = "Country Unknown",
-    var code: String? = "Country Code Unknown",
-    var timezone: String? = "Timezone Unknown"
+    var name: String? = "Country Unknown"
 ) {
     override fun toString(): String {
         return name!!

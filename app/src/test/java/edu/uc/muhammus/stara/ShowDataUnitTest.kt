@@ -24,7 +24,7 @@ class ShowDataUnitTest {
 
     @Test
     fun confirmCommunity_outputsCommunity() {
-        val show = Show("318", "Community", "English", "Ended")
+        val show = Show("318", "Community", "http://www.tvmaze.com/shows/318/community", "English", "Ended")
         assertEquals("Community", show.toString())
     }
 
@@ -52,13 +52,13 @@ class ShowDataUnitTest {
         val allShowsLiveData = MutableLiveData<ArrayList<ShowJSON>>()
         val allShows = ArrayList<ShowJSON>()
         // create and add shows to our collection
-        val community = Show("318", "Community", "English", "Ended")
+        val community = Show("318", "Community", "http://www.tvmaze.com/shows/318/community", "English", "Ended")
         val communityJSON = ShowJSON(50.0, community)
         allShows.add(communityJSON)
-        val communityLife = Show("28145", "Community Life", "English", "To Be Determined")
+        val communityLife = Show("28145", "Community Life", "http://www.tvmaze.com/shows/28145/community-life", "English", "To Be Determined")
         val communityLifeJSON = ShowJSON(25.0, communityLife)
         allShows.add(communityLifeJSON)
-        val diplomatic = Show("6191", "Diplomatic Immunity", "English", "Ended")
+        val diplomatic = Show("6191", "Diplomatic Immunity", "http://www.tvmaze.com/shows/6191/diplomatic-immunity", "English", "Ended")
         val diplomaticJSON = ShowJSON(12.5, diplomatic)
         allShows.add(diplomaticJSON)
         allShowsLiveData.postValue(allShows)
@@ -79,6 +79,7 @@ class ShowDataUnitTest {
             arrayList.forEach {
                 if (it.show.id == "318" &&
                     it.show.name == "Community" &&
+                    it.show.url == "http://www.tvmaze.com/shows/318/community" &&
                     it.show.language == "English" &&
                     it.show.status == "Ended"
                 ) {

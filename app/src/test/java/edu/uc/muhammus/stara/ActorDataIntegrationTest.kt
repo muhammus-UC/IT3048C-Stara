@@ -71,6 +71,7 @@ class ActorDataIntegrationTest {
             arrayList.forEach {
                 if (it.actor.id == "46432" &&
                     it.actor.name == "Tom Hanks" &&
+                    it.actor.url == "http://www.tvmaze.com/people/46432/tom-hanks" &&
                     it.actor.country?.name == "United States" &&
                     it.actor.gender == "Male" &&
                     it.actor.image?.medium == "http://static.tvmaze.com/uploads/images/medium_portrait/28/72307.jpg"
