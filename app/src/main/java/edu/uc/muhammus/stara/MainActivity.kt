@@ -38,9 +38,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        // Ensure user is signed out from Firebase Authentication
-        FirebaseAuth.getInstance().signOut()
-
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.initializeFirebase()
 
@@ -85,6 +82,9 @@ class MainActivity : AppCompatActivity() {
      * Reference: https://youtu.be/cqEawweiLEM
      */
     internal fun logon() {
+        // Ensure user is signed out from Firebase Authentication, otherwise Authentication may lag considerably.
+        FirebaseAuth.getInstance().signOut()
+
         showToast("Login to manage your favorites", true)
 
         val providers = arrayListOf(
