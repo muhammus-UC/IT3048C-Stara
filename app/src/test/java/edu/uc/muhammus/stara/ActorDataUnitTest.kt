@@ -25,8 +25,8 @@ class ActorDataUnitTest {
 
     @Test
     fun confirmJoelMcHale_outputsJoelMcHale() {
-        val country = ActorCountry("Italy", "IT", "Europe/Rome")
-        val actor = Actor("11615", "Joel McHale", country, "Male")
+        val country = ActorCountry("Italy")
+        val actor = Actor("11615", "Joel McHale", "http://www.tvmaze.com/people/11615/joel-mchale", country, "Male")
         assertEquals("Joel McHale", actor.toString())
     }
 
@@ -54,15 +54,15 @@ class ActorDataUnitTest {
         val allActorsLiveData = MutableLiveData<ArrayList<ActorJSON>>()
         val allActors = ArrayList<ActorJSON>()
         // create and add actors to our collection
-        val mcHaleCountry = ActorCountry("Italy", "IT", "Europe/Rome")
-        val mcHale = Actor("11615", "Joel McHale", mcHaleCountry, "Male")
+        val mcHaleCountry = ActorCountry("Italy")
+        val mcHale = Actor("11615", "Joel McHale", "http://www.tvmaze.com/people/11615/joel-mchale", mcHaleCountry, "Male")
         val mcHaleJSON = ActorJSON(50.0, mcHale)
         allActors.add(mcHaleJSON)
-        val barriosCountry = ActorCountry("United States", "US", "America/New_York")
-        val barrios = Actor("212615", "Joseph Barrios", barriosCountry, "Male")
+        val barriosCountry = ActorCountry("United States")
+        val barrios = Actor("212615", "Joseph Barrios", "http://www.tvmaze.com/people/212615/joseph-barrios", barriosCountry, "Male")
         val barriosJSON = ActorJSON(25.0, barrios)
         allActors.add(barriosJSON)
-        val kramer = Actor("170621", "Joel Michael Kramer", null, "Male")
+        val kramer = Actor("170621", "Joel Michael Kramer", "http://www.tvmaze.com/people/170621/joel-michael-kramer", null, "Male")
         val kramerJSON = ActorJSON(12.5, kramer)
         allActors.add(kramerJSON)
         allActorsLiveData.postValue(allActors)
@@ -83,6 +83,7 @@ class ActorDataUnitTest {
             arrayList.forEach {
                 if (it.actor.id == "11615" &&
                     it.actor.name == "Joel McHale" &&
+                    it.actor.url == "http://www.tvmaze.com/people/11615/joel-mchale" &&
                     it.actor.country?.name == "Italy" &&
                     it.actor.gender == "Male"
                 ) {

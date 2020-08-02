@@ -27,6 +27,7 @@ data class ShowJSON(var score: Double, var show: Show) {
 data class Show(
     var id: String,
     var name: String,
+    var url: String,
     var language: String? = "Language Unknown",
     var status: String? = "Status Unknown",
     var image: ShowImageURL? = null

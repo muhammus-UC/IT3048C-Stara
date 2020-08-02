@@ -24,7 +24,12 @@ class ScheduleDataUnitTest {
 
     @Test
     fun confirmDaisy_returnsDaisy() {
-        val schedule = ScheduleJSON("Daisy Chain Gang", "09:00", Show("42183", "LEGO City Adventures"))
+        val schedule = ScheduleJSON(
+            "Daisy Chain Gang",
+            "09:00",
+            "https://www.tvmaze.com/episodes/1896300/lego-city-adventures-2x09-daisy-chain-gang",
+            Show("42183", "LEGO City Adventures", "https://www.tvmaze.com/shows/42183/lego-city-adventures")
+        )
         assertEquals("Episode Daisy Chain Gang airs at 09:00 for show LEGO City Adventures", schedule.toString())
     }
 
@@ -45,11 +50,27 @@ class ScheduleDataUnitTest {
         val scheduleLiveData = MutableLiveData<ArrayList<ScheduleJSON>>()
         val schedule = ArrayList<ScheduleJSON>()
         // create and add episodes to schedule
-        val backdraft = ScheduleJSON("Backdraft to School", "09:15", Show("42183", "LEGO City Adventures"))
+        val backdraft = ScheduleJSON(
+            "Backdraft to School",
+            "09:15",
+            "https://www.tvmaze.com/episodes/1896300/lego-city-adventures-2x09-daisy-chain-gang",
+            Show("42183", "LEGO City Adventures", "https://www.tvmaze.com/shows/42183/lego-city-adventures")
+
+        )
         schedule.add(backdraft)
-        val outdoor = ScheduleJSON("Outdoor Dishes", "11:00", Show("42750", "Delicious Miss Brown"))
+        val outdoor = ScheduleJSON(
+            "Outdoor Dishes",
+            "11:00",
+            "https://www.tvmaze.com/episodes/1902174/delicious-miss-brown-2x15-outdoor-dishes",
+            Show("42750", "Delicious Miss Brown", "https://www.tvmaze.com/shows/42750/delicious-miss-brown")
+        )
         schedule.add(outdoor)
-        val thrill = ScheduleJSON("The Thrill of Pizza on a Grill", "12:30", Show("48531", "Symon's Dinners Cooking Out"))
+        val thrill = ScheduleJSON(
+            "The Thrill of Pizza on a Grill",
+            "12:30",
+            "https://www.tvmaze.com/episodes/1902269/symons-dinners-cooking-out-1x07-the-thrill-of-pizza-on-a-grill",
+            Show("48531", "Symon's Dinners Cooking Out", "https://www.tvmaze.com/shows/48531/symons-dinners-cooking-out")
+        )
         schedule.add(thrill)
         scheduleLiveData.postValue(schedule)
         every { scheduleService.fetchSchedule("US") } returns scheduleLiveData
@@ -69,8 +90,10 @@ class ScheduleDataUnitTest {
             arrayList.forEach {
                 if (it.episodeName == "Backdraft to School" &&
                     it.airtime == "09:15" &&
+                    it.url == "https://www.tvmaze.com/episodes/1896300/lego-city-adventures-2x09-daisy-chain-gang" &&
                     it.show.id == "42183" &&
-                    it.show.name == "LEGO City Adventures"
+                    it.show.name == "LEGO City Adventures" &&
+                    it.show.url == "https://www.tvmaze.com/shows/42183/lego-city-adventures"
                 ) {
                     backdraftFound = true
                 }
