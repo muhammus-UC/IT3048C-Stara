@@ -23,7 +23,7 @@ class ShowDataUnitTest {
     private var showService = mockk<ShowService>()
 
     @Test
-    fun confirmCommunity_outputsCommunity () {
+    fun confirmCommunity_outputsCommunity() {
         val show = Show("318", "Community", "English", "Ended")
         assertEquals("Community", show.toString())
     }
@@ -62,10 +62,9 @@ class ShowDataUnitTest {
         val diplomaticJSON = ShowJSON(12.5, diplomatic)
         allShows.add(diplomaticJSON)
         allShowsLiveData.postValue(allShows)
-        every {showService.fetchShows("Community")} returns allShowsLiveData
-        every {showService.fetchShows(not("Community"))} returns MutableLiveData<ArrayList<ShowJSON>>()
+        every { showService.fetchShows("Community") } returns allShowsLiveData
+        every { showService.fetchShows(not("Community")) } returns MutableLiveData<ArrayList<ShowJSON>>()
         mvm.showService = showService
-
     }
 
     private fun whenSearchForCommunity() {
@@ -81,7 +80,8 @@ class ShowDataUnitTest {
                 if (it.show.id == "318" &&
                     it.show.name == "Community" &&
                     it.show.language == "English" &&
-                    it.show.status == "Ended") {
+                    it.show.status == "Ended"
+                ) {
                     communityFound = true
                 }
             }
@@ -90,8 +90,8 @@ class ShowDataUnitTest {
     }
 
     private fun thenVerifyFunctionsInvoked() {
-        verify {showService.fetchShows("Community")}
-        verify(exactly = 0) {showService.fetchShows("Loner")}
+        verify { showService.fetchShows("Community") }
+        verify(exactly = 0) { showService.fetchShows("Loner") }
         confirmVerified(showService)
     }
 
@@ -104,6 +104,4 @@ class ShowDataUnitTest {
             assertEquals(0, it.size)
         }
     }
-
-
 }
