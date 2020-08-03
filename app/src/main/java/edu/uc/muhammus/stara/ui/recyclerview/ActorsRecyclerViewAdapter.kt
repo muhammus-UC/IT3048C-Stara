@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.dto.ActorJSON
-import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class ActorsRecyclerViewAdapter(private val actorJSONs: List<ActorJSON>, private val itemLayout: Int, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.Adapter<ActorRecyclerViewHolder>() {
+class ActorsRecyclerViewAdapter(private val actorJSONs: List<ActorJSON>, private val itemLayout: Int, private val myActivity: MainActivity) : RecyclerView.Adapter<ActorRecyclerViewHolder>() {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -37,7 +36,7 @@ class ActorsRecyclerViewAdapter(private val actorJSONs: List<ActorJSON>, private
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
-        return ActorRecyclerViewHolder(view, viewModel, myActivity)
+        return ActorRecyclerViewHolder(view, myActivity)
     }
 
     /**

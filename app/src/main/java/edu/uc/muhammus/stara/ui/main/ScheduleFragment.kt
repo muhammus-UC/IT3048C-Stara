@@ -28,8 +28,8 @@ import java.util.*
 class ScheduleFragment : StaraFragment() {
     private val fileName = "ScheduleFragment.kt"
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var myActivity: MainActivity
+    private lateinit var viewModel: MainViewModel
 
     // Title of Fragment currently shown. Used to set title when Fragment is shown from hide state.
     private var fragmentTitle = "Stara - Schedule"
@@ -55,11 +55,9 @@ class ScheduleFragment : StaraFragment() {
 
         activity?.title = fragmentTitle
 
-        // Updated deprecated code: https://stackoverflow.com/q/57534730
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.initializeFirebase()
-
         myActivity = (activity as MainActivity)
+        // Pass MainViewModel from MainActivity instead of initializing a new one unnecessarily.
+        viewModel = myActivity.viewModel
 
         // Configure recycler view options with sane defaults
         scheduleRecyclerView.hasFixedSize()

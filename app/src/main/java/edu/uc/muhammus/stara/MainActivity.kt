@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
+    // View Model shared across fragments as they use the same data
+    internal lateinit var viewModel: MainViewModel
 
     // Used to switch fragments without having to initialize them again.
     private lateinit var searchFragment: SearchFragment
