@@ -63,11 +63,9 @@ class SearchFragment : StaraFragment() {
         val searchTerm = editSearch.text.toString()
 
         if (searchRadioShow.isChecked) {
-            // Remove observers since we keep adding one when button is pressed.
-            viewModel.shows.removeObservers(viewLifecycleOwner)
-
             viewModel.fetchShows(searchTerm)
 
+            // Running fetchShows removes old observers so need to observe again
             viewModel.shows.observe(
                 viewLifecycleOwner,
                 Observer {
@@ -76,11 +74,9 @@ class SearchFragment : StaraFragment() {
                 }
             )
         } else if (searchRadioActor.isChecked) {
-            // Remove observers since we keep adding one when button is pressed.
-            viewModel.actors.removeObservers(viewLifecycleOwner)
-
             viewModel.fetchActors(searchTerm)
 
+            // Running fetchActors removes old observers so need to observe again
             viewModel.actors.observe(
                 viewLifecycleOwner,
                 Observer {
