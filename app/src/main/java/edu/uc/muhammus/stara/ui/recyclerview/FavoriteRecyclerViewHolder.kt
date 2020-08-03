@@ -16,9 +16,8 @@ import com.squareup.picasso.Picasso
 import edu.uc.muhammus.stara.MainActivity
 import edu.uc.muhammus.stara.R
 import edu.uc.muhammus.stara.dto.Favorite
-import edu.uc.muhammus.stara.ui.main.MainViewModel
 
-class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
+class FavoriteRecyclerViewHolder(itemView: View, private val myActivity: MainActivity) : RecyclerView.ViewHolder(itemView) {
     private val fileName = "FavoriteRecyclerViewHolder.kt"
 
     private val thumbnailImageView: ImageView = itemView.findViewById(R.id.list_thumbnail)
@@ -100,12 +99,12 @@ class FavoriteRecyclerViewHolder(itemView: View, val viewModel: MainViewModel, p
 
         // Add to Favorites if not already in favorites, otherwise Remove.
         if (!alreadyFavorite) {
-            viewModel.addFavorite(favorite, myActivity.email)
+            myActivity.viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true
             btnFavorite.setImageResource(android.R.drawable.star_big_on)
             myActivity.showToast(favorite.name + " added to favorites.")
         } else {
-            viewModel.removeFavorite(favorite, myActivity.email)
+            myActivity.viewModel.removeFavorite(favorite, myActivity.email)
             alreadyFavorite = false
             btnFavorite.setImageResource(android.R.drawable.star_big_off)
             myActivity.showToast(favorite.name + " removed from favorites.")

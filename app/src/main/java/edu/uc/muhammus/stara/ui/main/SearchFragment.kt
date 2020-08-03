@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.MainActivity
@@ -21,8 +20,9 @@ import kotlinx.android.synthetic.main.search_fragment.*
 
 class SearchFragment : StaraFragment() {
 
-    private lateinit var viewModel: MainViewModel
+    // Variables to hold MainActivity and MainViewModel later
     private lateinit var myActivity: MainActivity
+    private lateinit var viewModel: MainViewModel
 
     // Title of Fragment currently shown. Used to set title when Fragment is shown from hide state.
     private var fragmentTitle = "Stara - Search"
@@ -38,11 +38,9 @@ class SearchFragment : StaraFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // Updated deprecated code: https://stackoverflow.com/q/57534730
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.initializeFirebase()
-
         myActivity = (activity as MainActivity)
+        // Pass MainViewModel from MainActivity instead of initializing a new one unnecessarily.
+        viewModel = myActivity.viewModel
 
         // Configure recycler view options with sane defaults
         searchRecyclerView.hasFixedSize()
@@ -65,29 +63,25 @@ class SearchFragment : StaraFragment() {
         val searchTerm = editSearch.text.toString()
 
         if (searchRadioShow.isChecked) {
-            // Remove observers since we keep adding one when button is pressed.
-            viewModel.shows.removeObservers(viewLifecycleOwner)
-
             viewModel.fetchShows(searchTerm)
 
+            // Running fetchShows removes old observers so need to observe again
             viewModel.shows.observe(
                 viewLifecycleOwner,
                 Observer {
                     shows ->
-                        searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_favorite, viewModel, myActivity)
+                        searchRecyclerView.adapter = ShowsRecyclerViewAdapter(shows, R.layout.list_item_favorite, myActivity)
                 }
             )
         } else if (searchRadioActor.isChecked) {
-            // Remove observers since we keep adding one when button is pressed.
-            viewModel.actors.removeObservers(viewLifecycleOwner)
-
             viewModel.fetchActors(searchTerm)
 
+            // Running fetchActors removes old observers so need to observe again
             viewModel.actors.observe(
                 viewLifecycleOwner,
                 Observer {
                     actors ->
-                        searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_favorite, viewModel, myActivity)
+                        searchRecyclerView.adapter = ActorsRecyclerViewAdapter(actors, R.layout.list_item_favorite, myActivity)
                 }
             )
         }

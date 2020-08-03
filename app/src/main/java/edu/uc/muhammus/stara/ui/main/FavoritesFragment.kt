@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uc.muhammus.stara.MainActivity
@@ -20,8 +19,8 @@ import kotlinx.android.synthetic.main.favorites_fragment.*
 
 class FavoritesFragment : StaraFragment() {
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var myActivity: MainActivity
+    private lateinit var viewModel: MainViewModel
 
     // Title of Fragment currently shown. Used to set title when Fragment is shown from hide state.
     private var fragmentTitle = "Stara - Favorites"
@@ -37,11 +36,9 @@ class FavoritesFragment : StaraFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // Updated deprecated code: https://stackoverflow.com/q/57534730
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.initializeFirebase()
-
         myActivity = (activity as MainActivity)
+        // Pass MainViewModel from MainActivity instead of initializing a new one unnecessarily.
+        viewModel = myActivity.viewModel
 
         // Configure recycler view options with sane defaults
         favoritesRecyclerView.hasFixedSize()
@@ -57,7 +54,7 @@ class FavoritesFragment : StaraFragment() {
             viewLifecycleOwner,
             Observer {
                 favorites ->
-                    favoritesRecyclerView.adapter = FavoritesRecyclerViewAdapter(favorites, R.layout.list_item_favorite, viewModel, myActivity)
+                    favoritesRecyclerView.adapter = FavoritesRecyclerViewAdapter(favorites, R.layout.list_item_favorite, myActivity)
             }
         )
     }
