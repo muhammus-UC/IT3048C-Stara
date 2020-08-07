@@ -107,9 +107,6 @@ class ScheduleFragment : StaraFragment() {
                 populateScheduleRecyclerView(countryCode)
                 // Update text to indicate which country schedule is being gotten for
                 txtScheduleSubtitle.text = countryName
-
-                // Don't expect to update country schedule often. Remove Observer after one location received.
-                //locationViewModel.getLocationLiveData().removeObservers(viewLifecycleOwner)
             }
         )
     }
