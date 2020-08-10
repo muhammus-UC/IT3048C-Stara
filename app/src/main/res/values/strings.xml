@@ -2,15 +2,19 @@
     <string name="app_name">Stara</string>
     <!--Favorites Fragment-->
     <string name="favorites_label">Favorites</string>
-    <string name="favorite_subtitle">You</string>
+    <string name="favorites_subtitle">You</string>
     <string name="favorites_title">Favorites for</string>
     <!--RecyclerViews-->
     <string name="favorite_button">Favorite</string>
     <string name="thumbnail_label">thumbnail</string>
+    <string name="toast_favorite_added">\u0020added to favorites."</string>
+    <string name="toast_favorite_removed">\u0020removed from favorites.</string>
     <!--    Schedule Fragment-->
     <string name="schedule_label">Schedule</string>
     <string name="schedule_subtitle">United States</string>
     <string name="schedule_title">Today\'s TV Premieres for</string>
+    <string name="schedule_toast_location_denied">Unable to obtain location without permission. Showing USA Schedule.</string>
+    <string name="schedule_toast_location_granted">Location obtained. Getting schedule…</string>
     <!--Search Fragment-->
     <string name="radio_actor">Actor</string>
     <string name="radio_show">Show</string>
@@ -18,4 +22,9 @@
     <string name="search_hint_actor">Search for Actor…</string>
     <string name="search_hint_show">Search for Show…</string>
     <string name="search_label">Search</string>
+    <!--Main Activity-->
+    <string name="main_toast_login">Log in to manage your favorites.</string>
+    <string name="main_toast_schedule_showing">Schedule already showing!</string>
+    <string name="main_toast_favorites_showing">Favorites already showing!</string>
+    <string name="main_toast_search_showing">Search already showing!</string>
 </resources>

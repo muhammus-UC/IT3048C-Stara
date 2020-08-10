@@ -95,7 +95,6 @@ class ShowRecyclerViewHolder(itemView: View, private val myActivity: MainActivit
         // Default value of var email is "email".
         // If this is not changed, user has not logged in.
         if (myActivity.email == "email") {
-            myActivity.showToast("You can not add to favorites without logging in.", true)
             myActivity.logon()
             return
         }
@@ -117,12 +116,12 @@ class ShowRecyclerViewHolder(itemView: View, private val myActivity: MainActivit
             myActivity.viewModel.addFavorite(favorite, myActivity.email)
             alreadyFavorite = true
             btnFavorite.setImageResource(android.R.drawable.star_big_on)
-            myActivity.showToast(favorite.name + " added to favorites.")
+            myActivity.showToast(favorite.name + myActivity.getString(R.string.toast_favorite_added))
         } else {
             myActivity.viewModel.removeFavorite(favorite, myActivity.email)
             alreadyFavorite = false
             btnFavorite.setImageResource(android.R.drawable.star_big_off)
-            myActivity.showToast(favorite.name + " removed from favorites.")
+            myActivity.showToast(favorite.name + myActivity.getString(R.string.toast_favorite_removed))
         }
     }
 }

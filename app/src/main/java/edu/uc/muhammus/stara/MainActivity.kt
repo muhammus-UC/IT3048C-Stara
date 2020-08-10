@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         // Ensure user is signed out from Firebase Authentication, otherwise Authentication may lag considerably.
         FirebaseAuth.getInstance().signOut()
 
-        showToast("Login to manage your favorites", true)
+        showToast(getString(R.string.main_toast_login), true)
 
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_schedule -> {
                     when (activeFragment) {
                         scheduleFragment -> {
-                            showToast("Schedule already showing.", true)
+                            showToast(getString(R.string.main_toast_schedule_showing), true)
                         }
                         favoritesFragment -> {
                             supportFragmentManager.beginTransaction()
@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_favorites -> {
                     when (activeFragment) {
                         favoritesFragment -> {
-                            showToast("Favorites already showing.", true)
+                            showToast(getString(R.string.main_toast_favorites_showing), true)
                         }
                         scheduleFragment -> {
                             supportFragmentManager.beginTransaction()
@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_search -> {
                     when (activeFragment) {
                         searchFragment -> {
-                            showToast("Search already showing.", true)
+                            showToast(getString(R.string.main_toast_search_showing), true)
                         }
                         favoritesFragment -> {
                             supportFragmentManager.beginTransaction()

@@ -84,7 +84,7 @@ class ScheduleFragment : StaraFragment() {
 
     // User has granted permission to access location, time to use it to get user's country's schedule.
     private fun requestLocationUpdates() {
-        showToast("Getting Schedule...")
+        showToast(getString(R.string.schedule_toast_location_granted))
 
         locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
         locationViewModel.getLocationLiveData().observe(
@@ -124,7 +124,7 @@ class ScheduleFragment : StaraFragment() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocationUpdates()
                 } else {
-                    showToast("Unable to update location without permission. Showing USA Schedule.", true)
+                    showToast(getString(R.string.schedule_toast_location_denied), true)
                     populateScheduleRecyclerView("US")
                 }
             }
